@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 
 ---
 
-This is ZZF (朱泽峰). I am a first year Ph.D. student in AAIS at Peking University.
+This is ZZF (朱泽峰). I am a first year Ph.D. student at AAIS, Peking University.
 
 My involvement in science lies in the study of biomacromolecule structure.
 I am passionate to explore the underlying mechanisms of the molecular world with mathematical tools and physical insights.
