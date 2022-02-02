@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title:  # the website title (if blank, full name will be used instead)
+title: Zefeng Zhu # the website title (if blank, full name will be used instead)
 first_name: Zefeng
 middle_name: 
 last_name: Zhu
@@ -71,7 +71,7 @@ dblp_url: # your DBLP profile url
 stackoverflow_id: 12876491 #your stackoverflow id
 
 contact_note: >
-  🏄‍♂️
+  🏄‍♂️Contact me via email is ok.
 
 google_analytics:  # your google-analytics ID (format: UA-XXXXXXXXX)
 google_site_verification:  # your google-site-verification ID (Google Search Console)
@@ -82,7 +82,7 @@ panelbear_analytics:  # panelbear analytics site ID (format: XXXXXXXXX)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: ZZF's Blog  # your blog must have a name for it to show up in the nav bar
+blog_name: EigenBlog  # your blog must have a name for it to show up in the nav bar
 blog_description: an archive of my notes and thoughts
 permalink: /blog/:year/:title/
 

@@ -1,72 +1,69 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
-
-@book{einstein1956investigations,
-  bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation,}
-}
-
-@article{einstein1950meaning,
-  abbr={AJP},
-  bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics,},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers,}
-}
-
-@article{PhysRev.47.777,
-  abbr={PhysRev},
-  title={Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author={Einstein, A. and Podolsky, B. and Rosen, N.},
-  abstract={In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal={Phys. Rev.,},
-  volume={47},
-  issue={10},
-  pages={777--780},
-  numpages={0},
-  year={1935},
-  month={May},
-  publisher=aps,
-  doi={10.1103/PhysRev.47.777},
-  url={http://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html={https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf={example_pdf.pdf},
+@software{Zhu_ResNetPPI_Predicting_protein_2022,
+  author  = {Zhu, Zefeng},
+  license = {Apache-2.0},
+  month   = {1},
+  title   = {{ResNetPPI: Predicting protein inter-chain residue distances from sequences irrespective of paired MSA}},
+  url     = {https://github.com/naturegeorge/ResNetPPI},
+  version = {0.1.0},
+  year    = {2022},
   selected={true}
 }
-
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik,},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
+@software{Zhu_PDB-Profiling_2021,
+  author   = {Zhu, Zefeng},
+  license  = {MIT},
+  month    = {6},
+  title    = {{PDB-Profiling: Implementing locus-level mapping between genome sequence and protein three-dimensional structure and providing a strategy for selecting representative structures}},
+  url      = {https://github.com/naturegeorge/pdb-profiling},
+  version  = {0.3.4},
+  year     = {2021}
 }
-
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.,},
-  volume={17},
-  pages={549--560},
-  year={1905}
+@article{Sun2021,
+  author   = {Sun, Tingting
+              and Chen, Yuting
+              and Wen, Yuhao
+              and Zhu, Zefeng
+              and Li, Minghui},
+  title    = {{PremPLI: a machine learning model for predicting the effects of missense mutations on protein-ligand interactions}},
+  journal  = {Communications Biology},
+  year     = {2021},
+  month    = {Nov},
+  day      = {19},
+  volume   = {4},
+  number   = {1},
+  pages    = {1311},
+  abstract = {Resistance to small-molecule drugs is the main cause of the failure of therapeutic drugs in clinical practice. Missense mutations altering the binding of ligands to proteins are one of the critical mechanisms that result in genetic disease and drug resistance. Computational methods have made a lot of progress for predicting binding affinity changes and identifying resistance mutations, but their prediction accuracy and speed are still not satisfied and need to be further improved. To address these issues, we introduce a structure-based machine learning method for quantitatively estimating the effects of single mutations on ligand binding affinity changes (named as PremPLI). A comprehensive comparison of the predictive performance of PremPLI with other available methods on two benchmark datasets confirms that our approach performs robustly and presents similar or even higher predictive accuracy than the approaches relying on first-principle statistical mechanics and mixed physics- and knowledge-based potentials while requires much less computational resources. PremPLI can be used for guiding the design of ligand-binding proteins, identifying and understanding disease driver mutations, and finding potential resistance mutations for different drugs. PremPLI is freely available at https://lilab.jysw.suda.edu.cn/research/PremPLI/and allows to do large-scale mutational scanning.},
+  issn     = {2399-3642},
+  doi      = {10.1038/s42003-021-02826-3},
+  url      = {https://doi.org/10.1038/s42003-021-02826-3}
 }
-
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
+@article{10.1371/journal.pcbi.1008543,
+  doi       = {10.1371/journal.pcbi.1008543},
+  author    = {Chen, Yuting AND Lu, Haoyu AND Zhang, Ning AND Zhu, Zefeng AND Wang, Shuqin AND Li, Minghui},
+  journal   = {PLOS Computational Biology},
+  publisher = {Public Library of Science},
+  title     = {{PremPS: Predicting the impact of missense mutations on protein stability}},
+  year      = {2021},
+  month     = {12},
+  volume    = {16},
+  url       = {https://doi.org/10.1371/journal.pcbi.1008543},
+  pages     = {1-22},
+  abstract  = {Computational methods that predict protein stability changes induced by missense mutations have made a lot of progress over the past decades. Most of the available methods however have very limited accuracy in predicting stabilizing mutations because existing experimental sets are dominated by mutations reducing protein stability. Moreover, few approaches could consistently perform well across different test cases. To address these issues, we developed a new computational method PremPS to more accurately evaluate the effects of missense mutations on protein stability. The PremPS method is composed of only ten evolutionary- and structure-based features and parameterized on a balanced dataset with an equal number of stabilizing and destabilizing mutations. A comprehensive comparison of the predictive performance of PremPS with other available methods on nine benchmark datasets confirms that our approach consistently outperforms other methods and shows considerable improvement in estimating the impacts of stabilizing mutations. A protein could have multiple structures available, and if another structure of the same protein is used, the predicted change in stability for structure-based methods might be different. Thus, we further estimated the impact of using different structures on prediction accuracy, and demonstrate that our method performs well across different types of structures except for low-resolution structures and models built based on templates with low sequence identity. PremPS can be used for finding functionally important variants, revealing the molecular mechanisms of functional influences and protein design. PremPS is freely available at https://lilab.jysw.suda.edu.cn/research/PremPS/, which allows to do large-scale mutational scanning and takes about four minutes to perform calculations for a single mutation per protein with ~ 300 residues and requires ~ 0.4 seconds for each additional mutation.},
+  number    = {12}
+}
+@article{ijms21155560,
+  author         = {Zhang, Ning and Lu, Haoyu and Chen, Yuting and Zhu, Zefeng and Yang, Qing and Wang, Shuqin and Li, Minghui},
+  title          = {{PremPRI: Predicting the Effects of Missense Mutations on Protein–RNA Interactions}},
+  journal        = {International Journal of Molecular Sciences},
+  volume         = {21},
+  year           = {2020},
+  number         = {15},
+  article-number = {5560},
+  url            = {https://www.mdpi.com/1422-0067/21/15/5560},
+  pubmedid       = {32756481},
+  issn           = {1422-0067},
+  abstract       = {Protein&ndash;RNA interactions are crucial for many cellular processes, such as protein synthesis and regulation of gene expression. Missense mutations that alter protein&ndash;RNA interaction may contribute to the pathogenesis of many diseases. Here, we introduce a new computational method PremPRI, which predicts the effects of single mutations occurring in RNA binding proteins on the protein&ndash;RNA interactions by calculating the binding affinity changes quantitatively. The multiple linear regression scoring function of PremPRI is composed of three sequence- and eight structure-based features, and is parameterized on 248 mutations from 50 protein&ndash;RNA complexes. Our model shows a good agreement between calculated and experimental values of binding affinity changes with a Pearson correlation coefficient of 0.72 and the corresponding root-mean-square error of 0.76 kcal&middot;mol&minus;1, outperforming three other available methods. PremPRI can be used for finding functionally important variants, understanding the molecular mechanisms, and designing new protein&ndash;RNA interaction inhibitors.},
+  doi            = {10.3390/ijms21155560}
 }
