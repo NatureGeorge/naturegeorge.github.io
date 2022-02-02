@@ -48,16 +48,15 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
 
 ### Fitting Targets
 
-> Fitting Targets (i.e. Inter-chain Cβ-Cβ Distance Map) Examples
-
-> NOTE: *Cα for GLY*
+* Fitting Targets (i.e. Inter-chain Cβ-Cβ Distance Map) Examples
+  * *Cα for GLY*
 
 <table>
 <tr>
-    <td width=5%>
+    <td>
       PDB
     </td>
-    <td width=5%>
+    <td>
       Inter-chain Cβ-Cβ Distance Map
     </td>
     <td>
@@ -78,10 +77,14 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
   </tr>
   <tr>
     <td>
-      <img src="assets/img/resnetppi/3WWT_A_B.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/3WWT_A_B.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
-      <img src="assets/img/resnetppi/3wwt.A.B.label_dist6d12.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/3wwt.A.B.label_dist6d12.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
       3wwt
@@ -101,10 +104,14 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
   </tr>
  <tr>
     <td>
-      <img src="assets/img/resnetppi/1IM3_E_H.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/1IM3_E_H.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
-      <img src="assets/img/resnetppi/1im3.E.H.label_dist6d12.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/1im3.E.H.label_dist6d12.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
       1im3
@@ -124,10 +131,14 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
   </tr>
   <tr>
     <td>
-      <img src="assets/img/resnetppi/6BVV_A_B.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/6BVV_A_B.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
-      <img src="assets/img/resnetppi/6bvv.A.B.label_dist6d12.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/6bvv.A.B.label_dist6d12.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
       6bvv
@@ -147,10 +158,14 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
   </tr>
   <tr>
     <td>
-      <img src="assets/img/resnetppi/4RF1_B_A.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/4RF1_B_A.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
-      <img src="assets/img/resnetppi/4rf1.B.A.label_dist6d12.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/4rf1.B.A.label_dist6d12.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
       4rf1
@@ -170,10 +185,14 @@ Predicting protein inter-chain residue distances from sequences irrespective of 
   </tr>
   <tr>
     <td>
-      <img src="assets/img/resnetppi/6E5X_B_A.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/6E5X_B_A.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
-      <img src="assets/img/resnetppi/6e5x.B.A.label_dist6d12.png">
+      <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/resnetppi/6e5x.B.A.label_dist6d12.png" class="img-fluid rounded z-depth-1" %}
+      </div>
     </td>
     <td>
       6e5x
@@ -224,12 +243,11 @@ Real-valued distances are discretely binned:
 * **MSA Embedding**: for each encoded pairwise alignment, feed into the `ResNet1D` and get embedded pairwise alignment ($$64\times L_k$$)
   * hence we get $$\{64\times L_k, k\in K\}$$
   * omit the insertion region of the homologous sequences, thus we can get a $$K\times 64 \times L$$ tensor
-    * $$x_k\in R^{64\times L}$$
-    * $$x_k(i) \in R^{64}$$
+    * thus we have $$x_k\in R^{64\times L}$$ and $$x_k(i) \in R^{64}$$
 * **Paired Evolution Aggregation**
   * calculate one body term
-    * $$f_1(i)=\frac{1}{M_{\text{eff}_{1}}}\sum_{k}^{K_1}w_{1_k} x_{1_k}(i)$$
-    * $$f_2(j)=\frac{1}{M_{\text{eff}_{2}}}\sum_{k}^{K_2}w_{2_k} x_{2_k}(j)$$
+    * one body term of one sequence: $$f_1(i)=\frac{1}{M_{\text{eff}_{1}}}\sum_{k}^{K_1}w_{1_k} x_{1_k}(i)$$
+    * one body term of the other sequence: $$f_2(j)=\frac{1}{M_{\text{eff}_{2}}}\sum_{k}^{K_2}w_{2_k} x_{2_k}(j)$$
   * apply max function
     * $$A(i,c) = \max\{x_k(i,c), k \in K\}$$, c: channel; $$A \in R^{64\times L}$$
   * calculate two body term
