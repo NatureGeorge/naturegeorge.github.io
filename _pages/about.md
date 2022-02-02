@@ -17,4 +17,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 ---
 
 This is ZZF (朱泽峰). I am a first year Ph.D. student in AAIS at Peking University.
-My involvement in science lies in the study of biomacromolecule structure and I am passionate to explore the underlying mechanisms of the molecular world with mathematical tools and physical insights. I am stepping toward utilizing the advantages of (deep) learning methods to build a physically interpretable model of protein folding, conformation changes, protein binding, and so on.
+
+My involvement in science lies in the study of biomacromolecule structure.
+I am passionate to explore the underlying mechanisms of the molecular world with mathematical tools and physical insights.
+And I am stepping toward utilizing the advantages of (deep) learning methods to build a physically interpretable model of protein folding, conformation changes, protein binding, and so on.

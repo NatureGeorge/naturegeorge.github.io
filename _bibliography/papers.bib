@@ -2,25 +2,32 @@
 ---
 
 @software{Zhu_ResNetPPI_Predicting_protein_2022,
+  bibtex_show={true},
   author  = {Zhu, Zefeng},
   license = {Apache-2.0},
   month   = {1},
   title   = {{ResNetPPI: Predicting protein inter-chain residue distances from sequences irrespective of paired MSA}},
   url     = {https://github.com/naturegeorge/ResNetPPI},
+  code    = {https://github.com/naturegeorge/ResNetPPI},
   version = {0.1.0},
   year    = {2022},
+  journal = {software},
   selected={true}
 }
 @software{Zhu_PDB-Profiling_2021,
+  bibtex_show={true},
   author   = {Zhu, Zefeng},
   license  = {MIT},
   month    = {6},
   title    = {{PDB-Profiling: Implementing locus-level mapping between genome sequence and protein three-dimensional structure and providing a strategy for selecting representative structures}},
   url      = {https://github.com/naturegeorge/pdb-profiling},
+  code     = {https://github.com/naturegeorge/pdb-profiling},
   version  = {0.3.4},
-  year     = {2021}
+  year     = {2021},
+  journal = {software}
 }
 @article{Sun2021,
+  bibtex_show={true},
   author   = {Sun, Tingting
               and Chen, Yuting
               and Wen, Yuhao
@@ -37,9 +44,12 @@
   abstract = {Resistance to small-molecule drugs is the main cause of the failure of therapeutic drugs in clinical practice. Missense mutations altering the binding of ligands to proteins are one of the critical mechanisms that result in genetic disease and drug resistance. Computational methods have made a lot of progress for predicting binding affinity changes and identifying resistance mutations, but their prediction accuracy and speed are still not satisfied and need to be further improved. To address these issues, we introduce a structure-based machine learning method for quantitatively estimating the effects of single mutations on ligand binding affinity changes (named as PremPLI). A comprehensive comparison of the predictive performance of PremPLI with other available methods on two benchmark datasets confirms that our approach performs robustly and presents similar or even higher predictive accuracy than the approaches relying on first-principle statistical mechanics and mixed physics- and knowledge-based potentials while requires much less computational resources. PremPLI can be used for guiding the design of ligand-binding proteins, identifying and understanding disease driver mutations, and finding potential resistance mutations for different drugs. PremPLI is freely available at https://lilab.jysw.suda.edu.cn/research/PremPLI/and allows to do large-scale mutational scanning.},
   issn     = {2399-3642},
   doi      = {10.1038/s42003-021-02826-3},
-  url      = {https://doi.org/10.1038/s42003-021-02826-3}
+  url      = {https://doi.org/10.1038/s42003-021-02826-3},
+  html      = {https://doi.org/10.1038/s42003-021-02826-3}
 }
 @article{10.1371/journal.pcbi.1008543,
+  abbr={PLoS Comput. Biol.},
+  bibtex_show={true},
   doi       = {10.1371/journal.pcbi.1008543},
   author    = {Chen, Yuting AND Lu, Haoyu AND Zhang, Ning AND Zhu, Zefeng AND Wang, Shuqin AND Li, Minghui},
   journal   = {PLOS Computational Biology},
@@ -49,11 +59,13 @@
   month     = {12},
   volume    = {16},
   url       = {https://doi.org/10.1371/journal.pcbi.1008543},
+  html      = {https://doi.org/10.1371/journal.pcbi.1008543},
   pages     = {1-22},
   abstract  = {Computational methods that predict protein stability changes induced by missense mutations have made a lot of progress over the past decades. Most of the available methods however have very limited accuracy in predicting stabilizing mutations because existing experimental sets are dominated by mutations reducing protein stability. Moreover, few approaches could consistently perform well across different test cases. To address these issues, we developed a new computational method PremPS to more accurately evaluate the effects of missense mutations on protein stability. The PremPS method is composed of only ten evolutionary- and structure-based features and parameterized on a balanced dataset with an equal number of stabilizing and destabilizing mutations. A comprehensive comparison of the predictive performance of PremPS with other available methods on nine benchmark datasets confirms that our approach consistently outperforms other methods and shows considerable improvement in estimating the impacts of stabilizing mutations. A protein could have multiple structures available, and if another structure of the same protein is used, the predicted change in stability for structure-based methods might be different. Thus, we further estimated the impact of using different structures on prediction accuracy, and demonstrate that our method performs well across different types of structures except for low-resolution structures and models built based on templates with low sequence identity. PremPS can be used for finding functionally important variants, revealing the molecular mechanisms of functional influences and protein design. PremPS is freely available at https://lilab.jysw.suda.edu.cn/research/PremPS/, which allows to do large-scale mutational scanning and takes about four minutes to perform calculations for a single mutation per protein with ~ 300 residues and requires ~ 0.4 seconds for each additional mutation.},
   number    = {12}
 }
 @article{ijms21155560,
+  bibtex_show={true},
   author         = {Zhang, Ning and Lu, Haoyu and Chen, Yuting and Zhu, Zefeng and Yang, Qing and Wang, Shuqin and Li, Minghui},
   title          = {{PremPRI: Predicting the Effects of Missense Mutations on Protein–RNA Interactions}},
   journal        = {International Journal of Molecular Sciences},
@@ -62,6 +74,7 @@
   number         = {15},
   article-number = {5560},
   url            = {https://www.mdpi.com/1422-0067/21/15/5560},
+  html           = {https://www.mdpi.com/1422-0067/21/15/5560},
   pubmedid       = {32756481},
   issn           = {1422-0067},
   abstract       = {Protein&ndash;RNA interactions are crucial for many cellular processes, such as protein synthesis and regulation of gene expression. Missense mutations that alter protein&ndash;RNA interaction may contribute to the pathogenesis of many diseases. Here, we introduce a new computational method PremPRI, which predicts the effects of single mutations occurring in RNA binding proteins on the protein&ndash;RNA interactions by calculating the binding affinity changes quantitatively. The multiple linear regression scoring function of PremPRI is composed of three sequence- and eight structure-based features, and is parameterized on 248 mutations from 50 protein&ndash;RNA complexes. Our model shows a good agreement between calculated and experimental values of binding affinity changes with a Pearson correlation coefficient of 0.72 and the corresponding root-mean-square error of 0.76 kcal&middot;mol&minus;1, outperforming three other available methods. PremPRI can be used for finding functionally important variants, understanding the molecular mechanisms, and designing new protein&ndash;RNA interaction inhibitors.},
