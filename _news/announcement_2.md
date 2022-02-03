@@ -9,7 +9,7 @@ inline: false
 
 ***
 
-Contents on these site will be:
+Contents on this site will be:
 
 * informative and technical blogs about mathematics and programming
 * summarization and insights about some enlightening articles
