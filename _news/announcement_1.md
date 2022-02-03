@@ -1,7 +1,7 @@
 ---
 layout: post
-date: 2022-02-02 18:09:00-0400
+date: 2022-02-03
 inline: true
 ---
 
-Start to build this site. Some contents remain demo.
+Still building this site. Blogs and some projects remain demo.
