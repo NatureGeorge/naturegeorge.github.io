@@ -14,5 +14,14 @@ authors:
 
 A similar topic had been discussed by Bartoli et al<d-cite key="Bartoli2008"></d-cite> nearly 15 years ago.
 
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/pro3d_classic_representation.png" title="Classical Method" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Summary of Classical Method
+</div>
+
 **NOTE:**
 Still on writing.
