@@ -16,7 +16,7 @@ A similar topic had been discussed by Bartoli et al<d-cite key="Bartoli2008"></d
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/pro3d_classic_representation.png" title="Classical Method" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.html path="assets/img/pro3d_classic_representation.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
