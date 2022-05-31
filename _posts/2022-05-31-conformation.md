@@ -21,7 +21,7 @@ When movement involves, protein conformation becomes live. And the movements are
 Systematic descriptions of the energy landscapes help us to quantify conformations and their changes<d-cite key="PhysRevLett.122.018103"></d-cite>.
 
 $$
-n(E) = \frac{1}{\sqrt{2\pi{\Delta E}^2}}\exp\left[-\frac{(E-\bar{E})^2}{2{\Delta E}^2}\right],\quad{\Delta E} = \sqrt{\lang E^2 \rang - \lang E \rang^2}
+n(E) = \frac{1}{\sqrt{2\pi{\Delta E}^2}}\exp\left[-\frac{(E-\bar{E})^2}{2{\Delta E}^2}\right],\quad{\Delta E} = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
 $$
 
 For a protein sequence, its total number of conformations is denoted as $\Omega_0$. We can then derive the following terms:
@@ -36,8 +36,6 @@ $$
 
 **NOTE:**
 Still on writing.
-
-***
 
 Cited as:
 
