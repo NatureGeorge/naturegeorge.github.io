@@ -3,6 +3,7 @@ layout: post
 title: Ways to compute distance map
 date: 2022-05-27 15:50:00+0800
 categories: coding
+description: A brief record.
 authors:
   - name: Zefeng Zhu
     affiliations:
