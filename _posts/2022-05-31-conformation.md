@@ -75,8 +75,6 @@ $$
 **NOTE:**
 Still on writing.
 
-***
-
 Cited as:
 
 ```bibtex
