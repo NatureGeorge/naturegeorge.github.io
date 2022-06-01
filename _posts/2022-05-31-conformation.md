@@ -35,7 +35,7 @@ When movement involves, protein conformation becomes live. And the movements are
 Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. If we assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, the density of states approximates a Gaussian distribution<d-cite key="PhysRevLett-122-018103"></d-cite>:
 
 $$
-n(E) = \frac{1}{\sqrt{2\pi{\Delta E}^2}}\exp\left[-\frac{(E-\bar{E})^2}{2{\Delta E}^2}\right],\quad{\Delta E} = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
+n(E) = \frac{1}{\sqrt{2\pi\Delta E^2}}\exp\left[-\frac{(E-\bar{E})^2}{2\Delta E^2}\right],\quad\Delta E = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
 $$
 
 For a protein sequence, its total number of conformations is denoted as $\Omega_0$. Then the conformational entropy with energy $E$ is:
@@ -44,7 +44,7 @@ $$
 \begin{aligned}
 S(E) &= K_B\log(\underbrace{\Omega_{0} n(E)}_{\text{the number of conformations with energy} E}) \\
 &= K_B \log \Omega_0 + K_B \log n(E)\\
-&= \underbrace{K_B \log \Omega_0}_{S_0} - K_B \frac{(E-\bar{E})^2}{2{\Delta E}^2} \underbrace{- K_B \frac{\log(2\pi{\Delta E}^2)}{2}}_{\text{dropped}}
+&= \underbrace{K_B \log \Omega_0}_{S_0} - K_B \frac{(E-\bar{E})^2}{2\Delta E^2} \color{gray}{\underbrace{- K_B \frac{\log(2\pi\Delta E^2)}{2}}_{\text{dropped}}}
 \end{aligned}
 $$
 
@@ -57,19 +57,19 @@ $$
 And the most probable energy at different $T$ is:
 
 $$
-E(T) = \bar{E} - \frac{{\Delta E}^{2}}{K_{B}T}
+E(T) = \bar{E} - \frac{\Delta E^{2}}{K_{B}T}
 $$
 
 So the entropy at the most probable energy is:
 
 $$
-S(T) = S(E(T)) = S_{0} - \frac{{\Delta E}^{2}}{2K_{B}T^{2}}
+S(T) = S(E(T)) = S_{0} - \frac{\Delta E^{2}}{2K_{B}T^{2}}
 $$
 
 When reaching a critical temperature $T_g$ that makes $S(T_g)=0$, it means the protein is trapped in one frozen state.
 
 $$
-T_g = \sqrt{\frac{{\Delta E}^{2}}{2 K_B S_0}}
+T_g = \sqrt{\frac{\Delta E^{2}}{2 K_B S_0}}
 $$
 
 **NOTE:**
