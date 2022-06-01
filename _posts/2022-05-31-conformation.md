@@ -44,7 +44,7 @@ $$
 \begin{aligned}
 S(E) &= K_B\log(\underbrace{\Omega_{0} n(E)}_{\text{the number of conformations with energy} E}) \\
 &= K_B \log \Omega_0 + K_B \log n(E)\\
-&= \underbrace{K_B \log \Omega_0}_{S_0} - K_B \frac{(E-\bar{E})^2}{2{\Delta E}^2} \color{gray}{\underbrace{- K_B \frac{\log(2\pi{\Delta E}^2)}{2}}_{\text{dropped}}}
+&= \underbrace{K_B \log \Omega_0}_{S_0} - K_B \frac{(E-\bar{E})^2}{2{\Delta E}^2} \underbrace{- K_B \frac{\log(2\pi{\Delta E}^2)}{2}}_{\text{dropped}}
 \end{aligned}
 $$
 
@@ -74,6 +74,8 @@ $$
 
 **NOTE:**
 Still on writing.
+
+***
 
 Cited as:
 
