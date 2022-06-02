@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Conformation 101 - Difference in Conformation
+title: Conformation 101 - Funneled energy landscape
 date: 2022-05-31 15:22:00+0800
 description: Thoughts on protein conformation change.
 tags: conformation-101
@@ -32,7 +32,9 @@ However, molecules are connected components. When we look at a static covalent-b
 
 When movement involves, protein conformation becomes live. And the movements are characteristically described by the torsional DoF of backbone and side-chains. However, these DoF are restrained by the interatomic interactions rather than freely going around the whole space. Interactions related to solvent molecules, ligands, and binding partners should also be taken into account. Conformations without significant backbone and side-chain movements are considered to be in the same conformation cluster and trapped in the same low-energy state. On the contrary, critical movements of the backbone and side-chain are the transition process between different low-energy states.
 
-Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. If we assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, the density of states approximates a Gaussian distribution<d-cite key="PhysRevLett-122-018103"></d-cite>:
+Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. Here I will give a brief summary of pioneered works of [Prof. Jin Wang](https://www.stonybrook.edu/commcms/chemistry/faculty/_faculty-profiles/wang-jin) et al.<d-cite key="PhysRevLett-122-018103"></d-cite><d-cite key="WangReview2022"></d-cite> introducing the funneled energy landscape of protein structures.
+
+If we assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, the density of states approximates a Gaussian distribution:
 
 $$
 n(E) = \frac{1}{\sqrt{2\pi\Delta E^2}}\exp\left[-\frac{(E-\bar{E})^2}{2\Delta E^2}\right],\quad\Delta E = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
@@ -81,7 +83,7 @@ Cited as:
 
 ```bibtex
 @online{zhu2022conformation,
-        title={Conformation 101 - Difference in Conformation},
+        title={Conformation 101 - Funneled energy landscape},
         author={Zefeng Zhu},
         year={2022},
         month={May},
