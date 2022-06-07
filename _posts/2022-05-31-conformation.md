@@ -13,28 +13,11 @@ authors:
 
 ---
 
-When it comes to comparing modeled structures<d-footnote>experimental or predicted</d-footnote> of a protein, it is a common approach to regard structures as point clouds in $\mathbb{R}^{3}$ and quantify the difference via metrics<d-footnote>functions that follow non-degeneracy, symmetry, and triangle inequality</d-footnote> based on the difference in the Euclidean space, for instance:
+Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. Here I will give a brief summary of pioneered works of [Prof. Jin Wang](https://www.stonybrook.edu/commcms/chemistry/faculty/_faculty-profiles/wang-jin) et al.<d-cite key="WangReview2022"></d-cite> introducing the funneled energy landscape of protein structures.
 
-* the Root Mean Square Deviation (RMSD)<d-footnote>after centered and optimal rotation: cRMSD</d-footnote>
-
-$$
-\sqrt{\frac{1}{N}\sum_{i}^{N} \lVert \mathbf{r}_{i}-\hat{\mathbf{r}}_{i} \rVert^{2}_{2}}
-$$
-
-* the distance Root Mean Square Deviation (dRMSD)<d-footnote>invariant under reflection, cannot distinguish chirality</d-footnote>
-
-$$
-\sqrt{\frac{2}{N(N-1)}\sum_{i=1}^{N-1}\sum_{j=i+1}^{N}(d_{i,j} - \hat{d}_{i,j})^{2}}, \\
-d_{i,j}=\lVert \mathbf{r}_{i}-\mathbf{r}_{j} \rVert_{2}
-$$
-
-However, molecules are connected components. When we look at a static covalent-bonded protein conformation, we focus on the backbone torsion trace and the side-chain rotamers. All the non-covalent interactions are implicit but typically explicitly evaluated through interatomic Euclidean distances. <d-footnote>In other words, this naive representation requires further augmentation of descriptions of non-covalent interactions.</d-footnote>
-
-When movement involves, protein conformation becomes live. And the movements are characteristically described by the torsional DoF of backbone and side-chains. However, these DoF are restrained by the interatomic interactions rather than freely going around the whole space. Interactions related to solvent molecules, ligands, and binding partners should also be taken into account. Conformations without significant backbone and side-chain movements are considered to be in the same conformation cluster and trapped in the same low-energy state. On the contrary, critical movements of the backbone and side-chain are the transition process between different low-energy states.
-
-Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. Here I will give a brief summary of pioneered works of [Prof. Jin Wang](https://www.stonybrook.edu/commcms/chemistry/faculty/_faculty-profiles/wang-jin) et al.<d-cite key="WangFoldingEvo2019"></d-cite><d-cite key="WangBindingEvo2020"></d-cite><d-cite key="WangReview2022"></d-cite> introducing the funneled energy landscape of protein structures.
-
-If we assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, the density of states approximates a Gaussian distribution:
+For analytical derivation<d-cite key="WangFoldingEvo2019"></d-cite><d-cite key="WangBindingEvo2020"></d-cite>, we can assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, thus the density of states (i.e. a statistical energy distribution in
+microcanonical ensemble) approximates a Gaussian distribution
+<d-footnote>Noted that the density of states can be obtained from the simulated canonical ensemble after transformation and is not necessarily follows Gaussian distribution in a real system.</d-footnote>:
 
 $$
 n(E) = \frac{1}{\sqrt{2\pi\Delta E^2}}\exp\left[-\frac{(E-\bar{E})^2}{2\Delta E^2}\right],\quad\Delta E = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
@@ -118,13 +101,19 @@ $$
   * It provides a practical implementation of the principle of minimal frustration for protein folding.
   * Optimization of $\Lambda$ guarantees the kinetic accessibility of the native state.
 
+So we have the Optimal Foldability Criterion<d-cite key="pnas-89-11-4918"></d-cite><d-cite key="PhysRevLett-7-4070"></d-cite><d-cite key="WangFolding1997"></d-cite>:
+
+$$
+\max \frac{T_f}{T_g} \sim \max \Lambda
+$$
+
 The probability $P(E)$ of sampling any conformation at a finite temperature $T$ with energy $E$ is:
 
 $$
 P(E) = \frac{n(E)\exp[-\frac{E-\bar{E}}{K_{B}T}]}{Z}
 $$
 
-* The probability is weighted by the Boltzmann factor $\exp[-\frac{E-\bar{E}}{K_{B}T}]$.
+* Transforming from the microcanonical ensemble to the canonical ensemble, the probability is weighted by the Boltzmann factor $\exp[-\frac{E-\bar{E}}{K_{B}T}]$.
 * $Z$ is the partition function of the canonical ensemble.
 
 Thus, at a particular $T$ larger than $T_{g}$, the probability of the system in its unique native state and the non-native state are $P_N$ and $P_{D}$ respectively:
