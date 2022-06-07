@@ -15,9 +15,7 @@ authors:
 
 Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. Here I will give a brief summary of pioneered works of [Prof. Jin Wang](https://www.stonybrook.edu/commcms/chemistry/faculty/_faculty-profiles/wang-jin) et al.<d-cite key="WangReview2022"></d-cite> introducing the funneled energy landscape of protein structures.
 
-For analytical derivation<d-cite key="WangFoldingEvo2019"></d-cite><d-cite key="WangBindingEvo2020"></d-cite>, we can assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, thus the density of states (i.e. a statistical energy distribution in
-microcanonical ensemble) approximates a Gaussian distribution
-<d-footnote>Noted that the density of states can be obtained from the simulated canonical ensemble after transformation and is not necessarily follows Gaussian distribution in a real system.</d-footnote>:
+For analytical derivation<d-cite key="WangFoldingEvo2019"></d-cite><d-cite key="WangBindingEvo2020"></d-cite>, we can assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, thus the density of states (i.e. a statistical energy distribution in microcanonical ensemble) approximates a Gaussian distribution<d-footnote>Noted that the density of states can be obtained from the simulated canonical ensemble after transformation and is not necessarily follows Gaussian distribution in a real system.</d-footnote>:
 
 $$
 n(E) = \frac{1}{\sqrt{2\pi\Delta E^2}}\exp\left[-\frac{(E-\bar{E})^2}{2\Delta E^2}\right],\quad\Delta E = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}
