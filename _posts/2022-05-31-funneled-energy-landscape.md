@@ -3,9 +3,9 @@ layout: distill
 title: Conformation 101 - Funneled energy landscape
 date: 2022-05-31 15:22:00+0800
 description: Thoughts on protein conformation change.
-tags: conformation-101
+tags: conformation-101 energy-landscape
 categories: review
-bibliography: 2022-05-31-conformation.bib
+bibliography: 2022-05-31-funneled-energy-landscape.bib
 authors:
   - name: Zefeng Zhu
     affiliations:
@@ -140,11 +140,11 @@ Still on writing.
 Cited as:
 
 ```bibtex
-@online{zhu2022conformation,
+@online{zhu2022funneled,
         title={Conformation 101 - Funneled energy landscape},
         author={Zefeng Zhu},
         year={2022},
         month={May},
-        url={https://naturegeorge.github.io/blog/2022/conformation/},
+        url={https://naturegeorge.github.io/blog/2022/funneled-energy-landscape/},
 }
 ```
