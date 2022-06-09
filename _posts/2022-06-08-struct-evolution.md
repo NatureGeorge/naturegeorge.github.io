@@ -13,7 +13,7 @@ authors:
 
 ---
 
-Here I will give a brief summary of some infrastructure works for the study of the evolution of protein structure conducted by [Prof. Douglas L. Theobald](<https://theobald.brandeis.edu/people.php>) et al.<d-cite key="TheobaldSuperpose2006"></d-cite><d-cite key="TheobaldSuperposeSoftware2006"></d-cite><d-cite key="TheobaldSuperpose2008"></d-cite><d-cite key="TheobaldSuperpose2012"></d-cite><d-cite key="TheobaldSuperpose2019"></d-cite><d-cite key="TheobaldStructEvo2021"></d-cite>
+Here I will give a brief summary of some infrastructure works for the study of the dynamics and evolution of protein structures conducted by [Prof. Douglas L. Theobald](<https://theobald.brandeis.edu/people.php>) et al.<d-cite key="TheobaldSuperpose2006"></d-cite><d-cite key="TheobaldSuperposeSoftware2006"></d-cite><d-cite key="TheobaldSuperpose2008"></d-cite><d-cite key="TheobaldSuperpose2012"></d-cite><d-cite key="TheobaldSuperpose2019"></d-cite>
 
 For measuring how much a particular atom of a molecule fluctuates over a set of conformations (e.g. simulation trajectory for a period of time or NMR ensemble), it is straightforward to calculate the Root Mean Square Fluctuation (RMSF) of this atom $\lbrace \mathbf{r}(t) \in \mathbb{R}^{3} \rbrace_{t}^{T}$ after optimal translation and rotation of the molecule:
 
@@ -45,7 +45,7 @@ $$
 \end{bmatrix}_{N\times T}
 $$
 
-Through normalizing the covariances by the variances, we can get the correlation matrix $\mathbf{C}$<d-footnote>Hadamard product and Hadamard power notations are used here. See <https://en.wikipedia.org/wiki/Hadamard_product_(matrices)> for details.</d-footnote>:
+Through normalizing the covariances by the variances, we can get the correlation matrix $\mathbf{C}$<d-footnote>Hadamard product and Hadamard power notations are used here. See [here](https://en.wikipedia.org/wiki/Hadamard_product_(matrices)) for details.</d-footnote>:
 
 $$
 \mathbf{C} = \mathbf{\Sigma} \circ (\mathbf{b}\mathbf{b}^{\mathsf{T}})^{\circ-\frac{1}{2}},\, \mathbf{b} = \mathrm{diag}(\mathbf{\Sigma})
@@ -57,7 +57,13 @@ $$
 c_{i,j} = \frac{\sigma_{i,j}}{\sqrt{\sigma_{i,i}\sigma_{j,j}}}
 $$
 
-Above mentioned calculations can be transferred from ordinary molecules to coarse-grained protein structures (e.g. define a representative atom for each kind of residue). And the conformation set of the same entity can be extended to the aligned conformation set composed of conformations from different entities (e.g. a properly superpositioned family of protein structures), in which the determination of the optimal alignment region, optimal translation, and optimal rotation are required in advance.
+Above mentioned calculations can be transferred from ordinary molecules to coarse-grained protein structures (e.g. define a representative atom for each kind of residue). And the conformation set of the same entity can be extended to the aligned conformation set composed of conformations from different entities (e.g. a properly superpositioned family of protein structures), in which the determination of the optimal alignment region, translation, and rotation are required in advance. Thus there are there three scenarios for the analysis of protein structures:
+
+* quantify the internal dynamics of the same protein
+* quantify the structural similarity among a protein sequence family
+* quantify the structural similarity among a protein structure family
+
+Each of the scenarios has a variant case that there may be instances with different numbers of residues or with different residue identities ([Structure Alignment Versus Structure Superposition](https://link.springer.com/chapter/10.1007/978-3-642-27225-7_8)<d-site key="TheobaldBook2012"></d-site>) thus requiring appointment of alignment region. Sometimes the alignment region is (almost) deterministic, e.g. during the analysis of structure fragments of the same protein with sequence overlap or sequence family with many highly conserved residue sites. But if sequence alignment is not allowed or not feasible, we would need a structure-based alignment method.
 
 **NOTE:**
 Still on writing.

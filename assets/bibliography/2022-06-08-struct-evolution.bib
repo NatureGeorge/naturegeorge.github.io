@@ -13,7 +13,7 @@
 }
 @article{TheobaldSuperposeSoftware2006,
   author   = {Theobald, Douglas L. and Wuttke, Deborah S.},
-  title    = {{THESEUS: maximum likelihood superpositioning and analysis of macromolecular structures}},
+  title    = {THESEUS: maximum likelihood superpositioning and analysis of macromolecular structures},
   journal  = {Bioinformatics},
   volume   = {22},
   number   = {17},
@@ -78,4 +78,20 @@
   eprint   = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/pro.4155},
   abstract = {Abstract Proteins evolve under a myriad of biophysical selection pressures that collectively control the patterns of amino acid substitutions. These evolutionary pressures are sufficiently consistent over time and across protein families to produce substitution patterns, summarized in global amino acid substitution matrices such as BLOSUM, JTT, WAG, and LG, which can be used to successfully detect homologs, infer phylogenies, and reconstruct ancestral sequences. Although the factors that govern the variation of amino acid substitution rates have received much attention, the influence of thermodynamic stability constraints remains unresolved. Here we develop a simple model to calculate amino acid substitution matrices from evolutionary dynamics controlled by a fitness function that reports on the thermodynamic effects of amino acid mutations in protein structures. This hybrid biophysical and evolutionary model accounts for nucleotide transition/transversion rate bias, multi-nucleotide codon changes, the number of codons per amino acid, and thermodynamic protein stability. We find that our theoretical model accurately recapitulates the complex yet universal pattern observed in common global amino acid substitution matrices used in phylogenetics. These results suggest that selection for thermodynamically stable proteins, coupled with nucleotide mutation bias filtered by the structure of the genetic code, is the primary driver behind the global amino acid substitution patterns observed in proteins throughout the tree of life.},
   year     = {2021}
+}
+@inbook{TheobaldBook2012,
+  author    = {Theobald, Douglas L.},
+  editor    = {Hamelryck, Thomas
+               and Mardia, Kanti
+               and Ferkinghoff-Borg, Jesper},
+  title     = {Likelihood and Empirical Bayes Superposition of Multiple Macromolecular Structures},
+  booktitle = {Bayesian Methods in Structural Bioinformatics},
+  year      = {2012},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {191--208},
+  abstract  = {Superpositioning plays a fundamental role in current macromolecular structural analysis. By orienting structures so that their atoms match closely, superpositioning enables the direct analysis of conformational similarities and differences in three-dimensional Euclidean space. Superpositioning is a special case of Procrustes problems, in which coordinate vector sets are optimally oriented via rigid body rotations and translations. Optimal transformations are conventionally determined by minimizing the sum of the squared distances between corresponding atoms in the structures. However, the ordinary unweighted least-squares (OLS) criterion can produce inaccurate results when the atoms have heterogeneous variances (heteroscedasticity) or the atomic positions are correlated, both of which are common features of real data. In contrast, model-based probabilistic methods can easily allow for heterogeneous variances and correlations. Our likelihood treatment of the superposition problem results in more accurate superpositions and provides a framework for a full Bayesian analysis.},
+  isbn      = {978-3-642-27225-7},
+  doi       = {10.1007/978-3-642-27225-7_8},
+  url       = {https://doi.org/10.1007/978-3-642-27225-7_8}
 }
