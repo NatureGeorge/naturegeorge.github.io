@@ -31,7 +31,7 @@ $$
 Thus we can derive a covariance matrix $\mathbf{\Sigma}\in \mathbb{R}^{K\times K}$ describing the covariation of each of the $K$ atoms with each of the others:
 
 $$
-\mathbf{\Sigma} = \mathbf{A} \mathbf{A}^{\mathsf{T}}
+\mathbf{\Sigma} = \frac{1}{T}\mathbf{A} \mathbf{A}^{\mathsf{T}}
 $$
 
 $$
@@ -63,7 +63,7 @@ Above mentioned calculations can be transferred from ordinary molecules to coars
 
 Each of the scenarios has a variant case that there may be instances with different numbers of residues or with different residue identities ([Structure Alignment Versus Structure Superposition](https://link.springer.com/chapter/10.1007/978-3-642-27225-7_8))<d-cite key="TheobaldBook2012"></d-cite> thus requiring appointment of alignment region. Sometimes the alignment region is (almost) deterministic, e.g. during the analysis of structure fragments of the same protein with sequence overlap or sequence family with many highly conserved residue sites. But if sequence alignment is not allowed or not feasible, we would need a structure-based alignment method, which will not be covered in this blog post but will be discussed in the near future.
 
-Here I will give a brief summary of some infrastructure works for the study of superpositioning of protein structures conducted by [Prof. Douglas L. Theobald](<https://theobald.brandeis.edu/people.php>) et al.<d-cite key="TheobaldSuperpose2006"></d-cite><d-cite key="TheobaldSuperposeSoftware2006"></d-cite><d-cite key="TheobaldSuperpose2008"></d-cite><d-cite key="TheobaldSuperpose2012"></d-cite><d-cite key="TheobaldSuperpose2019"></d-cite>
+Here I will give a brief summary of some infrastructure works of superpositioning of protein structures conducted by [Prof. Douglas L. Theobald](<https://theobald.brandeis.edu/people.php>) et al.<d-cite key="TheobaldSuperpose2006"></d-cite><d-cite key="TheobaldSuperposeSoftware2006"></d-cite><d-cite key="TheobaldSuperpose2008"></d-cite><d-cite key="TheobaldSuperpose2012"></d-cite><d-cite key="TheobaldSuperpose2019"></d-cite>
 
 **NOTE:**
 Still on writing.
