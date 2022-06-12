@@ -14,7 +14,7 @@ authors:
 ---
 
 **NOTE:**
-Still on writing.<d-cite key="chapter4-BayesianMethodsInStructuralBioinformatics2012"></d-cite><d-cite key="probabilistic-model-2014"></d-cite><d-cite key="probabilistic-model-book-2015"></d-cite><d-cite key="torus-2017"></d-cite><d-cite key="torus-2019"></d-cite><d-cite key="torus-2021"></d-cite><d-cite key="POSTIC20202228"></d-cite>
+Still on writing.<d-cite key="ch4-book-2012"></d-cite><d-cite key="probabilistic-model-2014"></d-cite><d-cite key="probabilistic-model-book-2015"></d-cite><d-cite key="torus-2017"></d-cite><d-cite key="torus-2019"></d-cite><d-cite key="torus-2021"></d-cite><d-cite key="POSTIC20202228"></d-cite>
 
 ***
 
