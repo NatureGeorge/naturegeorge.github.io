@@ -2,7 +2,7 @@
 layout: distill
 title: Conformation 101 - Probabilistic Models For Protein Structure
 date: 2022-06-12 14:05:00+0800
-description: Thoughts on protein conformation difference.
+description: Thoughts on the probabilistic formulation of protein conformation.
 tags: conformation-101 probabilistic
 categories: review
 bibliography: 2022-06-12-probabilistic-model.bib
@@ -14,7 +14,7 @@ authors:
 ---
 
 **NOTE:**
-Still on writing.<d-cite key="probabilistic-model-2014"></d-cite><d-cite key="probabilistic-model-book-2015"></d-cite><d-cite key="torus-2017"></d-cite><d-cite key="torus-2019"></d-cite><d-cite key="torus-2021"></d-cite><d-cite key="POSTIC20202228"></d-cite>
+Still on writing.<d-cite key="chapter4-BayesianMethodsInStructuralBioinformatics2012"></d-cite><d-cite key="probabilistic-model-2014"></d-cite><d-cite key="probabilistic-model-book-2015"></d-cite><d-cite key="torus-2017"></d-cite><d-cite key="torus-2019"></d-cite><d-cite key="torus-2021"></d-cite><d-cite key="POSTIC20202228"></d-cite>
 
 ***
 
