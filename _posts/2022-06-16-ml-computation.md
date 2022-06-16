@@ -52,7 +52,7 @@ $$
 
 ### Softmax
 
-The Softmax serves as a smooth approximation to $\text{onehot}(\arg\max(\mathbf{x}))$:
+The Softmax serves as a smooth approximation to $$\text{onehot}(\arg\max(\mathbf{x}))$$:
 
 $$
 \text{Softmax}(\mathbf{x})=\left[\frac{\exp(x_1)}{\sum_{i}^{n}\exp(x_i)}, \ldots, \frac{\exp(x_n)}{\sum_{i}^{n}\exp(x_n)} \right]^{\mathsf{T}}
@@ -62,7 +62,7 @@ $$
 
 ### Linear Layer
 
-Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. `torch.nn.Linear`) is exactly a parameter matrix together with a bias vector, storing learnable weights and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.
+Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. `torch.nn.Linear`) is exactly a weight matrix together with a bias vector, storing learnable parameters and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.
 
 $$
 \mathbf{y} = \mathbf{Wx} + \mathbf{b}
@@ -74,17 +74,17 @@ An embedding layer (e.g. `torch.nn.Embedding`) is just a linear layer without bi
 
 ### Attention (Function)
 
-With the Query $\mathbf{Q}\in\mathbb{R}^{n\times d_{k}}$ and the paired Key $\mathbf{K}\in\mathbb{R}^{m\times d_{k}}$ and Value $\mathbf{V}\in\mathbb{R}^{m\times d_{v}}$, we would like to find the queries' corresponding values based on the similarity between the queries and keys. Then we can apply the Scaled Dot-Product Attention:
+With the Query $$\mathbf{Q}\in\mathbb{R}^{n\times d_{k}}$$ and the paired Key $$\mathbf{K}\in\mathbb{R}^{m\times d_{k}}$$ and Value $$\mathbf{V}\in\mathbb{R}^{m\times d_{v}}$$, we would like to find the queries' corresponding values based on the similarity between the queries and keys. Then we can apply the Scaled Dot-Product Attention:
 
 $$
 \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left( \frac{\mathbf{Q}\mathbf{K}^{\mathsf{T}}}{\sqrt{d_{k}}} \right)\mathbf{V}
 $$
 
-where $\sqrt{d_{k}}$ is used for scaling down large dot product values.
+where $$\sqrt{d_{k}}$$ is used for scaling down large dot product values.
 
 ### Multi-Head Attention (Layer)
 
-*... linearly project the queries, keys and values $h$ times with different, learned linear projections to $d_{k}$, $d_{k}$ and $d_v$ dimensions, respectively.*
+*... linearly project the queries, keys and values $$h$$ times with different, learned linear projections to $$d_{k}$$, $$d_{k}$$ and $$d_v$$ dimensions, respectively.*
 
 $$
 \begin{aligned}
@@ -93,4 +93,4 @@ $$
 \end{aligned}
 $$
 
-*On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $d_{v}$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani et al. (2017). Attention Is All You Need. CoRR, abs/1706.03762.
+*On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $$d_{v}$$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani et al. (2017). Attention Is All You Need. CoRR, abs/1706.03762.
