@@ -84,7 +84,7 @@ panelbear_analytics:  # panelbear analytics site ID (format: XXXXXXXXX)
 
 blog_name: 101  # your blog must have a name for it to show up in the nav bar
 blog_description: an archive of my notes and thoughts
-permalink: /blog/:year/:title/
+permalink: /blog/:year/:month/:title/
 
 # Pagination
 pagination:
