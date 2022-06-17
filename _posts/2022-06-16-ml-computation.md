@@ -94,3 +94,28 @@ $$
 $$
 
 *On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $$d_{v}$$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani et al. (2017). Attention Is All You Need. CoRR, abs/1706.03762.
+
+```python
+x = ...
+
+input_dim = x.shape[...]
+embed_dim = ...
+num_heads = ...
+head_dim = embed_dim // num_heads
+
+qkv_proj = Linear(input_dim, 3 * embed_dim)
+o_proj = Linear(embed_dim, embed_dim)
+
+qkv = qkv_proj(x).reshape(
+    batch_size,
+    seq_length,
+    num_heads,
+    3 * head_dim).permute(0, 2, 1, 3)
+    # batch, head, seq, dims
+
+q, k, v = qkv.chunk(3, dim=-1)
+values, attention = scaled_dot_product(q, k, v, mask=mask)
+values = values.permute(0, 2, 1, 3   # batch, seq, head, dims
+                                  ).reshape(batch_size, seq_length, embed_dim) 
+out = o_proj(values)
+```

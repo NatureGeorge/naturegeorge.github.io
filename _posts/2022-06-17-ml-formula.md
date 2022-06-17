@@ -16,10 +16,9 @@ authors:
 
 $$
 \begin{aligned}
-    x! &\simeq x^{x}e^{-x}{\color{gray} \sqrt{2\pi x}} \\
-    \Leftrightarrow \ln x! &\simeq x\ln x-x {\color{gray} + \frac{1}{2}\ln 2\pi x}
+    n! & \simeq n^{n} e^{-n}{\color{gray} \sqrt{2 \pi n}} \\
+    \Leftrightarrow \ln n! & \simeq n\ln n-n {\color{gray} + \frac{1}{2}\ln 2\pi n}
 \end{aligned}
-
 $$
 
 And its application on $$\begin{pmatrix} N \\ r \end{pmatrix}$$:
@@ -43,16 +42,44 @@ $$
 Noted that all the terms are logarithm and according to the Logarithm change of base rule, the above logarithm can be changed to any base. For instance:
 
 $$
-\begin{pmatrix} N \\ r \end{pmatrix} \simeq 2^{N H_{b}(r/N){\color{gray} - \frac{1}{2}\log_{2} 2\pi N (1-x) x}} \\
+\begin{aligned}
+    \begin{pmatrix} N \\ r \end{pmatrix} \simeq 2^{N H_{b}(r/N){\color{gray} - \frac{1}{2}\log_{2} 2\pi N (1-r/N) r/N}} \\
 \text{where} \quad \underbrace{H_{b}(x) \equiv x\log_{2}\frac{1}{x} + (1-x) \log_{2}\frac{1}{1-x}}_{\text{binary entropy function}}
+\end{aligned}
 $$
 
 ### Euler–Maclaurin Formula
 
 ...
 
+### Conditional Probability
+
+...
+
+#### Markov Chain
+
+...
+
+#### Markov Random Field
+
+...
+
 ## Applications
 
 ### Boltzmann Factor
+
+...
+
+### Reparameterization
+
+$$
+\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] = \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz & \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) & \text{discrete} \end{array} \right.
+$$
+
+#### Reparameterization Trick
+
+...
+
+#### Gumbel-softmax Trick
 
 ...
