@@ -82,6 +82,8 @@ $$
 
 where $$\sqrt{d_{k}}$$ is used for scaling down large dot product values.
 
+And self-Attention i.e. $$\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X})$$.
+
 ### Multi-Head Attention (Layer)
 
 *... linearly project the queries, keys and values $$h$$ times with different, learned linear projections to $$d_{k}$$, $$d_{k}$$ and $$d_v$$ dimensions, respectively.*
@@ -93,12 +95,19 @@ $$
 \end{aligned}
 $$
 
+Noted that $$\mathbf{W}_{i}^{Q}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{K}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{V}\in \mathbb{R}^{d_{v}\times \tilde{d_{v}}},\mathbf{W}^{O}\in \mathbb{R}^{h\cdot \tilde{d_{v}} \times d_{o}}$$.
+
 *On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $$d_{v}$$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani et al. (2017). Attention Is All You Need. CoRR, abs/1706.03762.
+
+And self Multi-Head Attention i.e. $$\text{MultiHead}(\mathbf{X}, \mathbf{X}, \mathbf{X})$$ with $$d_{v}=d_{k}, \tilde{d_{v}}=\tilde{d_{k}}$$ and embedding dimension be $$h\cdot \tilde{d_{v}}$$.
+
+Pseudocode:
 
 ```python
 x = ...
+mask = ...
 
-input_dim = x.shape[...]
+batch_size, seq_length, input_dim = x.size()
 embed_dim = ...
 num_heads = ...
 head_dim = embed_dim // num_heads
@@ -106,16 +115,16 @@ head_dim = embed_dim // num_heads
 qkv_proj = Linear(input_dim, 3 * embed_dim)
 o_proj = Linear(embed_dim, embed_dim)
 
-qkv = qkv_proj(x).reshape(
-    batch_size,
-    seq_length,
-    num_heads,
-    3 * head_dim).permute(0, 2, 1, 3)
-    # batch, head, seq, dims
+qkv = qkv_proj(x                       # from x: (batch_size, seq_length, input_dim) to qkv: (batch_size, seq_length, 3 * embed_dim)
+    ).reshape(batch_size, seq_length,  # 3 * embed_dim = 3 * head_dim * num_heads
+              num_heads,               #               = num_heads * 3 * head_dim
+              3 * head_dim             # batch_size, seq_length, num_heads, 3 * head_dim
+    ).permute(0, 2, 1, 3)              # batch_size, num_heads, seq_length, 3 * head_dim
 
 q, k, v = qkv.chunk(3, dim=-1)
 values, attention = scaled_dot_product(q, k, v, mask=mask)
-values = values.permute(0, 2, 1, 3   # batch, seq, head, dims
+values = values.permute(0, 2, 1, 3     # batch_size, seq_length, num_heads, head_dim
                                   ).reshape(batch_size, seq_length, embed_dim) 
+                                       # batch_size, seq_length, num_heads * head_dim
 out = o_proj(values)
 ```
