@@ -48,19 +48,14 @@ $$
 \end{aligned}
 $$
 
+### Properties of Gaussian PDF
+
+$$
+ p(\mathbf{x}|\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)
+$$
+
+
 ### Euler–Maclaurin Formula
-
-...
-
-### Conditional Probability
-
-...
-
-#### Markov Chain
-
-...
-
-#### Markov Random Field
 
 ...
 
@@ -74,6 +69,24 @@ $$
 
 $$
 \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] = \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz & \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) & \text{discrete} \end{array} \right.
+$$
+
+Since the sampling process is not differentiable, we can not optimize the $p_{\theta}$ via backpropagation. We would need to convert from the expectation related to $$z$$ to the expectation related to another variable of which distribution  with no parameter to optimize.
+
+$$
+\begin{aligned}
+  \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)]& = \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  \text{where}& \quad z = g_{\theta}(\epsilon)
+\end{aligned}
+$$
+
+And we have:
+
+$$
+\begin{aligned}
+  \frac{\partial}{\partial \theta} \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &= \frac{\partial}{\partial \theta} \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  &= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g}{ \partial \theta} \right]
+\end{aligned}
 $$
 
 #### Reparameterization Trick

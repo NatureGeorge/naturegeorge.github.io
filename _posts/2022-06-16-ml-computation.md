@@ -81,7 +81,6 @@ $$
 $$
 
 where $$\sqrt{d_{k}}$$ is used for scaling down large dot product values.
-
 And self-Attention i.e. $$\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X})$$.
 
 ### Multi-Head Attention (Layer)
@@ -115,7 +114,8 @@ head_dim = embed_dim // num_heads
 qkv_proj = Linear(input_dim, 3 * embed_dim)
 o_proj = Linear(embed_dim, embed_dim)
 
-qkv = qkv_proj(x                       # from x: (batch_size, seq_length, input_dim) to qkv: (batch_size, seq_length, 3 * embed_dim)
+qkv = qkv_proj(x                       # from x: batch_size, seq_length, input_dim
+                                       # to qkv: batch_size, seq_length, 3 * embed_dim
     ).reshape(batch_size, seq_length,  # 3 * embed_dim = 3 * head_dim * num_heads
               num_heads,               #               = num_heads * 3 * head_dim
               3 * head_dim             # batch_size, seq_length, num_heads, 3 * head_dim
