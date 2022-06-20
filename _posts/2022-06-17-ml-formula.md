@@ -48,12 +48,44 @@ $$
 \end{aligned}
 $$
 
-### Properties of Gaussian PDF
+### Soft Maximum
+
+One of the approaches is:
 
 $$
- p(\mathbf{x}|\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)
+\begin{aligned}
+  \max(x,y) &\simeq \ln(\exp(x)+\exp(y))\\
+  \mathrm{abs}(x) = \max(x,-x) &\simeq \ln(\exp(x)+\exp(-x))\\
+  \max(\mathbf{x}) &\simeq \ln\left(\sum_{i=1}^{n} \exp(x_{i}) \right) \triangleq \mathrm{logsumexp}(\mathbf{x})\\
+\end{aligned}
 $$
 
+For larger values, this approximation would be more precise, as the gap between those exponential values would be larger and the logarithm of the sum would be more close to the maximum value. So we can add a coefficient to adjust the scale of input values depending on the precision we would like to achieve:
+
+$$
+\max(\mathbf{x}) \simeq \frac{1}{k}\ln\left(\sum_{i=1}^{n} \exp(k x_{i}) \right)
+$$
+
+But it should be noted that this approximation is easy to overflow or underflow for computers.
+
+### Matrix Exponential
+
+$$
+\exp (\mathbf{A}) = \sum^{\infty}_{n=0} \frac{\mathbf{A}^{n}}{n!}
+$$
+
+$$
+\begin{aligned}
+  \det(\exp (\mathbf{A})) &= \exp(\mathrm{Tr}(\mathbf{A})) \\
+  \ln(\det(\underbrace{\mathbf{B}}_{\exp(\mathbf{A})})) &= \mathrm{Tr}(\ln(\mathbf{B}))
+\end{aligned}
+$$
+
+### Properties of Gaussian Distribution
+
+$$
+ p(\mathbf{x};\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)
+$$
 
 ### Euler–Maclaurin Formula
 
@@ -68,10 +100,13 @@ $$
 ### Reparameterization
 
 $$
-\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] = \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz & \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) & \text{discrete} \end{array} \right.
+\begin{aligned}
+\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &= \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz & \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) & \text{discrete} \end{array} \right. \\
+&\approx \frac{1}{n} \sum_{z} f(z)
+\end{aligned}
 $$
 
-Since the sampling process is not differentiable, we can not optimize the $p_{\theta}$ via backpropagation. We would need to convert from the expectation related to $$z$$ to the expectation related to another variable of which distribution  with no parameter to optimize.
+Since the sampling process is not differentiable, we can not optimize the $$p_{\theta}$$ via methods like backpropagation. We would need to convert from the expectation related to $$z$$ to the expectation related to another variable of which distribution  with no parameter to optimize.
 
 $$
 \begin{aligned}
@@ -85,14 +120,27 @@ And we have:
 $$
 \begin{aligned}
   \frac{\partial}{\partial \theta} \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &= \frac{\partial}{\partial \theta} \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
-  &= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g}{ \partial \theta} \right]
+  &= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g_{\theta}(\epsilon)}{ \partial \theta} \right]
 \end{aligned}
 $$
 
-#### Reparameterization Trick
+### Kernel Method
+
+#### Kernel Function
 
 ...
 
-#### Gumbel-softmax Trick
+#### Kernel Trick
 
 ...
+
+### Representation of Transformations
+
+$$
+\begin{bmatrix}
+  \cos n\theta & -\sin n \theta \\
+  \sin n\theta & \cos n\theta
+\end{bmatrix} = \exp \left( n\theta \begin{bmatrix}
+  0 & -1 \\ 1 & 0
+\end{bmatrix} \right)
+$$
