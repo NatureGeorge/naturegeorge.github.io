@@ -60,13 +60,26 @@ $$
 \end{aligned}
 $$
 
-For larger values, this approximation would be more precise, as the gap between those exponential values would be larger and the logarithm of the sum would be more close to the maximum value. So we can add a coefficient to adjust the scale of input values depending on the precision we would like to achieve:
+For values with a larger gap, this approximation would be more precise, as the gap between those exponential values would be larger making the logarithm of the sum closer to the maximum value. So we can add a coefficient to adjust the scale of input values depending on the precision we would like to achieve:
 
 $$
 \max(\mathbf{x}) \simeq \frac{1}{k}\ln\left(\sum_{i=1}^{n} \exp(k x_{i}) \right)
 $$
 
-But it should be noted that this approximation is easy to overflow or underflow for computers.
+But it should be noted that this approximation is easy to overflow or underflow for computers. We can shift the input values by a constant:
+
+$$
+\ln( \exp(x) + \exp(y)) = \ln( \exp(x – c) + \exp(y–c) ) + c
+$$
+
+And we get:
+
+$$
+\begin{aligned}
+  \max(\mathbf{x}) &\simeq \frac{1}{k} \left[\ln\left(\sum_{i=1}^{n} \exp(k x_{i} - c) \right) + c \right] \\
+  \text{where } & c=\max(k\mathbf{x})
+\end{aligned}
+$$
 
 ### Matrix Exponential
 
@@ -86,10 +99,6 @@ $$
 $$
  p(\mathbf{x};\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)
 $$
-
-### Euler–Maclaurin Formula
-
-...
 
 ## Applications
 
