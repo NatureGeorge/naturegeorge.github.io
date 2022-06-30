@@ -10,6 +10,8 @@ authors:
       name: AAIS, PKU
 ---
 
+> Notation: bold, lower-case letters refer to column vectors
+
 ## The Basic Building Blocks
 
 ### Dot Product
@@ -18,6 +20,18 @@ The dot product intrinsically defines a kind of similarity:
 
 $$
 \mathbf{a}\cdot\mathbf{b} = \sum_{i} a_{i} b_{i} = \mathbf{a}^{\mathsf{T}}\mathbf{b} = \underbrace{\lVert \mathbf{a} \rVert \lVert \mathbf{b} \rVert \cos\theta}_{\text{for orthonormal basis}}
+$$
+
+And it is the way to perform vector projection:
+
+$$
+\mathrm{proj}_{\mathbf{a}}\mathbf{b} = \frac{(\mathbf{a}^{\mathsf{T}}\mathbf{b}) \mathbf{a}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}=\frac{\mathbf{a}\mathbf{a}^{\mathsf{T}}\mathbf{b}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}
+$$
+
+Noted that we have the Cauchy-Buniakowsky-Schwarz Inequality:
+
+$$
+\left(\sum_{i} a_{i} b_{i}\right)^{2} \le \left(\sum_{i} a_{i}^{2}\right) \left(\sum_{i} b_{i}^{2}\right)
 $$
 
 ### Matrix Multiplication
@@ -48,6 +62,34 @@ $$
 
 $$
 c_{ij}= \sum_{k=1}^n a_{ik}b_{kj}
+$$
+
+### Matrix Decomposition
+
+#### QR Decomposition
+
+For $$ \mathbf{A} \in \mathbb{R}^{m\times n}\quad(m\ge n) $$
+
+Through the Gram-Schmidt process (MGS), we have:
+
+$$
+\begin{aligned}
+  \mathbf{A}_{m\times n} &=\underbrace{\mathbf{Q}_{m\times n}}_{\text{n orthonormal column vector}}\underbrace{\mathbf{R}_{n\times n}}_{\text{triu}} \\
+  \text{where } & \mathbf{Q}^{\mathsf{T}}\mathbf{Q} \in \mathbf{I}_{n}
+\end{aligned}
+$$
+
+Noted that:
+
+$$
+\begin{aligned}
+   \mathbf{A}^{\mathsf{T}}\mathbf{A} &= (\mathbf{QR})^{\mathsf{T}}(\mathbf{QR}) \\
+   &= \mathbf{R}^{\mathsf{T}}\mathbf{Q}^{\mathsf{T}}\mathbf{QR} \\
+   &= \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   \Rightarrow \det \mathbf{A}^{\mathsf{T}}\mathbf{A} &= \det \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   &=\det \mathbf{R}^{\mathsf{T}} \det \mathbf{R} \\
+   &= (\det \mathbf{R})^2
+\end{aligned}
 $$
 
 ### Softmax
