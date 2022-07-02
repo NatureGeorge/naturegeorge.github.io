@@ -14,6 +14,10 @@ authors:
 
 ## The Basic Building Blocks
 
+### Norm
+
+...
+
 ### Dot Product
 
 The dot product intrinsically defines a kind of similarity:
@@ -64,17 +68,62 @@ $$
 c_{ij}= \sum_{k=1}^n a_{ik}b_{kj}
 $$
 
+Then we can derive the outer product operation of two column vectors:
+
+$$
+\mathbf{u} \otimes \mathbf{v} = \mathbf{uv}^{\mathsf{T}}= \begin{bmatrix}
+         u_{1}v_{1} & u_{1}v_{2} & \cdots & u_{1}v_{n}\\
+         u_{2}v_{1} & u_{2}v_{2} & \cdots & u_{2}v_{n}\\
+         \vdots & \vdots & \ddots & \vdots\\
+         u_{m}v_{1} & u_{m}v_{2} & \cdots & u_{m}v_{n}
+     \end{bmatrix}
+$$
+
+The matrix multiplication can also be formulated as:
+
+$$
+\mathbf{A}_{m\times n}\mathbf{B}_{n\times p}=\sum_{k=1}^{n} \mathbf{A}_{(:,k)}\mathbf{B}_{(k,:)}
+$$
+
+We can find out that there exist ways to perform block matrix multiplication:
+
+$$
+\mathbf{A} = \begin{bmatrix}
+    \mathbf{M}_{ra} & \mathbf{M}_{rb} \\
+    \mathbf{M}_{sa} & \mathbf{M}_{sb}
+  \end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+    \mathbf{M}_{at} & \mathbf{M}_{au} \\
+    \mathbf{M}_{bt} & \mathbf{M}_{bu}
+  \end{bmatrix}
+$$
+
+$$
+\mathbf{AB} = \begin{bmatrix}
+    \mathbf{M}_{ra}\mathbf{M}_{at} + \mathbf{M}_{rb}\mathbf{M}_{bt}
+& \mathbf{M}_{ra}\mathbf{M}_{au} + \mathbf{M}_{rb}\mathbf{M}_{bu} \\
+    \mathbf{M}_{sa}\mathbf{M}_{at} + \mathbf{M}_{sb}\mathbf{M}_{bt}
+& \mathbf{M}_{sa}\mathbf{M}_{au} + \mathbf{M}_{sb}\mathbf{M}_{bu}
+  \end{bmatrix}
+= \begin{bmatrix}
+    \mathbf{M}_{rt} & \mathbf{M}_{ru} \\
+    \mathbf{M}_{st} & \mathbf{M}_{su}
+  \end{bmatrix}
+$$
+
 ### Matrix Decomposition
+
+#### LU Decomposition
+
+...
 
 #### QR Decomposition
 
-For $$ \mathbf{A} \in \mathbb{R}^{m\times n}\quad(m\ge n) $$
-
-Through the Gram-Schmidt process (MGS), we have:
+For $$ \mathbf{A} \in \mathbb{R}^{m\times n}\quad(m\ge n) $$, through the Gram-Schmidt process (MGS) or Givens rotation or Householder transformation, we have:
 
 $$
 \begin{aligned}
-  \mathbf{A}_{m\times n} &=\underbrace{\mathbf{Q}_{m\times n}}_{\text{n orthonormal column vector}}\underbrace{\mathbf{R}_{n\times n}}_{\text{triu}} \\
+  \mathbf{A}_{m\times n} &=\underbrace{\mathbf{Q}_{m\times n}}_{\text{n orthonormal column vectors}}\underbrace{\mathbf{R}_{n\times n}}_{\text{triu}} \\
   \text{where } & \mathbf{Q}^{\mathsf{T}}\mathbf{Q} \in \mathbf{I}_{n}
 \end{aligned}
 $$
@@ -91,6 +140,29 @@ $$
    &= (\det \mathbf{R})^2
 \end{aligned}
 $$
+
+#### Eigenvalue Decomposition
+
+$$
+\det(\mathbf{A}-\lambda \mathbf{I})
+$$
+
+For $$\mathbf{A}_{1} \sim \mathbf{A}_{2}$$ (i.e. $$\mathbf{A}_{1}=\mathbf{SA}_{2}\mathbf{S}^{-1}$$):
+
+$$
+\begin{aligned}
+  \mathbf{A}_{1}-\lambda \mathbf{I} &= \mathbf{SA}_{2}\mathbf{S}^{-1}-\lambda \mathbf{I} = \mathbf{S}(\mathbf{A}_{2}-\lambda \mathbf{I})\mathbf{S}^{-1} \\
+  \det(\mathbf{A}_{1}-\lambda \mathbf{I}) &= \det(\mathbf{S})\det(\mathbf{A}_{2}-\lambda \mathbf{I})\det(\mathbf{S}^{-1}) =\det(\mathbf{A}_{2}-\lambda \mathbf{I})
+\end{aligned}
+$$
+
+#### Singular Value Decomposition
+
+...
+
+### Optimization
+
+...
 
 ### Softmax
 
@@ -170,3 +242,20 @@ values = values.permute(0, 2, 1, 3     # batch_size, seq_length, num_heads, head
                                        # batch_size, seq_length, num_heads * head_dim
 out = o_proj(values)
 ```
+
+### Least Square
+
+$$
+\mathbf{Ax}=\mathbf{b}
+$$
+
+...
+
+$$
+\lVert \mathbf{Ax}-\mathbf{b} \rVert_{2}
+$$
+
+### Nonlinear Least Square
+
+...
+

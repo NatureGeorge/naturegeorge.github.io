@@ -12,6 +12,19 @@ authors:
 
 ## The Basic Building Blocks
 
+### Taylor Series Approximation
+
+Around a given point $$x_{0}$$, we have:
+
+$$
+\begin{aligned}
+  f(x) &= \sum_{n=0}^{\infty}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\\
+       &\simeq \underbrace{\left(\sum_{n=0}^{k}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\right)}_{k\text{th order Taylor polynomial}} + \underbrace{\frac{f^{(k+1)}(c)}{(k+1)!}(x-x_{0})^{k+1}}_{\text{remainder (mean-value (Lagrange) form)}}
+\end{aligned}
+$$
+
+which requires $$f$$ to be a k+1 times differentiable function.
+
 ### Stirling's Approximation
 
 $$
@@ -101,6 +114,10 @@ $$
 $$
 
 ## Applications
+
+### Numerical Integration and Differentiation
+
+...
 
 ### Boltzmann Factor
 

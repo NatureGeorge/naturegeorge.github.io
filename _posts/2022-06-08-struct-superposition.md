@@ -31,16 +31,16 @@ $$
 Thus we can derive a covariance matrix $\mathbf{\Sigma}\in \mathbb{R}^{K\times K}$ describing the covariation of each of the $K$ atoms with each of the others:
 
 $$
-\mathbf{\Sigma} = \frac{1}{T}\mathbf{A} \mathbf{A}^{\mathsf{T}}
+\mathbf{\Sigma} = \frac{1}{T} \mathbf{A}^{\mathsf{T}}\mathbf{A}
 $$
 
 $$
 \mathbf{A} = \begin{bmatrix}
-    \lVert \mathbf{r}_{1}(1) - \langle \mathbf{r}_{1} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{1}(T) - \langle \mathbf{r}_{1} \rangle \rVert_{2} \\
-    \lVert \mathbf{r}_{2}(1) - \langle \mathbf{r}_{2} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{2}(T) - \langle \mathbf{r}_{2} \rangle \rVert_{2} \\
+    \lVert \mathbf{r}_{1}(1) - \langle \mathbf{r}_{1} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{K}(1) - \langle \mathbf{r}_{K} \rangle \rVert_{2} \\
+    \lVert \mathbf{r}_{1}(2) - \langle \mathbf{r}_{1} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{K}(2) - \langle \mathbf{r}_{K} \rangle \rVert_{2} \\
     \vdots & \ddots & \vdots \\
-    \lVert \mathbf{r}_{K}(1) - \langle \mathbf{r}_{K} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{K}(T) - \langle \mathbf{r}_{K} \rangle \rVert_{2}
-\end{bmatrix}_{K\times T}
+    \lVert \mathbf{r}_{1}(T) - \langle \mathbf{r}_{1} \rangle \rVert_{2} & \dots  & \lVert \mathbf{r}_{K}(T) - \langle \mathbf{r}_{K} \rangle \rVert_{2}
+\end{bmatrix}_{T\times K}
 $$
 
 Through normalizing the covariances by the variances, we can get the correlation matrix $\mathbf{C}$<d-footnote>Hadamard product and Hadamard power notations are used here. See [here](https://en.wikipedia.org/wiki/Hadamard_product_(matrices)) for details.</d-footnote>:
