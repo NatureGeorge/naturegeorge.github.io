@@ -160,6 +160,8 @@ $$
 
 ...
 
+(Moore–Penrose inverse)
+
 ### Optimization
 
 ...
@@ -174,12 +176,71 @@ $$
 
 ## Applications
 
+### Standardizing and Whitening Data
+
+For a data matrix $$\mathbf{X}\in\mathbb{R}^{N\times D}$$ (row: sample, column: feature), we would like to:
+
+* standardize the data: *to ensure the features are comparable in magnitude, which can help with model fitting and inference*
+* whiten the data: to remove correlation between the features
+
+The most common way to standardize the data is:
+
+$$
+\begin{aligned}
+  \text{standardize}(x_{nd}) &= \frac{x_{nd}-\hat{\mu}_{d}}{\hat{\sigma}_{d}} \\
+  &\simeq \frac{x_{nd}-\hat{\mu}_{d}}{\sqrt{\hat{\sigma}_{d}^{2}+\epsilon}}
+\end{aligned}
+$$
+
+For each of the features, this Z-score standardization centers the mean to zero and scales the data to unit variance (i.e. remove bias and scale).
+
+However, standardization does not consider the covariation between features. Thus we have to whiten the data matrix via linear transformation (on feature dimension) so as to make the covariance matrix become an identity matrix (as long as the covariance matrix is nonsingular). Suppose the data matrix is already centered, we have:
+
+$$
+\begin{aligned}
+  \mathbf{\Sigma} &= \frac{1}{N}\mathbf{X}^{\mathsf{T}}\mathbf{X} \\
+  \mathbf{I} &= \frac{1}{N} \mathbf{W}^{\mathsf{T}}\mathbf{X}^{\mathsf{T}}\mathbf{XW} = \mathbf{W}^{\mathsf{T}}\mathbf{\Sigma}\mathbf{W}
+\end{aligned}
+$$
+
+For preserving the original characteristics of the data matrix, we can define $$\mathbf{W} \in \mathbb{R}^{D\times D}, \det\mathbf{W}>0$$ and get:
+
+$$
+\mathbf{\Sigma} = (\mathbf{W}^{\mathsf{T}})^{-1}\mathbf{W}^{-1} =  (\mathbf{W}^{-1})^{\mathsf{T}}\mathbf{W}^{-1}
+$$
+
+Since the covariance matrix is a real symmetric matrix, it is always orthogonally diagonalizable:
+
+$$
+\mathbf{\Sigma} = \mathbf{V\Lambda V}^{\mathsf{T}}
+$$
+
+Thus we can let:
+
+$$
+\mathbf{W}^{-1} = \underbrace{\mathbf{R}}_{\text{arbitrary orthogonal matrix}}\sqrt{\mathbf{\Lambda}}\mathbf{V}^{\mathsf{T}}
+$$
+
+and get:
+
+$$
+\begin{aligned}
+  \mathbf{W} &= \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{R}^{\mathsf{T}} \\
+  &= \left\{ \begin{array}{lll} \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}},&\mathbf{R} = \mathbf{I} &\text{(PCA whitening)} \\ \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{V}^{\mathsf{T}},&\mathbf{R} = \mathbf{V} &\text{(ZCA whitening)} \end{array} \right.
+\end{aligned}
+$$
+
+Noted that it would require a regularization term $$\epsilon$$ added to the eigenvalues so as to avoid dividing by zero.
+
 ### Linear Layer
 
 Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. `torch.nn.Linear`) is exactly a weight matrix together with a bias vector, storing learnable parameters and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.
 
 $$
-\mathbf{y} = \mathbf{Wx} + \mathbf{b}
+\begin{aligned}
+  \mathbf{y} &= \mathbf{Wx} + \mathbf{b},\quad \mathbf{x} \in \mathbb{R}^{d \times 1},\quad\mathbf{W} \in \mathbb{R}^{\hat{d} \times d}, \quad\mathbf{b},\mathbf{y} \in \mathbb{R}^{\hat{d}\times 1} \\
+  \mathbf{Y} &= \mathbf{XW} + \mathbf{B},\quad \mathbf{X} \in \mathbb{R}^{n \times d},\quad \mathbf{W}\in \mathbb{R}^{d\times\hat{d}},\quad \mathbf{B},\mathbf{Y}\in \mathbb{R}^{n\times \hat{d}}
+\end{aligned}
 $$
 
 ### Embedding Layer
