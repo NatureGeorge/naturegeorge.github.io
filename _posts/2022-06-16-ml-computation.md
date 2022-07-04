@@ -172,6 +172,10 @@ $$
 \end{aligned}
 $$
 
+### Matrix Lie Groups
+
+...
+
 ### Optimization
 
 ...
@@ -182,21 +186,6 @@ The Softmax serves as a smooth approximation to $$\text{onehot}(\arg\max(\mathbf
 
 $$
 \text{Softmax}(\mathbf{x})=\left[\frac{\exp(x_1)}{\sum_{i}^{n}\exp(x_i)}, \ldots, \frac{\exp(x_n)}{\sum_{i}^{n}\exp(x_n)} \right]^{\mathsf{T}}
-$$
-
-### Group Equivariance
-
-* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}$$, group operator denoted as $$g \in G$$.
-  * then group invariance can be expressed as: $$f(\mathbf{x})=f(g(\mathbf{x}))$$
-* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}^{d'}$$, group operator in input space denoted as $$g \in G$$, group operator in output space denoted as $$g' \in G'$$
-  * then group equivariance can be expressed as: $$f(g(\mathbf{x}))=g'(f(\mathbf{x}))$$
-
-$$
-\begin{array}{lll}
-  &\mathbf{x} &\xrightarrow[f]{} & f(\mathbf{x}) \\
-  &\big\downarrow^{g\in G} & &\big\downarrow^{g'\in G'} \\
-  &g(\mathbf{x}) &\xrightarrow[f]{} & \left\{ \begin{array}{r} g'(f(\mathbf{x})) \\ f(g(\mathbf{x})) \end{array} \right.
-\end{array}
 $$
 
 ## Applications
@@ -339,9 +328,31 @@ $$
 \lVert \mathbf{Ax}-\mathbf{b} \rVert_{2}
 $$
 
-#### Nonlinear Least Square
+### Nonlinear Least Square
 
 ...
+
+### Group Equivariance
+
+* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}$$, group operator denoted as $$g \in G$$
+  * then group invariance can be expressed as: $$f(\mathbf{x})=f(g(\mathbf{x}))$$
+  * we say that such function is invariant to $$g$$ since with and without the group action results in the same output
+* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}^{d'}$$, group operator in input space denoted as $$g \in G$$, group operator in output space denoted as $$g' \in G'$$
+  * then group equivariance can be expressed as: $$f(g(\mathbf{x}))=g'(f(\mathbf{x}))$$
+  * we say that such function is equivariant to $$g$$ since there exists an equivalent transformation $$g'$$
+on its output space
+
+$$
+\begin{array}{lll}
+  &\mathbf{x} &\xrightarrow[f]{} & f(\mathbf{x}) \\
+  &\big\downarrow^{g\in G} & &\big\downarrow^{g'\in G'} \\
+  &g(\mathbf{x}) &\xrightarrow[f]{} & \left\{ \begin{array}{r} g'(f(\mathbf{x})) \\ f(g(\mathbf{x})) \end{array} \right.
+\end{array}
+$$
+
+### Lie Algebra Convolutional Layer
+
+*...* —— Nima Dehmamy, Robin Walters, Yanchen Liu, Dashun Wang, & Rose Yu (2021). Automatic Symmetry Discovery with Lie Algebra Convolutional Network. In Advances in Neural Information Processing Systems.
 
 ### E(n)-Equivariant Graph Convolutional Layer
 
