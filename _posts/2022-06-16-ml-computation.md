@@ -23,7 +23,7 @@ authors:
 The dot product intrinsically defines a kind of similarity:
 
 $$
-\mathbf{a}\cdot\mathbf{b} = \sum_{i} a_{i} b_{i} = \mathbf{a}^{\mathsf{T}}\mathbf{b} = \underbrace{\lVert \mathbf{a} \rVert \lVert \mathbf{b} \rVert \cos\theta}_{\text{for orthonormal basis}}
+\mathbf{a}\cdot\mathbf{b} = \sum_{i} a_{i} b_{i} = \mathbf{a}^{\mathsf{T}}\mathbf{b} = \underbrace{\lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \cos\theta}_{\text{for orthonormal basis}}
 $$
 
 And it is the way to perform vector projection:
@@ -162,6 +162,16 @@ $$
 
 (Moore–Penrose inverse)
 
+### Matrix Derivatives
+
+$$
+\begin{aligned}
+  \frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}}{\partial \mathbf{a}} &= \frac{\mathbf{a}-\mathbf{b}}{\lVert \mathbf{a} - \mathbf{b} \rVert_{2}}
+\\
+\frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}^{2}}{\partial \mathbf{a}} &= 2(\mathbf{a}-\mathbf{b})
+\end{aligned}
+$$
+
 ### Optimization
 
 ...
@@ -172,6 +182,21 @@ The Softmax serves as a smooth approximation to $$\text{onehot}(\arg\max(\mathbf
 
 $$
 \text{Softmax}(\mathbf{x})=\left[\frac{\exp(x_1)}{\sum_{i}^{n}\exp(x_i)}, \ldots, \frac{\exp(x_n)}{\sum_{i}^{n}\exp(x_n)} \right]^{\mathsf{T}}
+$$
+
+### Group Equivariance
+
+* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}$$, group operator denoted as $$g \in G$$.
+  * then group invariance can be expressed as: $$f(\mathbf{x})=f(g(\mathbf{x}))$$
+* Let discriminator function denoted as $$f:\mathbb{R}^{d} \rightarrow \mathbb{R}^{d'}$$, group operator in input space denoted as $$g \in G$$, group operator in output space denoted as $$g' \in G'$$
+  * then group equivariance can be expressed as: $$f(g(\mathbf{x}))=g'(f(\mathbf{x}))$$
+
+$$
+\begin{array}{lll}
+  &\mathbf{x} &\xrightarrow[f]{} & f(\mathbf{x}) \\
+  &\big\downarrow^{g\in G} & &\big\downarrow^{g'\in G'} \\
+  &g(\mathbf{x}) &\xrightarrow[f]{} & \left\{ \begin{array}{r} g'(f(\mathbf{x})) \\ f(g(\mathbf{x})) \end{array} \right.
+\end{array}
 $$
 
 ## Applications
@@ -237,10 +262,10 @@ Noted that it would require a regularization term $$\epsilon$$ added to the eige
 Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. `torch.nn.Linear`) is exactly a weight matrix together with a bias vector, storing learnable parameters and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.
 
 $$
-\begin{aligned}
-  \mathbf{y} &= \mathbf{Wx} + \mathbf{b},\quad \mathbf{x} \in \mathbb{R}^{d \times 1},\quad\mathbf{W} \in \mathbb{R}^{\hat{d} \times d}, \quad\mathbf{b},\mathbf{y} \in \mathbb{R}^{\hat{d}\times 1} \\
-  \mathbf{Y} &= \mathbf{XW} + \mathbf{B},\quad \mathbf{X} \in \mathbb{R}^{n \times d},\quad \mathbf{W}\in \mathbb{R}^{d\times\hat{d}},\quad \mathbf{B},\mathbf{Y}\in \mathbb{R}^{n\times \hat{d}}
-\end{aligned}
+\begin{array}{llll}
+  \mathbf{y} = \mathbf{Wx} + \mathbf{b}, &\mathbf{x} \in \mathbb{R}^{d \times 1},&\mathbf{W} \in \mathbb{R}^{\hat{d} \times d}, &\mathbf{b},\mathbf{y} \in \mathbb{R}^{\hat{d}\times 1} \\
+  \mathbf{Y} = \mathbf{XW} + \mathbf{B}, &\mathbf{X} \in \mathbb{R}^{n \times d}, &\mathbf{W}\in \mathbb{R}^{d\times\hat{d}}, &\mathbf{B},\mathbf{Y}\in \mathbb{R}^{n\times \hat{d}}
+\end{array}
 $$
 
 ### Embedding Layer
@@ -310,13 +335,14 @@ $$
 \mathbf{Ax}=\mathbf{b}
 $$
 
-...
-
 $$
 \lVert \mathbf{Ax}-\mathbf{b} \rVert_{2}
 $$
 
-### Nonlinear Least Square
+#### Nonlinear Least Square
 
 ...
 
+### E(n)-Equivariant Graph Convolutional Layer
+
+*...* —— Satorras, V., Hoogeboom, E., & Welling, M. (2021). E(n) Equivariant Graph Neural Networks. In Proceedings of the 38th International Conference on Machine Learning (pp. 9323–9332). PMLR.
