@@ -32,6 +32,15 @@ $$
 \mathrm{proj}_{\mathbf{a}}\mathbf{b} = \frac{(\mathbf{a}^{\mathsf{T}}\mathbf{b}) \mathbf{a}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}=\frac{\mathbf{a}\mathbf{a}^{\mathsf{T}}\mathbf{b}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}
 $$
 
+and make it simple to derive the trigonometric formulas:
+
+$$
+\begin{array}{c}
+  \mathbf{a} = \begin{bmatrix} \cos\alpha \\ \sin\alpha \end{bmatrix}, \mathbf{b} = \begin{bmatrix} \cos\beta \\ \sin\beta \end{bmatrix} \quad\text{(unit circle)} \\
+  \mathbf{a}\cdot\mathbf{b} = \cos\alpha\cos\beta + \sin\alpha\sin\beta = \cos(\alpha - \beta) = \cos(\beta-\alpha)
+\end{array}
+$$
+
 Noted that we have the Cauchy-Buniakowsky-Schwarz Inequality:
 
 $$
@@ -174,7 +183,99 @@ $$
 
 ### Matrix Lie Groups
 
-...
+#### Rotations
+
+For basis vectors
+
+$$
+\mathbf{e}_{1}=\begin{bmatrix} 1\\0 \end{bmatrix},\mathbf{e}_{2}=\begin{bmatrix} 0\\1 \end{bmatrix}
+$$
+
+, a rotation of the plane $$\mathbb{R}^{2}$$ about the origin $$O$$ through angle $$\theta$$ is a linear
+transformation $$R_{\theta}: \mathbb{R}^{2} \rightarrow \mathbb{R}^{2}$$ that making
+
+$$
+\begin{aligned}
+  R_{\theta}(\mathbf{e}_{1}) &= \begin{bmatrix}\cos\theta \\ \sin\theta \end{bmatrix} \\
+R_{\theta}(\mathbf{e}_{2}) &= \begin{bmatrix}\cos(\theta+\frac{\pi}{2}) \\ \sin(\theta+\frac{\pi}{2}) \end{bmatrix} = \begin{bmatrix} -\sin\theta \\ \cos\theta \end{bmatrix}
+\end{aligned}
+$$
+
+Thus:
+
+$$
+\begin{aligned}
+  R_{\theta} &= \begin{bmatrix}
+  \cos\theta & -\sin\theta\\
+  \sin\theta & \cos\theta
+\end{bmatrix} \\ &= \cos\theta \underbrace{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}}_{\mathbf{1}} + \sin\theta \underbrace{\begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}}_{\mathbf
+i} \\
+  R_{\theta}\begin{bmatrix} x\\ y\end{bmatrix} &=
+  \begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix} \\
+  R_{\theta}R_{\beta} &= R_{\theta+\beta} = R_{\beta}R_{\theta}
+\end{aligned}
+$$
+
+If we take the complex view, each rotation $$R_{\theta}$$ of $$\mathbb{R}^{2}$$ can be represented by the complex number:
+
+$$
+\begin{aligned}
+  z_{\theta} &=\underbrace{\cos\theta+i\sin\theta}_{e^{i\theta}} \\
+  z_{\theta}(x+iy) &= (\cos\theta+i\sin\theta)(x+iy) \\
+  &= (x\cos\theta - y\sin\theta) + i (x\sin\theta + y\cos\theta)\\
+  z_{\theta}z_{\beta} &= e^{i(\theta+\beta)} = z_{\theta+\beta} = z_{\beta}z_{\theta}
+\end{aligned}
+$$
+
+These two representations of rotations have intrinsic relationships. Noted that all complex numbers have corresponding 2×2 real matrices:
+
+$$
+a+bi \Leftrightarrow \begin{bmatrix} a & -b \\ b & a \end{bmatrix} = a \mathbf{1} + b\mathbf{i},\quad \text{where }a,b\in \mathbb{R}
+$$
+
+We can view it as this: we model the real unit $$1$$ by $$(\mathbf{e}_{1})^{\star}=\mathbf{1}$$ and model the imaginary unit $$i$$ by $$(\mathbf{e}_{2})^{\star}=\mathbf{i}$$, where
+
+$$
+\begin{aligned}
+  \begin{bmatrix}a\\b\end{bmatrix}^{\star} &= \begin{bmatrix} a & -b \\ b & a \end{bmatrix}\\
+  c\left(\begin{bmatrix}a\\b\end{bmatrix}^{\star}\right)&=\left(c\begin{bmatrix}a\\b\end{bmatrix}\right)^{\star}
+\end{aligned}
+$$
+
+So, for $$a+bi$$ the real part is modeled by $$a(\mathbf{e}_{1})^{\star}=(a\mathbf{e}_{1})^{\star}$$ and the imaginary part is modeled by $$b(\mathbf{e}_{2})^{\star}=(b\mathbf{e}_{2})^{\star}$$. Thus the complex number is modeled by:
+
+$$
+\begin{aligned}
+  a(\mathbf{e}_{1})^{\star}+b(\mathbf{e}_{2})^{\star} &= (a\mathbf{e}_{1})^{\star}+(b\mathbf{e}_{2})^{\star} \\
+  &= (a\mathbf{e}_{1}+b\mathbf{e}_{2})^{\star}
+\end{aligned}
+$$
+
+The matrix representation behave exactly the same as the complex numbers nder addition and multiplication (matrices as $$\mathbb{C}$$):
+
+$$
+\begin{aligned}
+  (a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})&=\begin{bmatrix} a & -b \\ b & a \end{bmatrix} \begin{bmatrix} c & -d \\ d & c \end{bmatrix} \\&
+  = \begin{bmatrix} ac-bd & -(ad+bc) \\ ad+bc & ac-bd \end{bmatrix} \\
+  &=(ac-bd) \mathbf{1} + (ad+bc)\mathbf{i}
+\end{aligned}
+$$
+
+$$
+\mathbf{1}^{2}=\mathbf{1},\mathbf{1i}=\mathbf{i1}=\mathbf{i},\mathbf{i}^{2}=\mathbf{-1}
+$$
+
+So, for rotations, we have:
+
+$$
+\begin{aligned}
+  z_{\theta}(x+iy) \Leftrightarrow &\quad (\underbrace{\cos\theta\mathbf{1} +\sin\theta \mathbf{i}}_{R_{\theta}})(x\mathbf{1}+y\mathbf{i}) \\
+  &= (x\cos\theta - y\sin\theta)\mathbf{1} + (x\sin\theta + y\cos\theta)\mathbf{i}\\
+  &=\begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix}^{\star}
+\end{aligned}
+$$
+
+Lets back to the matrix representation and consider the set of all rotations in $$\mathbb{R}^{2}$$. This set is exactly $$\mathrm{SO}(2) = \lbrace \mathbf{R}\in \mathbb{R}^{2\times2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace$$.
 
 ### Optimization
 
@@ -285,7 +386,7 @@ $$
 
 Noted that $$\mathbf{W}_{i}^{Q}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{K}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{V}\in \mathbb{R}^{d_{v}\times \tilde{d_{v}}},\mathbf{W}^{O}\in \mathbb{R}^{h\cdot \tilde{d_{v}} \times d_{o}}$$.
 
-*On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $$d_{v}$$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani et al. (2017). Attention Is All You Need. CoRR, abs/1706.03762.
+*On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding $$d_{v}$$-dimensional output values. These are concatenated and once again projected, resulting in the final values ... **Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.*** —— Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A., Kaiser, u., & Polosukhin, I. (2017). Attention is All you Need. In Advances in Neural Information Processing Systems. Curran Associates, Inc.
 
 And self Multi-Head Attention i.e. $$\text{MultiHead}(\mathbf{X}, \mathbf{X}, \mathbf{X})$$ with $$d_{v}=d_{k}, \tilde{d_{v}}=\tilde{d_{k}}$$ and embedding dimension be $$h\cdot \tilde{d_{v}}$$.
 
@@ -352,7 +453,7 @@ $$
 
 ### Lie Algebra Convolutional Layer
 
-*...* —— Nima Dehmamy, Robin Walters, Yanchen Liu, Dashun Wang, & Rose Yu (2021). Automatic Symmetry Discovery with Lie Algebra Convolutional Network. In Advances in Neural Information Processing Systems.
+*...* —— Dehmamy, N., Walters, R., Liu, Y., Wang, D., & Yu, R. (2021). Automatic Symmetry Discovery with Lie Algebra Convolutional Network. In Advances in Neural Information Processing Systems (pp. 2503–2515). Curran Associates, Inc.
 
 ### E(n)-Equivariant Graph Convolutional Layer
 
