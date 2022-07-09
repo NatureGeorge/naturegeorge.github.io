@@ -251,7 +251,7 @@ $$
 \end{aligned}
 $$
 
-The matrix representation behave exactly the same as the complex numbers nder addition and multiplication (matrices as $$\mathbb{C}$$):
+The matrix representation behave exactly the same as the complex numbers under addition and multiplication (matrices as $$\mathbb{C}$$):
 
 $$
 \begin{aligned}
@@ -275,7 +275,11 @@ $$
 \end{aligned}
 $$
 
-Lets back to the matrix representation and consider the set of all rotations in $$\mathbb{R}^{2}$$. This set is exactly $$\mathrm{SO}(2) = \lbrace \mathbf{R}\in \mathbb{R}^{2\times2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace$$.
+Lets back to the matrix representation and consider the set of all rotations in $$\mathbb{R}^{2}$$. This set is exactly:
+
+$$
+\mathrm{SO}(2) = \lbrace \mathbf{R} \in \mathbb{R}^{2 \times 2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace
+$$
 
 ### Optimization
 
