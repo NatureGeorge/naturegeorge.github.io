@@ -262,7 +262,14 @@ $$
 $$
 
 $$
-\mathbf{1}^{2}=\mathbf{1},\mathbf{1i}=\mathbf{i1}=\mathbf{i},\mathbf{i}^{2}=\mathbf{-1}
+\begin{aligned}
+  \mathbf{1}^{2}=\mathbf{1},\mathbf{1i}&=\mathbf{i1}=\mathbf{i},\mathbf{i}^{2}=\mathbf{-1} \\
+  (a \mathbf{1} + b\mathbf{i})^{-1} &= \frac{a \mathbf{1} - b\mathbf{i}}{a^{2}+b^{2}}\\
+\det(a\mathbf{1}+b\mathbf{i}) &= a^{2}+b^{2} = \lvert a+bi \rvert^{2} \\
+\det((a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})) &=\det(a \mathbf{1} + b\mathbf{i})\det(c \mathbf{1} + d\mathbf{i}) \\
+=(ac-bd)^{2}+(ad+bc)^{2} &= (a^{2}+b^{2})(c^{2}+d^{2})\\
+= \lvert (a+bi)(c+di) \rvert^{2} &= \lvert a+bi \rvert^{2} \lvert c+di \rvert^{2}
+\end{aligned}
 $$
 
 So, for rotations, we have:
@@ -275,11 +282,32 @@ $$
 \end{aligned}
 $$
 
-Lets back to the matrix representation and consider the set of all rotations in $$\mathbb{R}^{2}$$. This set is exactly:
+If we consider the set of all rotations in $$\mathbb{R}^{2}$$, the matrix set is the special orthogonal group for n=2:
 
 $$
 \mathrm{SO}(2) = \lbrace \mathbf{R} \in \mathbb{R}^{2 \times 2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace
 $$
+
+and the number set is the unit circle or 1-dimensional sphere (also a (Lie) group under the operation of complex number multiplication):
+
+$$
+\mathbb{S}^{1} = \lbrace z: \lvert z \rvert = 1 \rbrace
+$$
+
+The complex numbers are ordered pairs with the *sum,* *product,* and *absolute value* operations that can express through matrix computations. We can extend this idea to the ordered quadruples of real values with the matrix:
+
+$$
+\begin{array}{c}
+  q = \begin{bmatrix}
+  a+id & -b-ic \\
+  b-ic & a-id
+\end{bmatrix}
+= a\mathbf{1}+b\mathbf{i}+c\mathbf{j}+d\mathbf{k}\\
+\text{where } \mathbf{j}=\begin{bmatrix}0 & -i \\ -i & 0\end{bmatrix}, \mathbf{k}=\begin{bmatrix} i & 0 \\ 0 & -1\end{bmatrix}
+\end{array}
+$$
+
+This is one of the forms of the quaternions.
 
 ### Optimization
 
@@ -462,3 +490,34 @@ $$
 ### E(n)-Equivariant Graph Convolutional Layer
 
 *...* —— Satorras, V., Hoogeboom, E., & Welling, M. (2021). E(n) Equivariant Graph Neural Networks. In Proceedings of the 38th International Conference on Machine Learning (pp. 9323–9332). PMLR.
+
+### Reparameterization
+
+$$
+\begin{aligned}
+\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &= \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz & \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) & \text{discrete} \end{array} \right. \\
+&\approx \frac{1}{n} \sum_{z} f(z)
+\end{aligned}
+$$
+
+Since the sampling process is not differentiable, we can not optimize the $$p_{\theta}$$ via methods like backpropagation. We would need to convert from the expectation related to $$z$$ to the expectation related to another variable of which distribution  with no parameter to optimize.
+
+$$
+\begin{aligned}
+  \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)]& = \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  \text{where}& \quad z = g_{\theta}(\epsilon)
+\end{aligned}
+$$
+
+And we have:
+
+$$
+\begin{aligned}
+  \frac{\partial}{\partial \theta} \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &= \frac{\partial}{\partial \theta} \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  &= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g_{\theta}(\epsilon)}{ \partial \theta} \right]
+\end{aligned}
+$$
+
+#### Reparameterizing Distributions on Lie Groups
+
+*...* —— Falorsi, L., de Haan, P., Davidson, T., & Forré, P. (2019). Reparameterizing Distributions on Lie Groups. In Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics (pp. 3244–3253). PMLR.
