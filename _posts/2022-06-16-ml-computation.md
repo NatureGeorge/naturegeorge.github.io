@@ -205,14 +205,14 @@ Thus:
 
 $$
 \begin{aligned}
-  R_{\theta} &= \begin{bmatrix}
+  \mathbf{R}_{\theta} &= \begin{bmatrix}
   \cos\theta & -\sin\theta\\
   \sin\theta & \cos\theta
 \end{bmatrix} \\ &= \cos\theta \underbrace{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}}_{\mathbf{1}} + \sin\theta \underbrace{\begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}}_{\mathbf
 i} \\
-  R_{\theta}\begin{bmatrix} x\\ y\end{bmatrix} &=
+  \mathbf{R}_{\theta}\begin{bmatrix} x\\ y\end{bmatrix} &=
   \begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix} \\
-  R_{\theta}R_{\beta} &= R_{\theta+\beta} = R_{\beta}R_{\theta}
+  \mathbf{R}_{\theta}\mathbf{R}_{\beta} &= \mathbf{R}_{\theta+\beta} = \mathbf{R}_{\beta}\mathbf{R}_{\theta}
 \end{aligned}
 $$
 
@@ -276,19 +276,19 @@ So, for rotations, we have:
 
 $$
 \begin{aligned}
-  z_{\theta}(x+iy) \Leftrightarrow &\quad (\underbrace{\cos\theta\mathbf{1} +\sin\theta \mathbf{i}}_{R_{\theta}})(x\mathbf{1}+y\mathbf{i}) \\
+  z_{\theta}(x+iy) \Leftrightarrow &\quad (\underbrace{\cos\theta\mathbf{1} +\sin\theta \mathbf{i}}_{\mathbf{R}_{\theta}})(x\mathbf{1}+y\mathbf{i}) \\
   &= (x\cos\theta - y\sin\theta)\mathbf{1} + (x\sin\theta + y\cos\theta)\mathbf{i}\\
   &=\begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix}^{\star}
 \end{aligned}
 $$
 
-If we consider the set of all rotations in $$\mathbb{R}^{2}$$, the matrix set is the special orthogonal group for n=2:
+If we consider the set of all rotations of the plane $$\mathbb{R}^{2}$$ about the origin $$O$$, the set is the special orthogonal group for n=2:
 
 $$
 \mathrm{SO}(2) = \lbrace \mathbf{R} \in \mathbb{R}^{2 \times 2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace
 $$
 
-and the number set is the unit circle or 1-dimensional sphere (also a (Lie) group under the operation of complex number multiplication):
+If we consider the set of all rotations of the plane $$\mathbb{C}$$ about the origin $$O$$, the set is the unit circle or 1-dimensional sphere (also a (Lie) group under the operation of complex number multiplication):
 
 $$
 \mathbb{S}^{1} = \lbrace z: \lvert z \rvert = 1 \rbrace
