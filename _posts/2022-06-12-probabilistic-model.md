@@ -26,6 +26,6 @@ Cited as:
         author={Zefeng Zhu},
         year={2022},
         month={June},
-        url={https://naturegeorge.github.io/blog/2022/probabilistic-model/},
+        url={https://naturegeorge.github.io/blog/2022/06/probabilistic-model/},
 }
 ```

@@ -78,6 +78,6 @@ Cited as:
         author={Zefeng Zhu},
         year={2022},
         month={June},
-        url={https://naturegeorge.github.io/blog/2022/struct-superposition/},
+        url={https://naturegeorge.github.io/blog/2022/06/struct-superposition/},
 }
 ```

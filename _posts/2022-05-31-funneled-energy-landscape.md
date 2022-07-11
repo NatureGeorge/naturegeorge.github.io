@@ -145,6 +145,6 @@ Cited as:
         author={Zefeng Zhu},
         year={2022},
         month={May},
-        url={https://naturegeorge.github.io/blog/2022/funneled-energy-landscape/},
+        url={https://naturegeorge.github.io/blog/2022/05/funneled-energy-landscape/},
 }
 ```

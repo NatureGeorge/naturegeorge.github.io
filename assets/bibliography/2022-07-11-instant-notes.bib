@@ -81,6 +81,39 @@
   doi      = {10.1186/s12859-021-04222-4},
   url      = {https://doi.org/10.1186/s12859-021-04222-4}
 }
+%%
+@article{Monasson2019,
+  article_type = {journal},
+  title        = {Learning protein constitutive motifs from sequence data},
+  author       = {Tubiana, Jérôme and Cocco, Simona and Monasson, Rémi},
+  editor       = {Colwell, Lucy J and Weigel, Detlef},
+  volume       = {8},
+  year         = {2019},
+  month        = {mar},
+  pub_date     = {2019-03-12},
+  pages        = {e39397},
+  citation     = {eLife 2019;8:e39397},
+  doi          = {10.7554/eLife.39397},
+  url          = {https://doi.org/10.7554/eLife.39397},
+  abstract     = {Statistical analysis of evolutionary-related protein sequences provides information about their structure, function, and history. We show that Restricted Boltzmann Machines (RBM), designed to learn complex high-dimensional data and their statistical features, can efficiently model protein families from sequence information. We here apply RBM to 20 protein families, and present detailed results for two short protein domains (Kunitz and WW), one long chaperone protein (Hsp70), and synthetic lattice proteins for benchmarking. The features inferred by the RBM are biologically interpretable: they are related to structure (residue-residue tertiary contacts, extended secondary motifs (α-helixes and β-sheets) and intrinsically disordered regions), to function (activity and ligand specificity), or to phylogenetic identity. In addition, we use RBM to design new protein sequences with putative properties by composing and 'turning up' or 'turning down' the different modes at will. Our work therefore shows that RBM are versatile and practical tools that can be used to unveil and exploit the genotype–phenotype relationship for protein families.},
+  keywords     = {sequence analysis, machine learning, coevolution},
+  journal      = {eLife},
+  issn         = {2050-084X},
+  publisher    = {eLife Sciences Publications, Ltd}
+}
+%%
+@article{Petti2021,
+  author       = {Petti, Samantha and Bhattacharya, Nicholas and Rao, Roshan and Dauparas, Justas and Thomas, Neil and Zhou, Juannan and Rush, Alexander M. and Koo, Peter K. and Ovchinnikov, Sergey},
+  title        = {End-to-end learning of multiple sequence alignments with differentiable Smith-Waterman},
+  elocation-id = {2021.10.23.465204},
+  year         = {2022},
+  doi          = {10.1101/2021.10.23.465204},
+  publisher    = {Cold Spring Harbor Laboratory},
+  abstract     = {Multiple Sequence Alignments (MSAs) of homologous sequences contain information on structural and functional constraints and their evolutionary histories. Despite their importance for many downstream tasks, such as structure prediction, MSA generation is often treated as a separate pre-processing step, without any guidance from the application it will be used for. Here, we implement a smooth and differentiable version of the Smith-Waterman pairwise alignment algorithm that enables jointly learning an MSA and a downstream machine learning system in an end-to-end fashion. To demonstrate its utility, we introduce SMURF (Smooth Markov Unaligned Random Field), a new method that jointly learns an alignment and the parameters of a Markov Random Field for unsupervised contact prediction. We find that SMURF learns MSAs that mildly improve contact prediction on a diverse set of protein and RNA families. As a proof of concept, we demonstrate that by connecting our differentiable alignment module to AlphaFold and maximizing predicted confidence, we can learn MSAs that improve structure predictions over the initial MSAs. Interestingly, the alignments that improve AlphaFold predictions are self-inconsistent and can be viewed as adversarial. This work highlights the potential of differentiable dynamic programming to improve neural network pipelines that rely on an alignment and the potential dangers of relying on black-box methods for optimizing predictions of protein sequences.Competing Interest StatementThe authors have declared no competing interest.},
+  url          = {https://www.biorxiv.org/content/early/2022/04/18/2021.10.23.465204},
+  eprint       = {https://www.biorxiv.org/content/early/2022/04/18/2021.10.23.465204.full.pdf},
+  journal      = {bioRxiv}
+}
 
 
 %AlphaFold2 & RoseTTAFold Downstream Analysis
@@ -125,4 +158,19 @@
   doi      = {10.1093/bioinformatics/btw752},
   url      = {https://doi.org/10.1093/bioinformatics/btw752},
   eprint   = {https://academic.oup.com/bioinformatics/article-pdf/33/7/997/25149799/btw752.pdf}
+}
+@article{Oteri2022,
+  author   = {Oteri, Francesco and Sarti, Edoardo and Nadalin, Francesca and Carbone, Alessandra},
+  title    = {{iBIS2Analyzer: a web server for a phylogeny-driven coevolution analysis of protein families}},
+  journal  = {Nucleic Acids Research},
+  volume   = {50},
+  number   = {W1},
+  pages    = {W412-W419},
+  year     = {2022},
+  month    = {06},
+  abstract = {{Residue coevolution within and between proteins is used as a marker of physical interaction and/or residue functional cooperation. Pairs or groups of coevolving residues are extracted from multiple sequence alignments based on a variety of computational approaches. However, coevolution signals emerging in subsets of sequences might be lost if the full alignment is considered. iBIS2Analyzer is a web server dedicated to a phylogeny-driven coevolution analysis of protein families with different evolutionary pressure. It is based on the iterative version, iBIS2, of the coevolution analysis method BIS, Blocks in Sequences. iBIS2 is designed to iteratively select and analyse subtrees in phylogenetic trees, possibly large and comprising thousands of sequences. With iBIS2Analyzer, openly accessible at http://ibis2analyzer.lcqb.upmc.fr/, the user visualizes, compares and inspects clusters of coevolving residues by mapping them onto sequences, alignments or structures of choice, greatly simplifying downstream analysis steps. A rich and interactive graphic interface facilitates the biological interpretation of the results.}},
+  issn     = {0305-1048},
+  doi      = {10.1093/nar/gkac481},
+  url      = {https://doi.org/10.1093/nar/gkac481},
+  eprint   = {https://academic.oup.com/nar/article-pdf/50/W1/W412/44379762/gkac481.pdf}
 }
