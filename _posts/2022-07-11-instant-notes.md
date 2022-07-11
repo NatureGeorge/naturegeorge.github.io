@@ -16,7 +16,7 @@ authors:
 
 ### Protein Structure Comparison
 
-Applications of the Gauss Integrals on protein structure comparison considering self-intersections, proposed by Peter Røgen<d-cite key="PR2021"></d-cite><d-cite key="PR2003"></d-cite>.
+Applications of the Gauss Integrals on protein structure comparison considering self-intersections and self-avoiding morphs, proposed by Peter Røgen<d-cite key="PR2021"></d-cite><d-cite key="PR2003"></d-cite>.
 
 ### Protein Structure Search
 
@@ -32,16 +32,18 @@ Interestingly, Petti et al. recently proposed another (similar in idea but quite
 
 ### New Fold?
 
-<d-cite key="Bordin2022"></d-cite>
+Bordin et al. reported a new CATH-Assign protocol which is used to analyze the AlphaFoldDB and detect new superfamilies<d-cite key="Bordin2022"></d-cite>. It seems that AlphaFold2 yields a certain amount of "novel" structures. But people should be cautious about this since the predicted structures are not always "true".
 
 ### Predicting the Impact of Mutations
 
-<d-cite key="Sen2022"></d-cite>
+Sen et al. used both AlphaFold and RoseTTAFold to predict the structures of protein domains without known experimental structures, and perform subsequent functional predictions based on those predicted structures to help estimate the effect of disease-associated missense mutations<d-cite key="Sen2022"></d-cite>. Such incorporating two models to try to yield better results is a kind of ensemble approach.
 
 ## Toolbox
 
-<d-cite key="Cazals2016"></d-cite>
-<d-cite key="Oteri2022"></d-cite>
+* The structural bioinformatics library (SBL)<d-cite key="Cazals2016"></d-cite>
+* iBIS2Analyzer: a web server for a phylogeny-driven coevolution analysis of protein families<d-cite key="Oteri2022"></d-cite>
+
+Require further investigation for usability.
 
 ***
 
