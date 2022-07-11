@@ -1,0 +1,128 @@
+%Gauss Integrals
+@article{PR2021,
+  author   = {R{\o}gen, Peter},
+  title    = {Quantifying steric hindrance and topological obstruction to protein structure superposition},
+  journal  = {Algorithms for Molecular Biology},
+  year     = {2021},
+  month    = {Feb},
+  day      = {27},
+  volume   = {16},
+  number   = {1},
+  pages    = {1},
+  abstract = {In computational structural biology, structure comparison is fundamental for our understanding of proteins. Structure comparison is, e.g., algorithmically the starting point for computational studies of structural evolution and it guides our efforts to predict protein structures from their amino acid sequences. Most methods for structural alignment of protein structures optimize the distances between aligned and superimposed residue pairs, i.e., the distances traveled by the aligned and superimposed residues during linear interpolation. Considering such a linear interpolation, these methods do not differentiate if there is room for the interpolation, if it causes steric clashes, or more severely, if it changes the topology of the compared protein backbone curves.},
+  issn     = {1748-7188},
+  doi      = {10.1186/s13015-020-00180-3},
+  url      = {https://doi.org/10.1186/s13015-020-00180-3}
+}
+%%
+@article{PR2003,
+  author   = {Peter Røgen  and Boris Fain },
+  title    = {Automatic classification of protein structure by using Gauss integrals},
+  journal  = {Proceedings of the National Academy of Sciences},
+  volume   = {100},
+  number   = {1},
+  pages    = {119-124},
+  year     = {2003},
+  doi      = {10.1073/pnas.2636460100},
+  url      = {https://www.pnas.org/doi/abs/10.1073/pnas.2636460100},
+  eprint   = {https://www.pnas.org/doi/pdf/10.1073/pnas.2636460100},
+  abstract = {We introduce a method of looking at, analyzing, and comparing protein structures. The topology of a protein is captured by 30 numbers inspired by Vassiliev knot invariants. To illustrate the simplicity and power of this topological approach, we construct a measure (scaled Gauss metric, SGM) of similarity of protein shapes. Under this metric, protein chains naturally separate into fold clusters. We use SGM to construct an automatic classification procedure for the CATH2.4 database. The method is very fast because it requires neither alignment of the chains nor any chain–chain comparison. It also has only one adjustable parameter. We assign 95.51\% of the chains into the proper C (class), A (architecture), T (topology), and H (homologous superfamily) fold, find all new folds, and detect no false geometric positives. Using the SGM, we display a “map” of the space of folds projected onto two dimensions, show the relative locations of the major structural classes, and “zoom into” the space of proteins to show architecture, topology, and fold clusters. The existence of a simple measure of a protein fold computed from the chain path will have a major impact on automatic fold classification.}
+}
+
+%Structure Search
+@article{vanKempen2022,
+  author   = {van Kempen, Michel
+              and Kim, Stephanie S.
+              and Tumescheit, Charlotte
+              and Mirdita, Milot
+              and Gilchrist, Cameron L.M.
+              and S{\"o}ding, Johannes
+              and Steinegger, Martin},
+  title    = {Foldseek: fast and accurate protein structure search},
+  journal  = {bioRxiv},
+  year     = {2022},
+  month    = {Jan},
+  day      = {01},
+  pages    = {2022.02.07.479398},
+  abstract = {Highly accurate structure prediction methods are generating an avalanche of publicly available protein structures. Searching through these structures is becoming the main bottleneck in their analysis. Foldseek enables fast and sensitive comparisons of large structure sets. It reaches sensitivities similar to state-of-the-art structural aligners while being four to five orders of magnitude faster. Foldseek is free open-source software available at foldseek.com and as a webserver at search.foldseek.com.Competing Interest StatementThe authors have declared no competing interest.},
+  doi      = {10.1101/2022.02.07.479398},
+  url      = {https://doi.org/10.1101/2022.02.07.479398}
+}
+%%
+@article{Guzenko2020,
+  doi       = {10.1371/journal.pcbi.1007970},
+  author    = {Guzenko, Dmytro AND Burley, Stephen K. AND Duarte, Jose M.},
+  journal   = {PLOS Computational Biology},
+  publisher = {Public Library of Science},
+  title     = {Real time structural search of the Protein Data Bank},
+  year      = {2020},
+  month     = {07},
+  volume    = {16},
+  url       = {https://doi.org/10.1371/journal.pcbi.1007970},
+  pages     = {1-18},
+  abstract  = {Detection of protein structure similarity is a central challenge in structural bioinformatics. Comparisons are usually performed at the polypeptide chain level, however the functional form of a protein within the cell is often an oligomer. This fact, together with recent growth of oligomeric structures in the Protein Data Bank (PDB), demands more efficient approaches to oligomeric assembly alignment/retrieval. Traditional methods use atom level information, which can be complicated by the presence of topological permutations within a polypeptide chain and/or subunit rearrangements. These challenges can be overcome by comparing electron density volumes directly. But, brute force alignment of 3D data is a compute intensive search problem. We developed a 3D Zernike moment normalization procedure to orient electron density volumes and assess similarity with unprecedented speed. Similarity searching with this approach enables real-time retrieval of proteins/protein assemblies resembling a target, from PDB or user input, together with resulting alignments (http://shape.rcsb.org).},
+  number    = {7}
+}
+
+%New Sequence Alignment
+@article{Talibart2021,
+  author   = {Talibart, Hugo
+              and Coste, Fran{\c{c}}ois},
+  title    = {PPalign: optimal alignment of Potts models representing proteins with direct coupling information},
+  journal  = {BMC Bioinformatics},
+  year     = {2021},
+  month    = {Jun},
+  day      = {10},
+  volume   = {22},
+  number   = {1},
+  pages    = {317},
+  abstract = {To assign structural and functional annotations to the ever increasing amount of sequenced proteins, the main approach relies on sequence-based homology search methods, e.g. BLAST or the current state-of-the-art methods based on profile Hidden Markov Models, which rely on significant alignments of query sequences to annotated proteins or protein families. While powerful, these approaches do not take coevolution between residues into account. Taking advantage of recent advances in the field of contact prediction, we propose here to represent proteins by Potts models, which model direct couplings between positions in addition to positional composition, and to compare proteins by aligning these models. Due to non-local dependencies, the problem of aligning Potts models is hard and remains the main computational bottleneck for their use.},
+  issn     = {1471-2105},
+  doi      = {10.1186/s12859-021-04222-4},
+  url      = {https://doi.org/10.1186/s12859-021-04222-4}
+}
+
+
+%AlphaFold2 & RoseTTAFold Downstream Analysis
+@article{Bordin2022,
+  author       = {Bordin, Nicola and Sillitoe, Ian and Nallapareddy, Vamsi and Rauer, Clemens and Lam, Su Datt and Waman, Vaishali P. and Sen, Neeladri and Heinzinger, Michael and Littmann, Maria and Kim, Stephanie and Velankar, Sameer and Steinegger, Martin and Rost, Burkhard and Orengo, Christine},
+  title        = {AlphaFold2 reveals commonalities and novelties in protein structure space for 21 model organisms},
+  elocation-id = {2022.06.02.494367},
+  year         = {2022},
+  doi          = {10.1101/2022.06.02.494367},
+  publisher    = {Cold Spring Harbor Laboratory},
+  abstract     = {Over the last year, there have been substantial improvements in protein structure prediction, particularly in methods like DeepMind{\textquoteright}s AlphaFold2 (AF2) that exploit deep learning strategies. Here we report a new CATH-Assign protocol which is used to analyse the first tranche of AF2 models predicted for 21 model organisms and discuss insights these models bring on the nature of protein structure space. We analyse good quality models and those with no unusual structural characteristics, i.e., features rarely seen in experimental structures. For the \~{}370,000 models that meet these criteria, we observe that 92\% can be assigned to evolutionary superfamilies in CATH. The remaining domains cluster into 2,367 putative novel superfamilies. Detailed manual analysis on a subset of 618 of those which had at least one human relative revealed some extremely remote homologies and some further unusual features, but 26 could be confirmed as novel superfamilies and one of these has an alpha-beta propeller architectural arrangement never seen before. By clustering both experimental and predicted AF2 domain structures into distinct {\textquoteleft}global fold{\textquoteright} groups, we observe that the new AF2 models in CATH increase information on structural diversity by 36\%. This expansion in structural diversity will help to reveal associated functional diversity not previously detected. Our novel CATH-Assign protocol scales well and will be able to harness the huge expansion (at least 100 million models) in structural data promised by DeepMind to provide more comprehensive coverage of even the most diverse superfamilies to help rationalise evolutionary changes in their functions.Competing Interest StatementThe authors have declared no competing interest.},
+  url          = {https://www.biorxiv.org/content/early/2022/06/03/2022.06.02.494367},
+  eprint       = {https://www.biorxiv.org/content/early/2022/06/03/2022.06.02.494367.full.pdf},
+  journal      = {bioRxiv}
+}
+@article{Sen2022,
+  author   = {Sen, Neeladri and Anishchenko, Ivan and Bordin, Nicola and Sillitoe, Ian and Velankar, Sameer and Baker, David and Orengo, Christine},
+  title    = {Characterizing and explaining the impact of disease-associated mutations in proteins without known structures or structural homologs},
+  journal  = {Briefings in Bioinformatics},
+  year     = {2022},
+  month    = {06},
+  abstract = {{Mutations in human proteins lead to diseases. The structure of these proteins can help understand the mechanism of such diseases and develop therapeutics against them. With improved deep learning techniques, such as RoseTTAFold and AlphaFold, we can predict the structure of proteins even in the absence of structural homologs. We modeled and extracted the domains from 553 disease-associated human proteins without known protein structures or close homologs in the Protein Databank. We noticed that the model quality was higher and the Root mean square deviation (RMSD) lower between AlphaFold and RoseTTAFold models for domains that could be assigned to CATH families as compared to those which could only be assigned to Pfam families of unknown structure or could not be assigned to either. We predicted ligand-binding sites, protein–protein interfaces and conserved residues in these predicted structures. We then explored whether the disease-associated missense mutations were in the proximity of these predicted functional sites, whether they destabilized the protein structure based on ddG calculations or whether they were predicted to be pathogenic. We could explain 80\\% of these disease-associated mutations based on proximity to functional sites, structural destabilization or pathogenicity. When compared to polymorphisms, a larger percentage of disease-associated missense mutations were buried, closer to predicted functional sites, predicted as destabilizing and pathogenic. Usage of models from the two state-of-the-art techniques provide better confidence in our predictions, and we explain 93 additional mutations based on RoseTTAFold models which could not be explained based solely on AlphaFold models.}},
+  issn     = {1477-4054},
+  doi      = {10.1093/bib/bbac187},
+  url      = {https://doi.org/10.1093/bib/bbac187},
+  note     = {bbac187},
+  eprint   = {https://academic.oup.com/bib/advance-article-pdf/doi/10.1093/bib/bbac187/43913437/bbac187.pdf}
+}
+
+%Toolbox
+@article{Cazals2016,
+  author   = {Cazals, Frédéric and Dreyfus, Tom},
+  title    = {The structural bioinformatics library: modeling in biomolecular science and beyond},
+  journal  = {Bioinformatics},
+  volume   = {33},
+  number   = {7},
+  pages    = {997-1004},
+  year     = {2016},
+  month    = {12},
+  abstract = {{Software in structural bioinformatics has mainly been application driven. To favor practitioners seeking off-the-shelf applications, but also developers seeking advanced building blocks to develop novel applications, we undertook the design of the Structural Bioinformatics Library (SBL, http://sbl.inria.fr), a generic C ++/python cross-platform software library targeting complex problems in structural bioinformatics. Its tenet is based on a modular design offering a rich and versatile framework allowing the development of novel applications requiring well specified complex operations, without compromising robustness and performances.The SBL involves four software components (1–4 thereafter). For end-users, the SBL provides ready to use, state-of-the-art (1) applications to handle molecular models defined by unions of balls, to deal with molecular flexibility, to model macro-molecular assemblies. These applications can also be combined to tackle integrated analysis problems. For developers, the SBL provides a broad C ++ toolbox with modular design, involving core (2) algorithms, (3) biophysical models and (4) modules, the latter being especially suited to develop novel applications. The SBL comes with a thorough documentation consisting of user and reference manuals, and a bugzilla platform to handle community feedback.The SBL is available from http://sbl.inria.frSupplementary data are available at Bioinformatics online.}},
+  issn     = {1367-4803},
+  doi      = {10.1093/bioinformatics/btw752},
+  url      = {https://doi.org/10.1093/bioinformatics/btw752},
+  eprint   = {https://academic.oup.com/bioinformatics/article-pdf/33/7/997/25149799/btw752.pdf}
+}

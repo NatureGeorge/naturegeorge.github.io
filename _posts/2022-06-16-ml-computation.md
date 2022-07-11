@@ -267,7 +267,7 @@ $$
   (a \mathbf{1} + b\mathbf{i})^{-1} &= \frac{a \mathbf{1} - b\mathbf{i}}{a^{2}+b^{2}}\\
 \det(a\mathbf{1}+b\mathbf{i}) &= a^{2}+b^{2} = \lvert a+bi \rvert^{2} \\
 \det((a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})) &=\det(a \mathbf{1} + b\mathbf{i})\det(c \mathbf{1} + d\mathbf{i}) \\
-=(ac-bd)^{2}+(ad+bc)^{2} &= (a^{2}+b^{2})(c^{2}+d^{2})\\
+=(ac-bd)^{2}+(ad+bc)^{2} &= (a^{2}+b^{2})(c^{2}+d^{2}) \quad \} \text{ the two-square identity}\\
 = \lvert (a+bi)(c+di) \rvert^{2} &= \lvert a+bi \rvert^{2} \lvert c+di \rvert^{2}
 \end{aligned}
 $$
