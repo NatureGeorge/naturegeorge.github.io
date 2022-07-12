@@ -51,12 +51,6 @@ For discretizing tertiary interactions, there are also some related works<d-cite
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="https://journals.plos.org/plosone/article/figure/image?size=medium&id=10.1371/journal.pone.0083788.g003" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
-</div>
-<div class="caption">
-    Fig 1 and Fig 3 of Shi et al.
-</div>
-
-<div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.html path="https://journals.plos.org/plosone/article/figure/image?size=medium&id=10.1371/journal.pone.0263566.g001" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
@@ -65,7 +59,7 @@ For discretizing tertiary interactions, there are also some related works<d-cite
     </div>
 </div>
 <div class="caption">
-    Fig 1 and Fig 2 of Pražnikar et al.
+    Fig 1 and Fig 3 of Shi et al. & Fig 1 and Fig 2 of Pražnikar et al.
 </div>
 
 ### New Sequence Alignment
