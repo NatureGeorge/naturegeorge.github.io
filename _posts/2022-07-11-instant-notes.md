@@ -20,13 +20,23 @@ Applications of the Gauss Integrals on protein structure comparison considering 
 
 ### Protein Structure Search
 
-Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite>, however not mention the related works utilizing the Zernike polynomials<d-cite key="Guzenko2020"></d-cite>.
+Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite>,
+
+![vanKempen2022-fig1](https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large.jpg)
+
+however not mention the related works utilizing the 3D Zernike polynomials and supporting oligomeric query<d-cite key="Guzenko2020"></d-cite>.
+
+![Guzenko2020-fig3](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1007970.g003)
+
+For discretizing tertiary interactions, there are also some related works<d-cite key="Jure2022"></d-cite>.
+
+![Jure2022-fig1](https://journals.plos.org/plosone/article/figure/image?size=large&id=10.1371/journal.pone.0263566.g001)
 
 ### New Sequence Alignment
 
 Inspired by the field of protein structure contact prediction, particularly the Direct Coupling Analysis (DCA) methodology, Talibart et al. applied the Potts model considering direct couplings (i.e. coevolution) between positions in addition to positional composition (i.e. positional conservation) to align two sequences through aligning two Potts models inferred from corresponding multiple sequence alignments (MSA) via Integer Linear Programming (ILP)<d-cite key="Talibart2021"></d-cite>. Their model can be used to improve the alignment of remotely related protein sequences in tractable time. Following this idea, it is straightforward to utilize the Restricted Boltzmann Machines (RBM)<d-cite key="Monasson2019"></d-cite> and even deep neural networks to build theoretically more powerful models.
 
-Interestingly, Petti et al. recently proposed another (similar in idea but quite different in implementation) approach to perform multiple sequence alignment<d-cite key="Petti2021"></d-cite>. They implemented a smooth and differentiable version of the Smith-Waterman pairwise alignment algorithm via differentiable dynamic programming and designed a method called Smooth Markov Unaligned Random Field (SMURF) that takes as input unaligned sequences and jointly learns an MSA. And they proved that such a differentiable alignment module helps improve the structure prediction results over those initial MSAs.
+Interestingly, Petti et al. recently proposed another (similar in idea but quite different in implementation) approach to perform multiple sequence alignment<d-cite key="Petti2021"></d-cite>. They implemented a smooth and differentiable version of the Smith-Waterman pairwise alignment algorithm via differentiable dynamic programming and designed a method called Smooth Markov Unaligned Random Field (SMURF) that takes as input unaligned sequences and jointly learns the MSA. And they proved that such a differentiable alignment module helps improve the structure prediction results over those initial MSAs.
 
 ## AlphaFold2 & RoseTTAFold Downstream Analysis
 

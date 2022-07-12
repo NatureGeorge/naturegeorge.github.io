@@ -9,5 +9,6 @@ _site
 Gemfile.lock
 vendor
 _arxiv
+_arxiv_zh
 _posts/temp*
 assets/bibliography/temp*
