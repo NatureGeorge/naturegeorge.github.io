@@ -42,7 +42,7 @@ however not mention the related works utilizing the 3D Zernike polynomials and s
     Fig 3 of Guzenko et al.
 </div>
 
-For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite>.
+For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite><d-cite key="Nepomnyachiy2017"></d-cite>.
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
@@ -69,7 +69,7 @@ Interestingly, Petti et al. recently proposed another (similar in idea but quite
 
 ### New Fold?
 
-Bordin et al. reported a new CATH-Assign protocol which is used to analyze the AlphaFoldDB and detect new superfamilies<d-cite key="Bordin2022"></d-cite>. It seems that AlphaFold2 yields a certain amount of "novel" structures. But people should be cautious about this since the predicted structures are not always "true".
+Bordin et al. reported a new CATH-Assign protocol (ultizing Foldseek<d-cite key="vanKempen2022"></d-cite> for fast structure comparison) which is used to analyze the AlphaFoldDB and detect new superfamilies<d-cite key="Bordin2022"></d-cite>. It seems that AlphaFold2 yields a certain amount of "novel" structures. But people should be cautious about this since the predicted structures are not always "true" and the structure comparison methods may not be robust enough<d-cite key="PR2021"></d-cite>.
 
 ### Predicting the Impact of Mutations
 
