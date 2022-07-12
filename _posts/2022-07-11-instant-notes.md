@@ -22,15 +22,48 @@ Applications of the Gauss Integrals on protein structure comparison considering 
 
 Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite>,
 
-![vanKempen2022-fig1](https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large.jpg)
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Fig 1 of Kempen et al.
+</div>
 
 however not mention the related works utilizing the 3D Zernike polynomials and supporting oligomeric query<d-cite key="Guzenko2020"></d-cite>.
 
-![Guzenko2020-fig3](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1007970.g003)
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://journals.plos.org/ploscompbiol/article/figure/image?size=medium&id=10.1371/journal.pcbi.1007970.g003" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Fig 3 of Guzenko et al.
+</div>
 
-For discretizing tertiary interactions, there are also some related works<d-cite key="Jure2022"></d-cite>.
+For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite>.
 
-![Jure2022-fig1](https://journals.plos.org/plosone/article/figure/image?size=large&id=10.1371/journal.pone.0263566.g001)
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://journals.plos.org/plosone/article/figure/image?size=medium&id=10.1371/journal.pone.0083788.g001" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://journals.plos.org/plosone/article/figure/image?size=medium&id=10.1371/journal.pone.0083788.g003" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Fig 1 and Fig 3 of Shi et al.
+</div>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://journals.plos.org/plosone/article/figure/image?size=medium&id=10.1371/journal.pone.0263566.g001" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Fig 1 of Pražnikar et al.
+</div>
 
 ### New Sequence Alignment
 
