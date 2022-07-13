@@ -5,23 +5,25 @@ date: 2022-07-11 12:18:00+0800
 description: Here are the notes on some interesting articles appeared in the ISMB 2022's 3DSIG COSI, as well as related works on the same topic.
 tags: instant-notes
 categories: review
-bibliography: 2022-07-11-instant-notes.bib
 authors:
   - name: Zefeng Zhu
     affiliations:
       name: AAIS, PKU
+bibliography: 2022-07-11-instant-notes.bib
+#
 toc:
-  - name: Protein Comparison & Search
+  - name: Protein Comparison and Search
     - name: Protein Structure Comparison
     - name: Protein Structure Search
     - name: New Sequence Alignment
-  - name: AlphaFold2 & RoseTTAFold Downstream Analysis
+  - name: AlphaFold2 and RoseTTAFold Downstream Analysis
     - name: New Fold?
     - name: Predicting the Impact of Mutations
   - name: Toolbox
+
 ---
 
-## Protein Comparison & Search
+## Protein Comparison and Search
 
 ### Protein Structure Comparison
 
@@ -29,7 +31,7 @@ Peter Røgen presented a novel method applying the Knot theory to find topologic
 
 ### Protein Structure Search
 
-Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite>,
+Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite> and emphasized advantages over those discretizing the local backbone<d-cite key="Brevern2000"></d-cite> (related to Alexandre G. de Brevern group's works),
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -40,7 +42,7 @@ Kempen et al. developed a new approach to perform a fast protein structure searc
     Fig 1 of Kempen et al.
 </div>
 
-however not mention the related works utilizing the 3D Zernike polynomials and supporting oligomeric query<d-cite key="Guzenko2020"></d-cite>.
+however not mention the related works utilizing the 3D Zernike polynomials that supporting both monomeric and oligomeric query<d-cite key="Guzenko2020"></d-cite>.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -91,7 +93,7 @@ Inspired by the field of protein structure contact prediction, particularly the 
 
 Interestingly, Petti et al. recently proposed another (similar in idea but quite different in implementation) approach to perform multiple sequence alignment<d-cite key="Petti2021"></d-cite>. They implemented a smooth and differentiable version of the Smith-Waterman pairwise alignment algorithm via differentiable dynamic programming and designed a method called Smooth Markov Unaligned Random Field (SMURF) that takes as input unaligned sequences and jointly learns the MSA. And they proved that such a differentiable alignment module helps improve the structure prediction results over those initial MSAs.
 
-## AlphaFold2 & RoseTTAFold Downstream Analysis
+## AlphaFold2 and RoseTTAFold Downstream Analysis
 
 ### New Fold?
 
