@@ -10,6 +10,15 @@ authors:
   - name: Zefeng Zhu
     affiliations:
       name: AAIS, PKU
+toc:
+  - name: Protein Comparison & Search
+    - name: Protein Structure Comparison
+    - name: Protein Structure Search
+    - name: New Sequence Alignment
+  - name: AlphaFold2 & RoseTTAFold Downstream Analysis
+    - name: New Fold?
+    - name: Predicting the Impact of Mutations
+  - name: Toolbox
 ---
 
 ## Protein Comparison & Search
