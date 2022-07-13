@@ -7,18 +7,20 @@ tags: instant-notes
 categories: review
 authors:
   - name: Zefeng Zhu
+    url: "https://naturegeorge.github.io"
     affiliations:
       name: AAIS, PKU
+
 bibliography: 2022-07-11-instant-notes.bib
 #
 toc:
   - name: Protein Comparison and Search
-    - name: Protein Structure Comparison
-    - name: Protein Structure Search
-    - name: New Sequence Alignment
+    #  - name: Protein Structure Comparison
+    #  - name: Protein Structure Search
+    #  - name: New Sequence Alignment
   - name: AlphaFold2 and RoseTTAFold Downstream Analysis
-    - name: New Fold?
-    - name: Predicting the Impact of Mutations
+    #  - name: New Fold?
+    #  - name: Predicting the Impact of Mutations
   - name: Toolbox
 
 ---
