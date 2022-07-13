@@ -16,7 +16,7 @@ authors:
 
 ### Protein Structure Comparison
 
-Applications of the Gauss Integrals on protein structure comparison considering self-intersections and self-avoiding morphs, proposed by Peter Røgen<d-cite key="PR2021"></d-cite><d-cite key="PR2003"></d-cite>.
+Peter Røgen presented a novel method applying the Knot theory to find topological obstructions to a superposition of one protein backbone onto another<d-cite key="PR2021"></d-cite>. Such a protein structure comparison method considers self-intersections and self-avoiding morphs. He previously utilized generalized Gauss integrals and proposed scaled Gauss metric as geometric measures of protein structures<d-cite key="PR2003"></d-cite>.
 
 ### Protein Structure Search
 
@@ -42,7 +42,7 @@ however not mention the related works utilizing the 3D Zernike polynomials and s
     Fig 3 of Guzenko et al.
 </div>
 
-For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite><d-cite key="Nepomnyachiy2017"></d-cite>.
+For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite><d-cite key="Nepomnyachiy2017"></d-cite>,
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
@@ -57,6 +57,23 @@ For discretizing tertiary interactions, there are also some related works<d-cite
 </div>
 <div class="caption">
     Fig 1 and Fig 3 of Shi et al. & Fig 1 of Pražnikar et al.
+</div>
+
+particularly Gevorg Grigoryan group's works<d-cite key="Zheng2015"></d-cite><d-cite key="Mackenzie2016"></d-cite><d-cite key="Zhou2020"></d-cite>.
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://els-jbs-prod-cdn.jbs.elsevierhealth.com/cms/attachment/943141aa-8fb6-44e2-a51a-fa35e51afd24/fx1.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://www.pnas.org/cms/10.1073/pnas.1607178113/asset/e0d64f5b-0d4b-4882-9d9b-dc39866a0048/assets/graphic/pnas.1607178113fig01.jpeg" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="https://www.pnas.org/cms/10.1073/pnas.1908723117/asset/84ce450d-1d76-4fcc-9717-03aac5f502d0/assets/graphic/pnas.1908723117fig01.jpeg" class="img-fluid rounded z-depth-1" zoomable=true %}
+    </div>
+</div>
+<div class="caption">
+    Summary Fig of Zheng et al. & Fig 1 of Mackenzie et al. & Fig 1 of Zhou et al.
 </div>
 
 ### New Sequence Alignment

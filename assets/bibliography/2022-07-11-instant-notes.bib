@@ -104,6 +104,49 @@
   eprint   = {https://www.pnas.org/doi/pdf/10.1073/pnas.1707642114},
   abstract = {We question a central paradigm: namely, that the protein domain is the “atomic unit” of evolution. In conflict with the current textbook view, our results unequivocally show that duplication of protein segments happens both above and below the domain level among amino acid segments of diverse lengths. Indeed, we show that significant evolutionary information is lost when the protein is approached as a string of domains. Our finer-grained approach reveals a far more complicated picture, where reused segments often intertwine and overlap with each other. Our results are consistent with a recursive model of evolution, in which segments of various lengths, typically smaller than domains, “hop” between environments. The fit segments remain, leaving traces that can still be detected. Proteins share similar segments with one another. Such “reused parts”—which have been successfully incorporated into other proteins—are likely to offer an evolutionary advantage over de novo evolved segments, as most of the latter will not even have the capacity to fold. To systematically explore the evolutionary traces of segment “reuse” across proteins, we developed an automated methodology that identifies reused segments from protein alignments. We search for “themes”—segments of at least 35 residues of similar sequence and structure—reused within representative sets of 15,016 domains [Evolutionary Classification of Protein Domains (ECOD) database] or 20,398 chains [Protein Data Bank (PDB)]. We observe that theme reuse is highly prevalent and that reuse is more extensive when the length threshold for identifying a theme is lower. Structural domains, the best characterized form of reuse in proteins, are just one of many complex and intertwined evolutionary traces. Others include long themes shared among a few proteins, which encompass and overlap with shorter themes that recur in numerous proteins. The observed complexity is consistent with evolution by duplication and divergence, and some of the themes might include descendants of ancestral segments. The observed recursive footprints, where the same amino acid can simultaneously participate in several intertwined themes, could be a useful concept for protein design. Data are available at http://trachel-srv.cs.haifa.ac.il/rachel/ppi/themes/.}
 }
+@article{Zheng2015,
+  author    = {Zheng, Fan
+               and Zhang, Jian
+               and Grigoryan, Gevorg},
+  title     = {Tertiary Structural Propensities Reveal Fundamental Sequence/Structure Relationships},
+  journal   = {Structure},
+  year      = {2015},
+  month     = {May},
+  day       = {05},
+  publisher = {Elsevier},
+  volume    = {23},
+  number    = {5},
+  pages     = {961-971},
+  issn      = {0969-2126},
+  doi       = {10.1016/j.str.2015.03.015},
+  url       = {https://doi.org/10.1016/j.str.2015.03.015}
+}
+@article{Mackenzie2016,
+  author   = {Craig O. Mackenzie  and Jianfu Zhou  and Gevorg Grigoryan },
+  title    = {Tertiary alphabet for the observable protein structural universe},
+  journal  = {Proceedings of the National Academy of Sciences},
+  volume   = {113},
+  number   = {47},
+  pages    = {E7438-E7447},
+  year     = {2016},
+  doi      = {10.1073/pnas.1607178113},
+  url      = {https://www.pnas.org/doi/abs/10.1073/pnas.1607178113},
+  eprint   = {https://www.pnas.org/doi/pdf/10.1073/pnas.1607178113},
+  abstract = {Proteins fold into intricate 3D structures, determined by their amino acid sequences. Different proteins can fold into drastically different structures, and the space of all possible structures appears hopelessly complex. However, this is precisely the space that needs to be described to understand how sequence encodes structure. In this paper, we decompose the set of known protein structures into standard reusable building blocks, which we call tertiary structural motifs (TERMs). Strikingly, we find that only ∼600 TERMs describe 50\% of the known protein structural universe at sub-Angstrom resolution. Furthermore, we find the natural utilization of TERMs gives us a means of uncovering sequence–structure relationships. These insights can be harnessed for protein structure prediction, protein design, and other applications. Here, we systematically decompose the known protein structural universe into its basic elements, which we dub tertiary structural motifs (TERMs). A TERM is a compact backbone fragment that captures the secondary, tertiary, and quaternary environments around a given residue, comprising one or more disjoint segments (three on average). We seek the set of universal TERMs that capture all structure in the Protein Data Bank (PDB), finding remarkable degeneracy. Only ∼600 TERMs are sufficient to describe 50\% of the PDB at sub-Angstrom resolution. However, more rare geometries also exist, and the overall structural coverage grows logarithmically with the number of TERMs. We go on to show that universal TERMs provide an effective mapping between sequence and structure. We demonstrate that TERM-based statistics alone are sufficient to recapitulate close-to-native sequences given either NMR or X-ray backbones. Furthermore, sequence variability predicted from TERM data agrees closely with evolutionary variation. Finally, locations of TERMs in protein chains can be predicted from sequence alone based on sequence signatures emergent from TERM instances in the PDB. For multisegment motifs, this method identifies spatially adjacent fragments that are not contiguous in sequence—a major bottleneck in structure prediction. Although all TERMs recur in diverse proteins, some appear specialized for certain functions, such as interface formation, metal coordination, or even water binding. Structural biology has benefited greatly from previously observed degeneracies in structure. The decomposition of the known structural universe into a finite set of compact TERMs offers exciting opportunities toward better understanding, design, and prediction of protein structure.}
+}
+@article{Zhou2020,
+  author   = {Jianfu Zhou  and Alexandra E. Panaitiu  and Gevorg Grigoryan },
+  title    = {A general-purpose protein design framework based on mining sequence\&\#x2013;structure relationships in known protein structures},
+  journal  = {Proceedings of the National Academy of Sciences},
+  volume   = {117},
+  number   = {2},
+  pages    = {1059-1068},
+  year     = {2020},
+  doi      = {10.1073/pnas.1908723117},
+  url      = {https://www.pnas.org/doi/abs/10.1073/pnas.1908723117},
+  eprint   = {https://www.pnas.org/doi/pdf/10.1073/pnas.1908723117},
+  abstract = {Evolution has given us proteins that perform amazingly complex tasks in living systems, each molecule appearing “custom-built” for its particular purpose. Protein design seeks to enable the “custom building” of proteins at will, for specific tasks, without waiting for evolution. This is a grand challenge, because how a protein’s 3-dimensional structure and function are encoded in its amino acid sequence is exceedingly difficult to model. In this paper, we argue that sequence–structure encodings can instead be learned directly from proteins of known structure, which enables an approach to design. We are at an exciting time in protein science, where emergent principles inferred from data may allow us to make headway in cases where application of first principles is challenging. Current state-of-the-art approaches to computational protein design (CPD) aim to capture the determinants of structure from physical principles. While this has led to many successful designs, it does have strong limitations associated with inaccuracies in physical modeling, such that a reliable general solution to CPD has yet to be found. Here, we propose a design framework—one based on identifying and applying patterns of sequence–structure compatibility found in known proteins, rather than approximating them from models of interatomic interactions. We carry out extensive computational analyses and an experimental validation for our method. Our results strongly argue that the Protein Data Bank is now sufficiently large to enable proteins to be designed by using only examples of structural motifs from unrelated proteins. Because our method is likely to have orthogonal strengths relative to existing techniques, it could represent an important step toward removing remaining barriers to robust CPD.}
+}
 
 %New Sequence Alignment
 @article{Talibart2021,
