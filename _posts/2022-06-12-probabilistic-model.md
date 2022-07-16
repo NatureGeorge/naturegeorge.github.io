@@ -8,6 +8,7 @@ categories: review
 bibliography: 2022-06-12-probabilistic-model.bib
 authors:
   - name: Zefeng Zhu
+    url: "https://naturegeorge.github.io"
     affiliations:
       name: AAIS, PKU
 
