@@ -294,20 +294,56 @@ $$
 \mathbb{S}^{1} = \lbrace z: \lvert z \rvert = 1 \rbrace
 $$
 
-The complex numbers are ordered pairs with the *sum,* *product,* and *absolute value* operations that can express through matrix computations. We can extend this idea to the ordered quadruples of real values with the matrix:
+The complex numbers are ordered pairs with the *sum,* *product,* and *absolute value* operations that can express through matrix computations. We can extend this idea to the ordered quadruples of real values (i.e. quaternions)
+
+$$
+\begin{aligned}
+  q &=a+bi+cj+dk \\
+  i^{2}&=j^{2}=k^{2}=ijk=-1 \\
+  ij&=k,ji=-k,\ldots \\
+  \overline{q} &= a-bi-cj-dk
+\end{aligned}
+$$
+
+with the matrix:
 
 $$
 \begin{array}{c}
-  q = \begin{bmatrix}
+  \mathbf{q} = \begin{bmatrix}
   a+id & -b-ic \\
   b-ic & a-id
+\end{bmatrix} = \begin{bmatrix}
+  \alpha & -\beta \\
+  \bar{\beta} & \bar{\alpha}
 \end{bmatrix}
 = a\mathbf{1}+b\mathbf{i}+c\mathbf{j}+d\mathbf{k}\\
-\text{where } \mathbf{j}=\begin{bmatrix}0 & -i \\ -i & 0\end{bmatrix}, \mathbf{k}=\begin{bmatrix} i & 0 \\ 0 & -1\end{bmatrix}
+\text{where } \mathbf{j}=\begin{bmatrix}0 & -i \\ -i & 0\end{bmatrix}, \mathbf{k}=\begin{bmatrix} i & 0 \\ 0 & -i\end{bmatrix}
 \end{array}
 $$
 
-This is one of the forms of the quaternions.
+We can verify the sum, product, and determinant of matrices like $$\mathbf{q}$$ are just equivalent to the sum, product, and squared absolute value of quaternions.
+
+$$
+\begin{aligned}
+  \mathbf{i}^{2}&=\mathbf{j}^{2}=\mathbf{k}^{2}=\mathbf{ijk}=-\mathbf{1} \\
+\mathbf{ij}&=\mathbf{k}, \mathbf{ji}=-\mathbf{k},\ldots \\
+\overline{\mathbf{q}} &= a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k} = \begin{bmatrix} \bar{\alpha} & -\bar{\beta} \\ \beta & \alpha \end{bmatrix}^{\mathsf{T}}\\
+\overline{(\mathbf{q}_{1}\mathbf{q}_{2})}&=\overline{\mathbf{q}_{2}}\,\overline{\mathbf{q}_{1}}\\
+\mathbf{q}^{-1}&=\frac{a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k}}{a^{2}+b^{2}+c^{2}+d^{2}}\\
+\det\mathbf{q} &= a^{2}+b^{2}+c^{2}+d^{2} = \lvert q \rvert^{2}= q\overline{q}\\
+\det(\mathbf{q}_{1}\mathbf{q}_{2})&=\det\mathbf{q}_{1}\det\mathbf{q}_{2} =\lvert q_{1}q_{2} \rvert^{2} = \lvert q_{1} \rvert^{2}\lvert q_{2} \rvert^{2}
+\end{aligned}
+$$
+
+For unit quaternions, they form the 3-sphere in the space $$\mathbb{R}^{4}$$:
+
+$$
+\mathbb{S}^{3}=\lbrace q: \lvert q \rvert = 1 \rbrace
+$$
+
+It is a group under quaternion multiplication.
+
+From the multiplicative absolute value, we can see that, for both complex numbers and quaternions, multiplication by a number $$u$$ with $$\lvert u \rvert=1$$ (unit complex number and unit quaternion respectively) is a rigid motion (i.e. an isometry) (of $$\mathbb{C}=\mathbb{R}^{2}$$ and $$\mathbb{R}^{4}$$ respectively), leaving the origin fixed.
 
 ### Optimization
 
