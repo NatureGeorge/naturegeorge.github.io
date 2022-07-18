@@ -301,7 +301,7 @@ $$
   q &=a+bi+cj+dk \\
   i^{2}&=j^{2}=k^{2}=ijk=-1 \\
   ij&=k,ji=-k,\ldots \\
-  \overline{q} &= a-bi-cj-dk
+  \bar{q} &= a-bi-cj-dk
 \end{aligned}
 $$
 
@@ -321,16 +321,16 @@ $$
 \end{array}
 $$
 
-We can verify the sum, product, and determinant of matrices like $$\mathbf{q}$$ are just equivalent to the sum, product, and squared absolute value of quaternions.
+We can verify that, the sum, product, and determinant of matrices like $$\mathbf{q}$$ are just equivalent to the sum, product, and squared absolute value of quaternions.
 
 $$
 \begin{aligned}
   \mathbf{i}^{2}&=\mathbf{j}^{2}=\mathbf{k}^{2}=\mathbf{ijk}=-\mathbf{1} \\
 \mathbf{ij}&=\mathbf{k}, \mathbf{ji}=-\mathbf{k},\ldots \\
-\overline{\mathbf{q}} &= a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k} = \begin{bmatrix} \bar{\alpha} & -\bar{\beta} \\ \beta & \alpha \end{bmatrix}^{\mathsf{T}}\\
-\overline{(\mathbf{q}_{1}\mathbf{q}_{2})}&=\overline{\mathbf{q}_{2}}\,\overline{\mathbf{q}_{1}}\\
+\bar{\mathbf{q}} &= a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k} = \begin{bmatrix} \bar{\alpha} & -\bar{\beta} \\ \beta & \alpha \end{bmatrix}^{\mathsf{T}}\\
+\bar{(\mathbf{q}_{1}\mathbf{q}_{2})}&=\bar{\mathbf{q}_{2}}\bar{\mathbf{q}_{1}}\\
 \mathbf{q}^{-1}&=\frac{a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k}}{a^{2}+b^{2}+c^{2}+d^{2}}\\
-\det\mathbf{q} &= a^{2}+b^{2}+c^{2}+d^{2} = \lvert q \rvert^{2}= q\overline{q}\\
+\det\mathbf{q} &= a^{2}+b^{2}+c^{2}+d^{2} = \lvert q \rvert^{2}= q\bar{q}\\
 \det(\mathbf{q}_{1}\mathbf{q}_{2})&=\det\mathbf{q}_{1}\det\mathbf{q}_{2} =\lvert q_{1}q_{2} \rvert^{2} = \lvert q_{1} \rvert^{2}\lvert q_{2} \rvert^{2}
 \end{aligned}
 $$
@@ -343,7 +343,13 @@ $$
 
 It is a group under quaternion multiplication.
 
-From the multiplicative absolute value, we can see that, for both complex numbers and quaternions, multiplication by a number $$u$$ with $$\lvert u \rvert=1$$ (unit complex number and unit quaternion respectively) is a rigid motion (i.e. an isometry) (of $$\mathbb{C}=\mathbb{R}^{2}$$ and $$\mathbb{R}^{4}$$ respectively), leaving the origin fixed.
+From the multiplicative absolute value,
+
+$$
+\lvert uv - uw \rvert = \lvert u(v - w) \rvert = \lvert u \rvert \lvert v-w \rvert
+$$
+
+we can see that, for both complex numbers and quaternions, multiplication by a number $$u$$ where $$\lvert u \rvert=1$$ is a rigid motion, leaving the distance between $$v$$ and $$w$$ unchanged. $$u$$ is the unit complex number or unit quaternion respectively. And such rigid motion of $$\mathbb{C}=\mathbb{R}^{2}$$ or $$\mathbb{R}^{4}$$ is known as an isometry. Noted that the origin is also fixed. This is exactly the nature of rotation.
 
 ### Optimization
 
