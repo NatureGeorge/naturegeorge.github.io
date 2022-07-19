@@ -47,6 +47,12 @@ $$
 \left(\sum_{i} a_{i} b_{i}\right)^{2} \le \left(\sum_{i} a_{i}^{2}\right) \left(\sum_{i} b_{i}^{2}\right)
 $$
 
+#### Properties
+
+$$
+\mathbf{a}\cdot(\mathbf{b}+\mathbf{c})=a\cdot\mathbf{b}+a\cdot\mathbf{c}
+$$
+
 ### Matrix Multiplication
 
 And the matrix multiplication can be seen as a generalization of the dot product operation, i.e. apply dot product in batch:
@@ -119,6 +125,27 @@ $$
     \mathbf{M}_{st} & \mathbf{M}_{su}
   \end{bmatrix}
 $$
+
+### Cross Product
+
+$$
+\begin{aligned}
+  \mathbf{a}\times\mathbf{b} &= \underbrace{[\mathbf{a}]_{\times}}_{\text{skew-symmetric matrix}} \mathbf{b} = \lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \sin\theta \mathbf{n}\\
+  &= {[\mathbf{b}]_{\times}}^{\mathsf{T}}\mathbf{a} = -(\mathbf{b}\times\mathbf{a}) \\
+\lVert \mathbf{a}\times\mathbf{b} \rVert_{2}^{2} &=  \lVert \mathbf{a} \rVert_{2}^{2} \lVert \mathbf{b} \rVert_{2}^{2}-(\mathbf{a}\cdot\mathbf{b})^{2} \\
+&=\sum_{1\le i < j \le n} (a_{i}b_{j}-a_{j}b_{i})^{2} & \text{Lagrange's identity}\\
+(\mathbf{a}\times\mathbf{b}) \cdot (\mathbf{c}\times\mathbf{d})&= (\mathbf{a}\cdot\mathbf{c})(\mathbf{b}\cdot\mathbf{d})-(\mathbf{a}\cdot\mathbf{d})(\mathbf{b}\cdot\mathbf{c}) & \text{the Binet–Cauchy identity}\\
+\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})&=\mathbf{b}\cdot(\mathbf{c}\times\mathbf{a})=\mathbf{c}\cdot(\mathbf{a}\times\mathbf{b}) & \text{the scalar triple product}\\
+\mathbf{a}\times(\mathbf{b}+\mathbf{c})&=(\mathbf{a}\times\mathbf{b})+(\mathbf{a}\times\mathbf{c}) & \text{distributive over addition}\\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c})&=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{c}(\mathbf{a}\cdot \mathbf{b}) & \text{the vector triple product} \\
+(\mathbf{a}\times\mathbf{b})\times\mathbf{c}&=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{a}(\mathbf{b}\cdot \mathbf{c}) \\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c}) &+ \mathbf{b}\times(\mathbf{c}\times\mathbf{a}) + \mathbf{c}\times(\mathbf{a}\times\mathbf{b}) = \mathbf{0} & \text{the Jacobi identity}
+\end{aligned}
+$$
+
+### Matrix Determinant
+
+...
 
 ### Matrix Decomposition
 
