@@ -590,3 +590,7 @@ $$
 #### Reparameterizing Distributions on Lie Groups
 
 *...* —— Falorsi, L., de Haan, P., Davidson, T., & Forré, P. (2019). Reparameterizing Distributions on Lie Groups. In Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics (pp. 3244–3253). PMLR.
+
+#### Riemannian Score-Based Generative Modeling
+
+*...* -- Valentin De Bortoli, Emile Mathieu, Michael Hutchinson, James Thornton, Yee Whye Teh, & Arnaud Doucet (2022). Riemannian Score-Based Generative Modeling. CoRR, abs/2202.02763.
