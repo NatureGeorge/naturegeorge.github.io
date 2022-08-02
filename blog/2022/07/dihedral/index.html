@@ -2,7 +2,7 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://naturegeorge.github.io/" />        
+  <head>        
     <!-- Metadata, OpenGraph and Schema.org -->
     
 
@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Zefeng Zhu | Page not found</title>
+    <title>Zefeng Zhu | Ways to compute dihedrals</title>
     <meta name="author" content="Zefeng  Zhu" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="A brief record." />
 
 
     <!-- Bootstrap & MDB -->
@@ -30,7 +30,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://naturegeorge.github.io/404.html">
+    <link rel="canonical" href="https://naturegeorge.github.io/blog/2022/07/dihedral/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -64,7 +64,7 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item ">
+              <li class="nav-item active">
                 <a class="nav-link" href="/blog/">blog</a>
               </li>
 
@@ -97,20 +97,58 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://naturegeorge.github.io/">here</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">Ways to compute dihedrals</h1>
+    <p class="post-meta">July 16, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/category/coding">
+          <i class="fas fa-tag fa-sm"></i> coding</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    <h2 id="dihedral-angle-defined-by-four-points-ie-three-vectors">Dihedral angle defined by four points (i.e. three vectors)</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+<td class="code"><pre><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">def</span> <span class="nf">dihedral</span><span class="p">(</span><span class="n">coord0</span><span class="p">,</span> <span class="n">coord1</span><span class="p">,</span> <span class="n">coord2</span><span class="p">,</span> <span class="n">coord3</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">coord2</span> <span class="o">-</span> <span class="n">coord1</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">coord1</span> <span class="o">-</span> <span class="n">coord0</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">coord2</span> <span class="o">-</span> <span class="n">coord3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">).</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">u</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
+
+\[\begin{aligned}
+  \textbf{coord}_{i} &amp;\in \mathbb{R}^{3} \\
+  \mathbf{b}_{ij} &amp;= \textbf{coord}_{j} - \textbf{coord}_{i} \\
+  \mathbf{u} &amp;= \mathbf{b}_{12} \times \mathbf{b}_{01} = - \mathbf{b}_{01} \times \mathbf{b}_{12} \\
+  \mathbf{w} &amp;= \mathbf{b}_{12} \times \mathbf{b}_{32} = -\mathbf{b}_{12} \times \mathbf{b}_{23} \\
+  \cos\theta &amp;= \frac{\mathbf{u} \cdot \mathbf{w}}{\lvert \mathbf{u} \rvert \lvert \mathbf{w} \rvert} \\
+  \sin\theta &amp;= \frac{(\mathbf{u}\times\mathbf{w}) \cdot \mathbf{b}_{12}}{\lvert \mathbf{u} \rvert \lvert \mathbf{w} \rvert \lvert \mathbf{b}_{12} \rvert} \\
+  \tan\theta &amp;= \frac{\sin\theta}{\cos\theta} = \frac{(\mathbf{u}\times\mathbf{w}) \cdot \mathbf{b}_{12}}{\mathbf{u} \cdot \mathbf{w}} \lvert \mathbf{b}_{12} \rvert
+\end{aligned}\]
+
+  </article>
+
+</div>
 
     </div>
 

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>        
+    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zefeng Zhu | Fundamental computations in ML</title>
+    <meta name="author" content="Zefeng  Zhu" />
+    <meta name="description" content="Naive but useful keynotes on ML." />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+    <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://naturegeorge.github.io/blog/2022/06/ml-computation/">
+
+    <!-- Dark Mode -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="https://naturegeorge.github.io/">Zefeng Zhu</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog</a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/experience/">experience</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/teaching/">teaching</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <div class="toggle-container">
+                <a id="light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </a>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Fundamental computations in ML</h1>
+    <p class="post-meta">June 16, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/category/computation">
+          <i class="fas fa-tag fa-sm"></i> computation</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    <blockquote>
+  <p>Notation: bold, lower-case letters refer to column vectors</p>
+</blockquote>
+
+<h2 id="the-basic-building-blocks">The Basic Building Blocks</h2>
+
+<h3 id="norm">Norm</h3>
+
+<p>…</p>
+
+<h3 id="dot-product">Dot Product</h3>
+
+<p>The dot product intrinsically defines a kind of similarity:</p>
+
+\[\mathbf{a}\cdot\mathbf{b} = \sum_{i} a_{i} b_{i} = \mathbf{a}^{\mathsf{T}}\mathbf{b} = \underbrace{\lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \cos\theta}_{\text{for orthonormal basis}}\]
+
+<p>And it is the way to perform vector projection:</p>
+
+\[\mathrm{proj}_{\mathbf{a}}\mathbf{b} = \frac{(\mathbf{a}^{\mathsf{T}}\mathbf{b}) \mathbf{a}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}=\frac{\mathbf{a}\mathbf{a}^{\mathsf{T}}\mathbf{b}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}\]
+
+<p>and make it simple to derive the trigonometric formulas:</p>
+
+\[\begin{array}{c}
+  \mathbf{a} = \begin{bmatrix} \cos\alpha \\ \sin\alpha \end{bmatrix}, \mathbf{b} = \begin{bmatrix} \cos\beta \\ \sin\beta \end{bmatrix} \quad\text{(unit circle)} \\
+  \mathbf{a}\cdot\mathbf{b} = \cos\alpha\cos\beta + \sin\alpha\sin\beta = \cos(\alpha - \beta) = \cos(\beta-\alpha)
+\end{array}\]
+
+<p>Noted that we have the Cauchy-Buniakowsky-Schwarz Inequality:</p>
+
+\[\left(\sum_{i} a_{i} b_{i}\right)^{2} \le \left(\sum_{i} a_{i}^{2}\right) \left(\sum_{i} b_{i}^{2}\right)\]
+
+<h4 id="properties">Properties</h4>
+
+\[\mathbf{a}\cdot(\mathbf{b}+\mathbf{c})=a\cdot\mathbf{b}+a\cdot\mathbf{c}\]
+
+<h3 id="matrix-multiplication">Matrix Multiplication</h3>
+
+<p>And the matrix multiplication can be seen as a generalization of the dot product operation, i.e. apply dot product in batch:</p>
+
+\[\begin{bmatrix}
+         a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+         a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+     \end{bmatrix}
+     \begin{bmatrix}
+         b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1p}\\
+         b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2p}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         b_{n1} &amp; b_{n2} &amp; \cdots &amp; b_{np}
+     \end{bmatrix}
+      =
+     \begin{bmatrix}
+         c_{11} &amp; c_{12} &amp; \cdots &amp; c_{1p}\\
+         c_{21} &amp; c_{22} &amp; \cdots &amp; c_{2p}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp}
+     \end{bmatrix}\]
+
+\[c_{ij}= \sum_{k=1}^n a_{ik}b_{kj}\]
+
+<p>Then we can derive the outer product operation of two column vectors:</p>
+
+\[\mathbf{u} \otimes \mathbf{v} = \mathbf{uv}^{\mathsf{T}}= \begin{bmatrix}
+         u_{1}v_{1} &amp; u_{1}v_{2} &amp; \cdots &amp; u_{1}v_{n}\\
+         u_{2}v_{1} &amp; u_{2}v_{2} &amp; \cdots &amp; u_{2}v_{n}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         u_{m}v_{1} &amp; u_{m}v_{2} &amp; \cdots &amp; u_{m}v_{n}
+     \end{bmatrix}\]
+
+<p>The matrix multiplication can also be formulated as:</p>
+
+\[\mathbf{A}_{m\times n}\mathbf{B}_{n\times p}=\sum_{k=1}^{n} \mathbf{A}_{(:,k)}\mathbf{B}_{(k,:)}\]
+
+<p>We can find out that there exist ways to perform block matrix multiplication:</p>
+
+\[\mathbf{A} = \begin{bmatrix}
+    \mathbf{M}_{ra} &amp; \mathbf{M}_{rb} \\
+    \mathbf{M}_{sa} &amp; \mathbf{M}_{sb}
+  \end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+    \mathbf{M}_{at} &amp; \mathbf{M}_{au} \\
+    \mathbf{M}_{bt} &amp; \mathbf{M}_{bu}
+  \end{bmatrix}\]
+
+\[\mathbf{AB} = \begin{bmatrix}
+    \mathbf{M}_{ra}\mathbf{M}_{at} + \mathbf{M}_{rb}\mathbf{M}_{bt}
+&amp; \mathbf{M}_{ra}\mathbf{M}_{au} + \mathbf{M}_{rb}\mathbf{M}_{bu} \\
+    \mathbf{M}_{sa}\mathbf{M}_{at} + \mathbf{M}_{sb}\mathbf{M}_{bt}
+&amp; \mathbf{M}_{sa}\mathbf{M}_{au} + \mathbf{M}_{sb}\mathbf{M}_{bu}
+  \end{bmatrix}
+= \begin{bmatrix}
+    \mathbf{M}_{rt} &amp; \mathbf{M}_{ru} \\
+    \mathbf{M}_{st} &amp; \mathbf{M}_{su}
+  \end{bmatrix}\]
+
+<h3 id="cross-product">Cross Product</h3>
+
+\[\begin{aligned}
+  \mathbf{a}\times\mathbf{b} &amp;= \underbrace{[\mathbf{a}]_{\times}}_{\text{skew-symmetric matrix}} \mathbf{b} = \lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \sin\theta \mathbf{n}\\
+  &amp;= {[\mathbf{b}]_{\times}}^{\mathsf{T}}\mathbf{a} = -(\mathbf{b}\times\mathbf{a}) \\
+\lVert \mathbf{a}\times\mathbf{b} \rVert_{2}^{2} &amp;=  \lVert \mathbf{a} \rVert_{2}^{2} \lVert \mathbf{b} \rVert_{2}^{2}-(\mathbf{a}\cdot\mathbf{b})^{2} \\
+&amp;=\sum_{1\le i &lt; j \le n} (a_{i}b_{j}-a_{j}b_{i})^{2} &amp; \text{Lagrange's identity}\\
+(\mathbf{a}\times\mathbf{b}) \cdot (\mathbf{c}\times\mathbf{d})&amp;= (\mathbf{a}\cdot\mathbf{c})(\mathbf{b}\cdot\mathbf{d})-(\mathbf{a}\cdot\mathbf{d})(\mathbf{b}\cdot\mathbf{c}) &amp; \text{the Binet–Cauchy identity}\\
+\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})&amp;=\mathbf{b}\cdot(\mathbf{c}\times\mathbf{a})=\mathbf{c}\cdot(\mathbf{a}\times\mathbf{b}) &amp; \text{the scalar triple product}\\
+\mathbf{a}\times(\mathbf{b}+\mathbf{c})&amp;=(\mathbf{a}\times\mathbf{b})+(\mathbf{a}\times\mathbf{c}) &amp; \text{distributive over addition}\\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c})&amp;=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{c}(\mathbf{a}\cdot \mathbf{b}) &amp; \text{the vector triple product} \\
+(\mathbf{a}\times\mathbf{b})\times\mathbf{c}&amp;=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{a}(\mathbf{b}\cdot \mathbf{c}) \\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c}) &amp;+ \mathbf{b}\times(\mathbf{c}\times\mathbf{a}) + \mathbf{c}\times(\mathbf{a}\times\mathbf{b}) = \mathbf{0} &amp; \text{the Jacobi identity}
+\end{aligned}\]
+
+<h3 id="matrix-determinant">Matrix Determinant</h3>
+
+<p>…</p>
+
+<h3 id="matrix-decomposition">Matrix Decomposition</h3>
+
+<h4 id="lu-decomposition">LU Decomposition</h4>
+
+<p>…</p>
+
+<h4 id="qr-decomposition">QR Decomposition</h4>
+
+<p>For \(\mathbf{A} \in \mathbb{R}^{m\times n}\quad(m\ge n)\), through the Gram-Schmidt process (MGS) or Givens rotation or Householder transformation, we have:</p>
+
+\[\begin{aligned}
+  \mathbf{A}_{m\times n} &amp;=\underbrace{\mathbf{Q}_{m\times n}}_{\text{n orthonormal column vectors}}\underbrace{\mathbf{R}_{n\times n}}_{\text{triu}} \\
+  \text{where } &amp; \mathbf{Q}^{\mathsf{T}}\mathbf{Q} \in \mathbf{I}_{n}
+\end{aligned}\]
+
+<p>Noted that:</p>
+
+\[\begin{aligned}
+   \mathbf{A}^{\mathsf{T}}\mathbf{A} &amp;= (\mathbf{QR})^{\mathsf{T}}(\mathbf{QR}) \\
+   &amp;= \mathbf{R}^{\mathsf{T}}\mathbf{Q}^{\mathsf{T}}\mathbf{QR} \\
+   &amp;= \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   \Rightarrow \det \mathbf{A}^{\mathsf{T}}\mathbf{A} &amp;= \det \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   &amp;=\det \mathbf{R}^{\mathsf{T}} \det \mathbf{R} \\
+   &amp;= (\det \mathbf{R})^2
+\end{aligned}\]
+
+<h4 id="eigenvalue-decomposition">Eigenvalue Decomposition</h4>
+
+\[\det(\mathbf{A}-\lambda \mathbf{I})\]
+
+<p>For \(\mathbf{A}_{1} \sim \mathbf{A}_{2}\) (i.e. \(\mathbf{A}_{1}=\mathbf{SA}_{2}\mathbf{S}^{-1}\)):</p>
+
+\[\begin{aligned}
+  \mathbf{A}_{1}-\lambda \mathbf{I} &amp;= \mathbf{SA}_{2}\mathbf{S}^{-1}-\lambda \mathbf{I} = \mathbf{S}(\mathbf{A}_{2}-\lambda \mathbf{I})\mathbf{S}^{-1} \\
+  \det(\mathbf{A}_{1}-\lambda \mathbf{I}) &amp;= \det(\mathbf{S})\det(\mathbf{A}_{2}-\lambda \mathbf{I})\det(\mathbf{S}^{-1}) =\det(\mathbf{A}_{2}-\lambda \mathbf{I})
+\end{aligned}\]
+
+<h4 id="singular-value-decomposition">Singular Value Decomposition</h4>
+
+<p>…</p>
+
+<p>(Moore–Penrose inverse)</p>
+
+<h3 id="matrix-derivatives">Matrix Derivatives</h3>
+
+\[\begin{aligned}
+  \frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}}{\partial \mathbf{a}} &amp;= \frac{\mathbf{a}-\mathbf{b}}{\lVert \mathbf{a} - \mathbf{b} \rVert_{2}}
+\\
+\frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}^{2}}{\partial \mathbf{a}} &amp;= 2(\mathbf{a}-\mathbf{b})
+\end{aligned}\]
+
+<h3 id="matrix-lie-groups">Matrix Lie Groups</h3>
+
+<h4 id="rotations">Rotations</h4>
+
+<p>For basis vectors</p>
+
+\[\mathbf{e}_{1}=\begin{bmatrix} 1\\0 \end{bmatrix},\mathbf{e}_{2}=\begin{bmatrix} 0\\1 \end{bmatrix}\]
+
+<p>, a rotation of the plane \(\mathbb{R}^{2}\) about the origin \(O\) through angle \(\theta\) is a linear
+transformation \(R_{\theta}: \mathbb{R}^{2} \rightarrow \mathbb{R}^{2}\) that making</p>
+
+\[\begin{aligned}
+  R_{\theta}(\mathbf{e}_{1}) &amp;= \begin{bmatrix}\cos\theta \\ \sin\theta \end{bmatrix} \\
+R_{\theta}(\mathbf{e}_{2}) &amp;= \begin{bmatrix}\cos(\theta+\frac{\pi}{2}) \\ \sin(\theta+\frac{\pi}{2}) \end{bmatrix} = \begin{bmatrix} -\sin\theta \\ \cos\theta \end{bmatrix}
+\end{aligned}\]
+
+<p>Thus:</p>
+
+\[\begin{aligned}
+  \mathbf{R}_{\theta} &amp;= \begin{bmatrix}
+  \cos\theta &amp; -\sin\theta\\
+  \sin\theta &amp; \cos\theta
+\end{bmatrix} \\ &amp;= \cos\theta \underbrace{\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}}_{\mathbf{1}} + \sin\theta \underbrace{\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}}_{\mathbf
+i} \\
+  \mathbf{R}_{\theta}\begin{bmatrix} x\\ y\end{bmatrix} &amp;=
+  \begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix} \\
+  \mathbf{R}_{\theta}\mathbf{R}_{\beta} &amp;= \mathbf{R}_{\theta+\beta} = \mathbf{R}_{\beta}\mathbf{R}_{\theta}
+\end{aligned}\]
+
+<p>If we take the complex view, each rotation \(R_{\theta}\) of \(\mathbb{R}^{2}\) can be represented by the complex number:</p>
+
+\[\begin{aligned}
+  z_{\theta} &amp;=\underbrace{\cos\theta+i\sin\theta}_{e^{i\theta}} \\
+  z_{\theta}(x+iy) &amp;= (\cos\theta+i\sin\theta)(x+iy) \\
+  &amp;= (x\cos\theta - y\sin\theta) + i (x\sin\theta + y\cos\theta)\\
+  z_{\theta}z_{\beta} &amp;= e^{i(\theta+\beta)} = z_{\theta+\beta} = z_{\beta}z_{\theta}
+\end{aligned}\]
+
+<p>These two representations of rotations have intrinsic relationships. Noted that all complex numbers have corresponding 2×2 real matrices:</p>
+
+\[a+bi \Leftrightarrow \begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix} = a \mathbf{1} + b\mathbf{i},\quad \text{where }a,b\in \mathbb{R}\]
+
+<p>We can view it as this: we model the real unit \(1\) by \((\mathbf{e}_{1})^{\star}=\mathbf{1}\) and model the imaginary unit \(i\) by \((\mathbf{e}_{2})^{\star}=\mathbf{i}\), where</p>
+
+\[\begin{aligned}
+  \begin{bmatrix}a\\b\end{bmatrix}^{\star} &amp;= \begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix}\\
+  c\left(\begin{bmatrix}a\\b\end{bmatrix}^{\star}\right)&amp;=\left(c\begin{bmatrix}a\\b\end{bmatrix}\right)^{\star}
+\end{aligned}\]
+
+<p>So, for \(a+bi\) the real part is modeled by \(a(\mathbf{e}_{1})^{\star}=(a\mathbf{e}_{1})^{\star}\) and the imaginary part is modeled by \(b(\mathbf{e}_{2})^{\star}=(b\mathbf{e}_{2})^{\star}\). Thus the complex number is modeled by:</p>
+
+\[\begin{aligned}
+  a(\mathbf{e}_{1})^{\star}+b(\mathbf{e}_{2})^{\star} &amp;= (a\mathbf{e}_{1})^{\star}+(b\mathbf{e}_{2})^{\star} \\
+  &amp;= (a\mathbf{e}_{1}+b\mathbf{e}_{2})^{\star}
+\end{aligned}\]
+
+<p>The matrix representation behave exactly the same as the complex numbers under addition and multiplication (matrices as \(\mathbb{C}\)):</p>
+
+\[\begin{aligned}
+  (a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})&amp;=\begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix} \begin{bmatrix} c &amp; -d \\ d &amp; c \end{bmatrix} \\&amp;
+  = \begin{bmatrix} ac-bd &amp; -(ad+bc) \\ ad+bc &amp; ac-bd \end{bmatrix} \\
+  &amp;=(ac-bd) \mathbf{1} + (ad+bc)\mathbf{i}
+\end{aligned}\]
+
+\[\begin{aligned}
+  \mathbf{1}^{2}=\mathbf{1},\mathbf{1i}&amp;=\mathbf{i1}=\mathbf{i},\mathbf{i}^{2}=\mathbf{-1} \\
+  (a \mathbf{1} + b\mathbf{i})^{-1} &amp;= \frac{a \mathbf{1} - b\mathbf{i}}{a^{2}+b^{2}}\\
+\det(a\mathbf{1}+b\mathbf{i}) &amp;= a^{2}+b^{2} = \lvert a+bi \rvert^{2} \\
+\det((a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})) &amp;=\det(a \mathbf{1} + b\mathbf{i})\det(c \mathbf{1} + d\mathbf{i}) \\
+=(ac-bd)^{2}+(ad+bc)^{2} &amp;= (a^{2}+b^{2})(c^{2}+d^{2}) \quad \} \text{ the two-square identity}\\
+= \lvert (a+bi)(c+di) \rvert^{2} &amp;= \lvert a+bi \rvert^{2} \lvert c+di \rvert^{2}
+\end{aligned}\]
+
+<p>So, for rotations, we have:</p>
+
+\[\begin{aligned}
+  z_{\theta}(x+iy) \Leftrightarrow &amp;\quad (\underbrace{\cos\theta\mathbf{1} +\sin\theta \mathbf{i}}_{\mathbf{R}_{\theta}})(x\mathbf{1}+y\mathbf{i}) \\
+  &amp;= (x\cos\theta - y\sin\theta)\mathbf{1} + (x\sin\theta + y\cos\theta)\mathbf{i}\\
+  &amp;=\begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix}^{\star}
+\end{aligned}\]
+
+<p>If we consider the set of all rotations of the plane \(\mathbb{R}^{2}\) about the origin \(O\), the set is the special orthogonal group for n=2:</p>
+
+\[\mathrm{SO}(2) = \lbrace \mathbf{R} \in \mathbb{R}^{2 \times 2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace\]
+
+<p>If we consider the set of all rotations of the plane \(\mathbb{C}\) about the origin \(O\), the set is the unit circle or 1-dimensional sphere (also a (Lie) group under the operation of complex number multiplication):</p>
+
+\[\mathbb{S}^{1} = \lbrace z: \lvert z \rvert = 1 \rbrace\]
+
+<p>The complex numbers are ordered pairs with the <em>sum,</em> <em>product,</em> and <em>absolute value</em> operations that can express through matrix computations. We can extend this idea to the ordered quadruples of real values (i.e. quaternions)</p>
+
+\[\begin{aligned}
+  q &amp;=a+bi+cj+dk \\
+  i^{2}&amp;=j^{2}=k^{2}=ijk=-1 \\
+  ij&amp;=k,ji=-k,\ldots \\
+  \bar{q} &amp;= a-bi-cj-dk
+\end{aligned}\]
+
+<p>with the matrix:</p>
+
+\[\begin{array}{c}
+  \mathbf{q} = \begin{bmatrix}
+  a+id &amp; -b-ic \\
+  b-ic &amp; a-id
+\end{bmatrix} = \begin{bmatrix}
+  \alpha &amp; -\beta \\
+  \bar{\beta} &amp; \bar{\alpha}
+\end{bmatrix}
+= a\mathbf{1}+b\mathbf{i}+c\mathbf{j}+d\mathbf{k}\\
+\text{where } \mathbf{j}=\begin{bmatrix}0 &amp; -i \\ -i &amp; 0\end{bmatrix}, \mathbf{k}=\begin{bmatrix} i &amp; 0 \\ 0 &amp; -i\end{bmatrix}
+\end{array}\]
+
+<p>We can verify that, the sum, product, and determinant of matrices like \(\mathbf{q}\) are just equivalent to the sum, product, and squared absolute value of quaternions.</p>
+
+\[\begin{aligned}
+  \mathbf{i}^{2}&amp;=\mathbf{j}^{2}=\mathbf{k}^{2}=\mathbf{ijk}=-\mathbf{1} \\
+\mathbf{ij}&amp;=\mathbf{k}, \mathbf{ji}=-\mathbf{k},\ldots \\
+\bar{\mathbf{q}} &amp;= a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k} = \begin{bmatrix} \bar{\alpha} &amp; -\bar{\beta} \\ \beta &amp; \alpha \end{bmatrix}^{\mathsf{T}}\\
+\bar{(\mathbf{q}_{1}\mathbf{q}_{2})}&amp;=\bar{\mathbf{q}_{2}}\bar{\mathbf{q}_{1}}\\
+\mathbf{q}^{-1}&amp;=\frac{a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k}}{a^{2}+b^{2}+c^{2}+d^{2}}\\
+\det\mathbf{q} &amp;= a^{2}+b^{2}+c^{2}+d^{2} = \lvert q \rvert^{2}= q\bar{q}\\
+\det(\mathbf{q}_{1}\mathbf{q}_{2})&amp;=\det\mathbf{q}_{1}\det\mathbf{q}_{2} =\lvert q_{1}q_{2} \rvert^{2} = \lvert q_{1} \rvert^{2}\lvert q_{2} \rvert^{2}
+\end{aligned}\]
+
+<p>For unit quaternions, they form the 3-sphere in the space \(\mathbb{R}^{4}\):</p>
+
+\[\mathbb{S}^{3}=\lbrace q: \lvert q \rvert = 1 \rbrace\]
+
+<p>It is a group under quaternion multiplication.</p>
+
+<p>From the multiplicative absolute value,</p>
+
+\[\lvert uv - uw \rvert = \lvert u(v - w) \rvert = \lvert u \rvert \lvert v-w \rvert\]
+
+<p>we can see that, for both complex numbers and quaternions, multiplication by a number \(u\) where \(\lvert u \rvert=1\) is a rigid motion, leaving the distance between \(v\) and \(w\) unchanged. \(u\) is the unit complex number or unit quaternion respectively. And such rigid motion of \(\mathbb{C}=\mathbb{R}^{2}\) or \(\mathbb{R}^{4}\) is known as an isometry. Noted that the origin is also fixed. This is exactly the nature of rotation.</p>
+
+<h3 id="optimization">Optimization</h3>
+
+<p>…</p>
+
+<h3 id="softmax">Softmax</h3>
+
+<p>The Softmax serves as a smooth approximation to \(\text{onehot}(\arg\max(\mathbf{x}))\):</p>
+
+\[\text{Softmax}(\mathbf{x})=\left[\frac{\exp(x_1)}{\sum_{i}^{n}\exp(x_i)}, \ldots, \frac{\exp(x_n)}{\sum_{i}^{n}\exp(x_n)} \right]^{\mathsf{T}}\]
+
+<h2 id="applications">Applications</h2>
+
+<h3 id="standardizing-and-whitening-data">Standardizing and Whitening Data</h3>
+
+<p>For a data matrix \(\mathbf{X}\in\mathbb{R}^{N\times D}\) (row: sample, column: feature), we would like to:</p>
+
+<ul>
+  <li>standardize the data: <em>to ensure the features are comparable in magnitude, which can help with model fitting and inference</em>
+</li>
+  <li>whiten the data: to remove correlation between the features</li>
+</ul>
+
+<p>The most common way to standardize the data is:</p>
+
+\[\begin{aligned}
+  \text{standardize}(x_{nd}) &amp;= \frac{x_{nd}-\hat{\mu}_{d}}{\hat{\sigma}_{d}} \\
+  &amp;\simeq \frac{x_{nd}-\hat{\mu}_{d}}{\sqrt{\hat{\sigma}_{d}^{2}+\epsilon}}
+\end{aligned}\]
+
+<p>For each of the features, this Z-score standardization centers the mean to zero and scales the data to unit variance (i.e. remove bias and scale).</p>
+
+<p>However, standardization does not consider the covariation between features. Thus we have to whiten the data matrix via linear transformation (on feature dimension) so as to make the covariance matrix become an identity matrix (as long as the covariance matrix is nonsingular). Suppose the data matrix is already centered, we have:</p>
+
+\[\begin{aligned}
+  \mathbf{\Sigma} &amp;= \frac{1}{N}\mathbf{X}^{\mathsf{T}}\mathbf{X} \\
+  \mathbf{I} &amp;= \frac{1}{N} \mathbf{W}^{\mathsf{T}}\mathbf{X}^{\mathsf{T}}\mathbf{XW} = \mathbf{W}^{\mathsf{T}}\mathbf{\Sigma}\mathbf{W}
+\end{aligned}\]
+
+<p>For preserving the original characteristics of the data matrix, we can define \(\mathbf{W} \in \mathbb{R}^{D\times D}, \det\mathbf{W}&gt;0\) and get:</p>
+
+\[\mathbf{\Sigma} = (\mathbf{W}^{\mathsf{T}})^{-1}\mathbf{W}^{-1} =  (\mathbf{W}^{-1})^{\mathsf{T}}\mathbf{W}^{-1}\]
+
+<p>Since the covariance matrix is a real symmetric matrix, it is always orthogonally diagonalizable:</p>
+
+\[\mathbf{\Sigma} = \mathbf{V\Lambda V}^{\mathsf{T}}\]
+
+<p>Thus we can let:</p>
+
+\[\mathbf{W}^{-1} = \underbrace{\mathbf{R}}_{\text{arbitrary orthogonal matrix}}\sqrt{\mathbf{\Lambda}}\mathbf{V}^{\mathsf{T}}\]
+
+<p>and get:</p>
+
+\[\begin{aligned}
+  \mathbf{W} &amp;= \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{R}^{\mathsf{T}} \\
+  &amp;= \left\{ \begin{array}{lll} \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}},&amp;\mathbf{R} = \mathbf{I} &amp;\text{(PCA whitening)} \\ \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{V}^{\mathsf{T}},&amp;\mathbf{R} = \mathbf{V} &amp;\text{(ZCA whitening)} \end{array} \right.
+\end{aligned}\]
+
+<p>Noted that it would require a regularization term \(\epsilon\) added to the eigenvalues so as to avoid dividing by zero.</p>
+
+<h3 id="linear-layer">Linear Layer</h3>
+
+<p>Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Linear</code>) is exactly a weight matrix together with a bias vector, storing learnable parameters and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.</p>
+
+\[\begin{array}{llll}
+  \mathbf{y} = \mathbf{Wx} + \mathbf{b}, &amp;\mathbf{x} \in \mathbb{R}^{d \times 1},&amp;\mathbf{W} \in \mathbb{R}^{\hat{d} \times d}, &amp;\mathbf{b},\mathbf{y} \in \mathbb{R}^{\hat{d}\times 1} \\
+  \mathbf{Y} = \mathbf{XW} + \mathbf{B}, &amp;\mathbf{X} \in \mathbb{R}^{n \times d}, &amp;\mathbf{W}\in \mathbb{R}^{d\times\hat{d}}, &amp;\mathbf{B},\mathbf{Y}\in \mathbb{R}^{n\times \hat{d}}
+\end{array}\]
+
+<h3 id="embedding-layer">Embedding Layer</h3>
+
+<p>An embedding layer (e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Embedding</code>) is just a linear layer without bias but queried with onehot vectors (sparse input matrix). Thus it serves as a lookup table with learnable parameters. In deep learning frameworks, the embedding layer is optimized for retrieving with indices rather than doing matrix multiplication with sparse matrix.</p>
+
+<h3 id="attention-function">Attention (Function)</h3>
+
+<p>With the Query \(\mathbf{Q}\in\mathbb{R}^{n\times d_{k}}\) and the paired Key \(\mathbf{K}\in\mathbb{R}^{m\times d_{k}}\) and Value \(\mathbf{V}\in\mathbb{R}^{m\times d_{v}}\), we would like to find the queries’ corresponding values based on the similarity between the queries and keys. Then we can apply the Scaled Dot-Product Attention:</p>
+
+\[\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left( \frac{\mathbf{Q}\mathbf{K}^{\mathsf{T}}}{\sqrt{d_{k}}} \right)\mathbf{V}\]
+
+<p>where \(\sqrt{d_{k}}\) is used for scaling down large dot product values.
+And self-Attention i.e. \(\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X})\).</p>
+
+<h3 id="multi-head-attention-layer">Multi-Head Attention (Layer)</h3>
+
+<p><em>… linearly project the queries, keys and values \(h\) times with different, learned linear projections to \(d_{k}\), \(d_{k}\) and \(d_v\) dimensions, respectively.</em></p>
+
+\[\begin{aligned}
+  \text{head}_{i} &amp;= \text{Attention}(\mathbf{QW}_{i}^{Q}, \mathbf{KW}_{i}^{K}, \mathbf{VW}_{i}^{V}) \\
+  \text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) &amp;= \text{Concat}(\text{head}_{1}, \ldots, \text{head}_{h})\mathbf{W}^{O}
+\end{aligned}\]
+
+<p>Noted that \(\mathbf{W}_{i}^{Q}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{K}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{V}\in \mathbb{R}^{d_{v}\times \tilde{d_{v}}},\mathbf{W}^{O}\in \mathbb{R}^{h\cdot \tilde{d_{v}} \times d_{o}}\).</p>
+
+<p><em>On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding \(d_{v}\)-dimensional output values. These are concatenated and once again projected, resulting in the final values … <strong>Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.</strong></em> —— Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A., Kaiser, u., &amp; Polosukhin, I. (2017). Attention is All you Need. In Advances in Neural Information Processing Systems. Curran Associates, Inc.</p>
+
+<p>And self Multi-Head Attention i.e. \(\text{MultiHead}(\mathbf{X}, \mathbf{X}, \mathbf{X})\) with \(d_{v}=d_{k}, \tilde{d_{v}}=\tilde{d_{k}}\) and embedding dimension be \(h\cdot \tilde{d_{v}}\).</p>
+
+<p>Pseudocode:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">embed_dim</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">num_heads</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">head_dim</span> <span class="o">=</span> <span class="n">embed_dim</span> <span class="o">//</span> <span class="n">num_heads</span>
+
+<span class="n">qkv_proj</span> <span class="o">=</span> <span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">embed_dim</span><span class="p">)</span>
+<span class="n">o_proj</span> <span class="o">=</span> <span class="n">Linear</span><span class="p">(</span><span class="n">embed_dim</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span>
+
+<span class="n">qkv</span> <span class="o">=</span> <span class="n">qkv_proj</span><span class="p">(</span><span class="n">x</span>                       <span class="c1"># from x: batch_size, seq_length, input_dim
+</span>                                       <span class="c1"># to qkv: batch_size, seq_length, 3 * embed_dim
+</span>    <span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span>  <span class="c1"># 3 * embed_dim = 3 * head_dim * num_heads
+</span>              <span class="n">num_heads</span><span class="p">,</span>               <span class="c1">#               = num_heads * 3 * head_dim
+</span>              <span class="mi">3</span> <span class="o">*</span> <span class="n">head_dim</span>             <span class="c1"># batch_size, seq_length, num_heads, 3 * head_dim
+</span>    <span class="p">).</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>              <span class="c1"># batch_size, num_heads, seq_length, 3 * head_dim
+</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">qkv</span><span class="p">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">values</span><span class="p">,</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">scaled_dot_product</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>     <span class="c1"># batch_size, seq_length, num_heads, head_dim
+</span>                                  <span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span> 
+                                       <span class="c1"># batch_size, seq_length, num_heads * head_dim
+</span><span class="n">out</span> <span class="o">=</span> <span class="n">o_proj</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="least-square">Least Square</h3>
+
+\[\mathbf{Ax}=\mathbf{b}\]
+
+\[\lVert \mathbf{Ax}-\mathbf{b} \rVert_{2}\]
+
+<h3 id="nonlinear-least-square">Nonlinear Least Square</h3>
+
+<p>…</p>
+
+<h3 id="group-equivariance">Group Equivariance</h3>
+
+<ul>
+  <li>Let discriminator function denoted as \(f:\mathbb{R}^{d} \rightarrow \mathbb{R}\), group operator denoted as \(g \in G\)
+    <ul>
+      <li>then group invariance can be expressed as: \(f(\mathbf{x})=f(g(\mathbf{x}))\)</li>
+      <li>we say that such function is invariant to \(g\) since with and without the group action results in the same output</li>
+    </ul>
+  </li>
+  <li>Let discriminator function denoted as \(f:\mathbb{R}^{d} \rightarrow \mathbb{R}^{d'}\), group operator in input space denoted as \(g \in G\), group operator in output space denoted as \(g' \in G'\)
+    <ul>
+      <li>then group equivariance can be expressed as: \(f(g(\mathbf{x}))=g'(f(\mathbf{x}))\)</li>
+      <li>we say that such function is equivariant to \(g\) since there exists an equivalent transformation \(g'\)
+on its output space</li>
+    </ul>
+  </li>
+</ul>
+
+\[\begin{array}{lll}
+  &amp;\mathbf{x} &amp;\xrightarrow[f]{} &amp; f(\mathbf{x}) \\
+  &amp;\big\downarrow^{g\in G} &amp; &amp;\big\downarrow^{g'\in G'} \\
+  &amp;g(\mathbf{x}) &amp;\xrightarrow[f]{} &amp; \left\{ \begin{array}{r} g'(f(\mathbf{x})) \\ f(g(\mathbf{x})) \end{array} \right.
+\end{array}\]
+
+<h3 id="lie-algebra-convolutional-layer">Lie Algebra Convolutional Layer</h3>
+
+<p><em>…</em> —— Dehmamy, N., Walters, R., Liu, Y., Wang, D., &amp; Yu, R. (2021). Automatic Symmetry Discovery with Lie Algebra Convolutional Network. In Advances in Neural Information Processing Systems (pp. 2503–2515). Curran Associates, Inc.</p>
+
+<h3 id="en-equivariant-graph-convolutional-layer">E(n)-Equivariant Graph Convolutional Layer</h3>
+
+<p><em>…</em> —— Satorras, V., Hoogeboom, E., &amp; Welling, M. (2021). E(n) Equivariant Graph Neural Networks. In Proceedings of the 38th International Conference on Machine Learning (pp. 9323–9332). PMLR.</p>
+
+<h3 id="reparameterization">Reparameterization</h3>
+
+\[\begin{aligned}
+\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &amp;= \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz &amp; \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) &amp; \text{discrete} \end{array} \right. \\
+&amp;\approx \frac{1}{n} \sum_{z} f(z)
+\end{aligned}\]
+
+<p>Since the sampling process is not differentiable, we can not optimize the \(p_{\theta}\) via methods like backpropagation. We would need to convert from the expectation related to \(z\) to the expectation related to another variable of which distribution  with no parameter to optimize.</p>
+
+\[\begin{aligned}
+  \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)]&amp; = \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  \text{where}&amp; \quad z = g_{\theta}(\epsilon)
+\end{aligned}\]
+
+<p>And we have:</p>
+
+\[\begin{aligned}
+  \frac{\partial}{\partial \theta} \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &amp;= \frac{\partial}{\partial \theta} \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  &amp;= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g_{\theta}(\epsilon)}{ \partial \theta} \right]
+\end{aligned}\]
+
+<h4 id="reparameterizing-distributions-on-lie-groups">Reparameterizing Distributions on Lie Groups</h4>
+
+<p><em>…</em> —— Falorsi, L., de Haan, P., Davidson, T., &amp; Forré, P. (2019). Reparameterizing Distributions on Lie Groups. In Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics (pp. 3244–3253). PMLR.</p>
+
+<h4 id="riemannian-score-based-generative-modeling">Riemannian Score-Based Generative Modeling</h4>
+
+<p><em>…</em> – Valentin De Bortoli, Emile Mathieu, Michael Hutchinson, James Thornton, Yee Whye Teh, &amp; Arnaud Doucet (2022). Riemannian Score-Based Generative Modeling. CoRR, abs/2202.02763.</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2022 Zefeng  Zhu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+Last updated: August 02, 2022.
+      </div>
+    </footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Mansory & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+  </body>
+</html>
+

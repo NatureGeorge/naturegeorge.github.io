@@ -2,7 +2,7 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://naturegeorge.github.io/" />        
+  <head>        
     <!-- Metadata, OpenGraph and Schema.org -->
     
 
@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Zefeng Zhu | Page not found</title>
+    <title>Zefeng Zhu | Ways to compute distance map</title>
     <meta name="author" content="Zefeng  Zhu" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="A brief record." />
 
 
     <!-- Bootstrap & MDB -->
@@ -30,7 +30,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://naturegeorge.github.io/404.html">
+    <link rel="canonical" href="https://naturegeorge.github.io/blog/2022/05/coords2dist/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -64,7 +64,7 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item ">
+              <li class="nav-item active">
                 <a class="nav-link" href="/blog/">blog</a>
               </li>
 
@@ -97,20 +97,79 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://naturegeorge.github.io/">here</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">Ways to compute distance map</h1>
+    <p class="post-meta">May 27, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/category/coding">
+          <i class="fas fa-tag fa-sm"></i> coding</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    <p>Just take advantage of the symmetric property:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+<td class="code"><pre><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">...</span>  <span class="c1"># (N, 3)
+</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">D</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]]).</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
+
+<p>Or do it more algebraically:</p>
+
+\[\begin{aligned}
+\mathbf{B} &amp;= \mathbf{X}\mathbf{X}^{\mathsf{T}} \\
+\mathbf{c} &amp;= \mathrm{diag}(\mathbf{B}) \\
+\mathbf{D} &amp;= (\mathbf{c}\mathbf{1}^{\mathsf{T}} + \mathbf{1}\mathbf{c}^{\mathsf{T}} - 2\mathbf{B})^{\circ \frac{1}{2}}
+\end{aligned}\]
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="code"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">coords</span> <span class="o">@</span> <span class="n">coords</span><span class="p">.</span><span class="n">T</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">diag</span><span class="p">(</span><span class="n">B</span><span class="p">).</span><span class="n">expand</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">B</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
+
+<p>If radius cutoff (e.g. 8) is known in prior:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+<td class="code"><pre><span class="kn">from</span> <span class="nn">torch_geometric.nn</span> <span class="kn">import</span> <span class="n">radius_graph</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">radius_graph</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span>
+</pre></td>
+</tr></tbody></table></code></pre></figure>
+
+
+  </article>
+
+</div>
 
     </div>
 

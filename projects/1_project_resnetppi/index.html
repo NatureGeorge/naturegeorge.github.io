@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<!-- _layouts/distill.html -->
+<html>
+  <head>        
+    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zefeng Zhu | ResNetPPI</title>
+    <meta name="author" content="Zefeng  Zhu" />
+    <meta name="description" content="A lab rotation project. Under development from 2021.12 to 2022.1." />
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+    <!-- Styles -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://naturegeorge.github.io/projects/1_project_resnetppi/">
+
+    <!-- Dark Mode -->
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <!-- Distill js -->
+    <script src="/assets/js/distillpub/template.v2.js"></script>
+    <script src="/assets/js/distillpub/transforms.v2.js"></script>
+    
+  </head>
+
+  <d-front-matter>
+    <script async type="text/json">{
+      "title": "ResNetPPI",
+      "description": "A lab rotation project. Under development from 2021.12 to 2022.1.",
+      "published": "January 12, 2022",
+      "authors": [
+        {
+          "author": "Zefeng Zhu",
+          "authorURL": "",
+          "affiliations": [
+            {
+              "name": "AAIS, PKU",
+              "url": ""
+            }
+          ]
+        }
+        
+      ],
+      "katex": {
+        "delimiters": [
+          {
+            "left": "$",
+            "right": "$",
+            "display": false
+          },
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ]
+      }
+    }</script>
+  </d-front-matter>
+
+  <body class="fixed-top-nav">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="https://naturegeorge.github.io/">Zefeng Zhu</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/blog/">blog</a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/experience/">experience</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">projects</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/publications/">publications</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/teaching/">teaching</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <div class="toggle-container">
+                <a id="light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </a>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="post distill">
+
+      <d-title>
+        <h1>ResNetPPI</h1>
+        <p>A lab rotation project. Under development from 2021.12 to 2022.1.</p>
+      </d-title>
+
+      <d-byline></d-byline>
+
+      <d-article>
+        
+
+        <h2 id="summary">Summary</h2>
+
+<p>Predicting protein inter-chain residue distances from sequences irrespective of paired MSA<d-cite key="Zhu_ResNetPPI_Predicting_protein_2022"></d-cite>.</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/summary-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/summary-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/summary-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/summary.png" title="Summary">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Summary
+</div>
+
+<h2 id="advantages">Advantages</h2>
+
+<ul>
+  <li>accept variable input size
+    <ul>
+      <li>protein of any length</li>
+      <li>any number of homologous sequences</li>
+    </ul>
+  </li>
+  <li>does not rely on paired MSA, thus it can predict cross-species protein interaction</li>
+</ul>
+
+<h2 id="training">Training</h2>
+
+<h3 id="data-resources">Data Resources</h3>
+
+<ul>
+  <li>Sequence database e.g. <a href="http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz" target="_blank" rel="noopener noreferrer">UniRef30_2020_06_hhsuite.tar.gz</a>
+</li>
+  <li>PDB structures</li>
+</ul>
+
+<h3 id="input-features">Input Features</h3>
+
+<ul>
+  <li>Protein Sequence * 2
+    <ul>
+      <li>build MSA via HHblits if possible</li>
+      <li>onehot encoding of amino acid type (20+gap+X)*2 + (hydrophoblic+hydrophilic)*2</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="fitting-targets">Fitting Targets</h3>
+
+<ul>
+  <li>Fitting Targets (i.e. Inter-chain Cβ-Cβ Distance Map) Examples
+    <ul>
+      <li><em>Cα for GLY</em></li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+<tr>
+    <td>
+      PDB
+    </td>
+    <td>
+      Inter-chain Cβ-Cβ Distance Map
+    </td>
+    <td>
+      pdb_id
+    </td>
+    <td>
+      human chain
+    </td>
+    <td>
+      virus chain
+    </td>
+    <td>
+      len(human chain)
+    </td>
+    <td>
+      len(virus chain)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/3WWT_A_B-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/3WWT_A_B-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/3WWT_A_B-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/3WWT_A_B.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/3wwt.A.B.label_dist6d12-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/3wwt.A.B.label_dist6d12-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/3wwt.A.B.label_dist6d12-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/3wwt.A.B.label_dist6d12.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      3wwt
+    </td>
+    <td>
+      A
+    </td>
+    <td>
+      B
+    </td>
+    <td>
+      123
+    </td>
+    <td>
+      107
+    </td>
+  </tr>
+ <tr>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/1IM3_E_H-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/1IM3_E_H-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/1IM3_E_H-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/1IM3_E_H.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/1im3.E.H.label_dist6d12-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/1im3.E.H.label_dist6d12-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/1im3.E.H.label_dist6d12-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/1im3.E.H.label_dist6d12.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      1im3
+    </td>
+    <td>
+      E
+    </td>
+    <td>
+      H
+    </td>
+    <td>
+      275
+    </td>
+    <td>
+      95
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/6BVV_A_B-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/6BVV_A_B-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/6BVV_A_B-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/6BVV_A_B.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/6bvv.A.B.label_dist6d12-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/6bvv.A.B.label_dist6d12-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/6bvv.A.B.label_dist6d12-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/6bvv.A.B.label_dist6d12.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      6bvv
+    </td>
+    <td>
+      A
+    </td>
+    <td>
+      B
+    </td>
+    <td>
+      416
+    </td>
+    <td>
+      24
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/4RF1_B_A-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/4RF1_B_A-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/4RF1_B_A-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/4RF1_B_A.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/4rf1.B.A.label_dist6d12-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/4rf1.B.A.label_dist6d12-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/4rf1.B.A.label_dist6d12-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/4rf1.B.A.label_dist6d12.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      4rf1
+    </td>
+    <td>
+      B
+    </td>
+    <td>
+      A
+    </td>
+    <td>
+      75
+    </td>
+    <td>
+      321
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/6E5X_B_A-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/6E5X_B_A-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/6E5X_B_A-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/6E5X_B_A.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/6e5x.B.A.label_dist6d12-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/6e5x.B.A.label_dist6d12-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/6e5x.B.A.label_dist6d12-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/6e5x.B.A.label_dist6d12.png">
+
+  </picture>
+
+</figure>
+
+      </div>
+    </td>
+    <td>
+      6e5x
+    </td>
+    <td>
+      B
+    </td>
+    <td>
+      A
+    </td>
+    <td>
+      13
+    </td>
+    <td>
+      127
+    </td>
+  </tr>
+</table>
+
+<p>Real-valued distances are discretely binned:</p>
+
+<ul>
+  <li>from 2Å to 20Å</li>
+  <li>with bin size of 0.5Å</li>
+  <li>36 bins + 1 bin for \([20, +\infty)\)</li>
+</ul>
+
+<h3 id="network-architecture">Network Architecture</h3>
+
+<ul>
+  <li>ResNet1D
+    <ul>
+      <li>1d residual block: ((Conv1d + BatchNorm1d) + ELU + (Conv1d + BatchNorm1d)) (+) ELU</li>
+      <li>8 1d-blocks (64 channels)</li>
+    </ul>
+  </li>
+  <li>ResNet2D
+    <ul>
+      <li>2d residual block: ((Conv2d + BatchNorm2d) + ELU + (Conv2d + BatchNorm2d)) (+) ELU</li>
+      <li>16 2d-blocks (96 channels), cycling through dilations \((1,2,4,8)\)</li>
+    </ul>
+  </li>
+  <li>(mini-)batch size: 1</li>
+  <li>Cross-entropy Loss</li>
+</ul>
+
+<h3 id="model-design">Model Design</h3>
+
+<ul>
+  <li>for each protein sequence (of length \(L\)) search homologous sequences and input the MSA (of size \(K\)) if possible, otherwise input the single sequence
+    <ul>
+      <li>use original MSA to calculate the weight \(w_k\) for each homologous sequence, \(w_k=\frac{1}{\text{count}(\text{sequence with identity}\ge 0.8)}\)</li>
+      <li>calculate \(M_\text{eff}=\sum_{k}^{K}w_k\)</li>
+    </ul>
+  </li>
+  <li>
+<strong>MSA Encoding</strong>: perform onehot-encoding for each pairwise alignment (\(2\times L_k\), consider both insertion and deletion: \(\rightarrow 48\times L_k\))
+    <ul>
+      <li>onehot-encoding including 22+2 channels for the reference sequence, 22+2 channels for the homologous sequence</li>
+      <li>22: 20 amino acid types + 1 gap + 1 unknown type</li>
+      <li>2: 1 hydrophoblic + 1 hydrophilic</li>
+      <li>for the single sequence input, all the homologous related channels are filled with the reference sequence’s corresponding values</li>
+      <li>hence we get \(\{48\times L_k, k\in K\}\)</li>
+    </ul>
+  </li>
+  <li>
+<strong>MSA Embedding</strong>: for each encoded pairwise alignment, feed into the <code class="language-plaintext highlighter-rouge">ResNet1D</code> and get embedded pairwise alignment (\(64\times L_k\))
+    <ul>
+      <li>hence we get \(\{64\times L_k, k\in K\}\)</li>
+      <li>omit the insertion region of the homologous sequences, thus we can get a \(K\times 64 \times L\) tensor
+        <ul>
+          <li>thus we have \(x_k\in R^{64\times L}\) and \(x_k(i) \in R^{64}\)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+<strong>Paired Evolution Aggregation</strong>
+    <ul>
+      <li>calculate one body term
+        <ul>
+          <li>one body term of one sequence: \(f_1(i)=\frac{1}{M_{\text{eff}_{1}}}\sum_{k}^{K_1}w_{1_k} x_{1_k}(i)\)</li>
+          <li>one body term of the other sequence: \(f_2(j)=\frac{1}{M_{\text{eff}_{2}}}\sum_{k}^{K_2}w_{2_k} x_{2_k}(j)\)</li>
+        </ul>
+      </li>
+      <li>apply max function
+        <ul>
+          <li>\(A(i,c) = \max\{x_k(i,c), k \in K\}\), c: channel; \(A \in R^{64\times L}\)</li>
+        </ul>
+      </li>
+      <li>calculate two body term
+        <ul>
+          <li>
+\[s(i,j) = \frac{1}{\sqrt{M_{\text{eff}_{1}}\cdot M_{\text{eff}_{2}}}}[A_1(i)\otimes A_2(j)], s(i,j)\in R^{64\times 64}\]
+          </li>
+        </ul>
+      </li>
+      <li>concatenate
+        <ul>
+          <li>
+\[h(i,j) = \text{concat}(f_1(i), f_2(j), s(i,j)), h(i,j)\in R^{4224}\]
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+<strong>Inter-chain Distance Estimation</strong>
+    <ul>
+      <li>feed the \(R^{4224 \times L_1\times L_2}\) tensor into the <code class="language-plaintext highlighter-rouge">ResNet2D</code>
+</li>
+      <li>convert the <code class="language-plaintext highlighter-rouge">ResNet2D</code> outputs into the discrete distance distribution \(37 \times L_1 \times L_2\) throught a (Conv2d+BatchNorm2d+ELU) layer</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="during-training">During Training</h4>
+
+<ul>
+  <li>randomly sample 1000 homologous sequences if \(K &gt; 1000\)</li>
+  <li>randomly crop the distance matrix into \(64 \times 64\) shape
+    <ul>
+      <li>for those input sequences of length \(\le 64\), keep their original length</li>
+    </ul>
+  </li>
+  <li>loss function ignore those missing residues of PDB structure
+    <ul>
+      <li>definition of missing
+        <ol>
+          <li>complete without any modeled atoms for a residue</li>
+          <li>GLY without Cα atom</li>
+          <li>non-GLY without Cβ atom and without any anchoring atoms (Cα, N, C) that can infer Cβ atom</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="current-training-and-validation-results">Current Training and Validation Results</h2>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="/assets/img/resnetppi/loss_epoch.new-480.webp"></source>
+    <source media="(max-width: 800px)" srcset="/assets/img/resnetppi/loss_epoch.new-800.webp"></source>
+    <source media="(max-width: 1400px)" srcset="/assets/img/resnetppi/loss_epoch.new-1400.webp"></source>
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/resnetppi/loss_epoch.new.png" title="loss_epoch">
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    loss per epoch
+</div>
+
+<h3 id="dataset-preparation">Dataset Preparation</h3>
+
+<ul>
+  <li>training dataset (362)</li>
+  <li>validation dataset (100)</li>
+</ul>
+
+<blockquote>
+  <p>NOTE: the datasets have not been carefully curated, they just serve as demo inputs for training and validation. Thus the training and validation results are just a demonstration of the model’s learning ability.</p>
+</blockquote>
+
+<h2 id="todo">TODO</h2>
+
+<ul>
+  <li>increase mini-batch size</li>
+  <li>multiple GPU training</li>
+  <li>improve archi</li>
+</ul>
+
+<h2 id="hardware--software-prerequisites">Hardware &amp; Software Prerequisites</h2>
+
+<ul>
+  <li>Hardware (tested)
+    <ul>
+      <li>GPU: NVIDIA Tesla T4 (16G)</li>
+      <li>CUDA Version: 11.2</li>
+    </ul>
+  </li>
+  <li>Software
+    <ul>
+      <li>Python 3.8 or later in a conda environment</li>
+      <li>PyTorch and other Python packages: see <a href="https://github.com/NatureGeorge/ResNetPPI/blob/main/requirements.txt" target="_blank" rel="noopener noreferrer">requirements</a>
+</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="acknowledgment">Acknowledgment</h2>
+
+<p>I would like to thank Jinyuan Guo and Prof. Huaiqiu Zhu for their helpful discussions and provide me with devices to develop this project.</p>
+
+<h2 id="reference-papers">Reference Papers</h2>
+
+<p><a href="https://github.com/NatureGeorge/ResNetPPI/blob/main/base.bib" target="_blank" rel="noopener noreferrer">base on these papers</a></p>
+
+<h2 id="license">License</h2>
+
+<p><a href="https://github.com/NatureGeorge/ResNetPPI/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Apache-2.0 License</a></p>
+
+      </d-article>
+
+      <d-appendix>
+        <d-footnote-list></d-footnote-list>
+        <d-citation-list></d-citation-list>
+      </d-appendix>
+
+    </div>
+
+    <!-- Footer -->    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        © Copyright 2022 Zefeng  Zhu. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="noopener noreferrer">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="noopener noreferrer">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>.
+Last updated: August 02, 2022.
+      </div>
+    </footer>
+
+  </body>
+
+  <d-bibliography src="/assets/bibliography/2022-01-12-resnetppi.bib">
+  </d-bibliography>
+
+  <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+  <script src="/assets/js/distillpub/overrides.js"></script>
+
+</html>

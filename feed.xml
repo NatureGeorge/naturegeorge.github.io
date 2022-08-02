@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://naturegeorge.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://naturegeorge.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-08-02T08:01:41+00:00</updated><id>https://naturegeorge.github.io/feed.xml</id><title type="html">Zefeng Zhu</title><subtitle>...
+</subtitle><entry><title type="html">Instant Notes - Genus</title><link href="https://naturegeorge.github.io/blog/2022/07/genus/" rel="alternate" type="text/html" title="Instant Notes - Genus" /><published>2022-07-28T06:52:00+00:00</published><updated>2022-07-28T06:52:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/07/genus</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/07/genus/"><![CDATA[<h2 id="backgrounds">Backgrounds</h2>
+
+<p>The biopolymers such as proteins, RNA, and DNA are composed of a finite set of basic building blocks linked with covalent bonds forming a sequential order. Their native states are often involved with intra-molecular non-covalent interactions <d-footnote>except that some residues would form covalent disulfide bonds </d-footnote>toward low-energy conformations. <d-footnote>Not to mention those high energy states and interactions with partners and solvent molecules for now. </d-footnote>People have come up with many ways to describe those interactions. The concept of “interaction” (i.e. graph) itself has sound mathematical formulations, and the <strong>genus</strong> is such a quantitative measurement. And we can apply it to analyze the topological properties of biomolecular structures.</p>
+
+<h2 id="euler-characteristic">Euler Characteristic</h2>
+
+<p>From graph duality, we know that for any convex polyhedron’s surface, we have:</p>
+
+\[\begin{aligned}
+  E+2 &amp;= V+F \\
+  2 &amp;= V-E+F
+\end{aligned}\]
+
+<p>And the Euler characteristic is formulated as:</p>
+
+\[\chi= V-E+F\]
+
+<p>for the surfaces of polyhedra, where</p>
+
+<ul>
+  <li>\(V\): the numbers of vertices</li>
+  <li>\(E\): the numbers of edges</li>
+  <li>\(F\): the numbers of faces</li>
+</ul>
+
+<p>For general surfaces, we can also calculate their Euler characteristic by deriving a polygonization of the surfaces.
+Besides, we can consider a closed orientable surface as a “convex” polyhedron surface but with holes<d-footnote>with one hole, such a surface is a torus.</d-footnote>. The number of holes is called <strong>genus</strong> and denoted as \(g\). Thus:</p>
+
+\[\begin{aligned}
+  \chi &amp;= V-\underbrace{(E-n+n)}_{E'}+\underbrace{(F - 2g)}_{F'} \\
+  &amp;=2-2g
+\end{aligned}\]
+
+<p>If such surfaces with \(r\) boundary components:</p>
+
+\[\chi = 2-2g-r\]
+
+<p>…</p>
+
+\[b − n = 2 − 2g − r\]
+
+<d-cite key="Zajac2018"></d-cite>
+<d-cite key="Rubach2019"></d-cite>
+
+<hr />
+
+<p>Cited as:</p>
+
+<div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@online</span><span class="p">{</span><span class="nl">zhu2022instant-notes-on-genus</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">=</span><span class="s">{Instant Notes - Genus}</span><span class="p">,</span>
+        <span class="na">author</span><span class="p">=</span><span class="s">{Zefeng Zhu}</span><span class="p">,</span>
+        <span class="na">year</span><span class="p">=</span><span class="s">{2022}</span><span class="p">,</span>
+        <span class="na">month</span><span class="p">=</span><span class="s">{July}</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">=</span><span class="s">{https://naturegeorge.github.io/blog/2022/07/genus/}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zefeng Zhu</name></author><category term="review" /><category term="instant-notes" /><summary type="html"><![CDATA[Here are the notes on the topological properties of biomolecular structure.]]></summary></entry><entry><title type="html">Ways to convert rotations in 3D</title><link href="https://naturegeorge.github.io/blog/2022/07/rotation3d/" rel="alternate" type="text/html" title="Ways to convert rotations in 3D" /><published>2022-07-20T06:37:00+00:00</published><updated>2022-07-20T06:37:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/07/rotation3d</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/07/rotation3d/"><![CDATA[<h2 id="rotation-matrix-to-axisangle-vs-log-map-from-so3-to-so3">Rotation matrix to axis–angle v.s. Log map from SO(3) to so(3)</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="kn">from</span> <span class="nn">pytorch3d.transforms.rotation_conversions</span> <span class="kn">import</span> <span class="n">matrix_to_axis_angle</span><span class="p">,</span> <span class="n">random_rotations</span>
+<span class="kn">from</span> <span class="nn">pytorch3d.transforms.so3</span> <span class="kn">import</span> <span class="n">so3_log_map</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">random_rotations</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">axis_angle</span> <span class="o">=</span> <span class="n">matrix_to_axis_angle</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+<span class="n">angle_in_2pi</span> <span class="o">=</span> <span class="n">axis_angle</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">angle_in_2pi</span> <span class="o">&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">pi</span>
+<span class="n">axis_angle</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">einsum</span><span class="p">(</span><span class="s">'km,k-&gt;km'</span><span class="p">,</span>
+    <span class="n">axis_angle</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>
+    <span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">torch</span><span class="p">.</span><span class="n">pi</span><span class="o">/</span><span class="n">angle_in_2pi</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+<span class="n">so3_axis_angle</span> <span class="o">=</span> <span class="n">so3_log_map</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+\[\begin{aligned}
+    \theta &amp;= \left\{ \begin{array}{ll}
+    \theta'-2\pi, &amp; \theta' &gt; \pi \\
+    \theta', &amp; \text{elsewise}
+    \end{array} \right. \\
+    \Downarrow\\
+    \boldsymbol{\phi} &amp;= \left\{ \begin{array}{ll}
+    \frac{\boldsymbol{\phi}'}{\theta'}(\theta'-2\pi), &amp; \theta' &gt; \pi \\
+    \boldsymbol{\phi}', &amp; \text{elsewise}
+    \end{array} \right.
+\end{aligned}\]
+
+<p>Noted that when the rotation angle is close to pi, error would be raised:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">torch</span><span class="p">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">axis_angle</span><span class="p">,</span> <span class="n">so3_axis_angle</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">AssertionError</span><span class="p">:</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">axis_angle</span><span class="o">-</span><span class="n">so3_axis_angle</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-3</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="n">unique</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">angle_in_2pi</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">so3_axis_angle</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>There had been discussions on the numerical instabilities of <code class="language-plaintext highlighter-rouge">so3_log_map</code> (e.g. <a href="https://github.com/facebookresearch/pytorch3d/issues/188">https://github.com/facebookresearch/pytorch3d/issues/188</a>).</p>
+
+<p>The function <code class="language-plaintext highlighter-rouge">matrix_to_axis_angle</code> is more stable since it is a wrapper of <code class="language-plaintext highlighter-rouge">quaternion_to_axis_angle(matrix_to_quaternion(matrix))</code> utilizing the advantages of quaternions (see <a href="https://github.com/facebookresearch/pytorch3d/blob/7978ffd1e4819d24803b01a1147a2c33ad97c142/pytorch3d/transforms/rotation_conversions.py">here</a>).</p>
+
+<h3 id="note">NOTE</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">matrix_to_axis_angle</code>: \(\theta \in [0, 2\pi)\), for the same rotation axis, the direction is fixed</li>
+  <li><code class="language-plaintext highlighter-rouge">so3_log_map</code>: \(\theta \in [0, \pi)\), the direction of the rotation axis is used.</li>
+</ul>]]></content><author><name>Zefeng Zhu</name></author><category term="coding" /><summary type="html"><![CDATA[A brief record.]]></summary></entry><entry><title type="html">Ways to compute dihedrals</title><link href="https://naturegeorge.github.io/blog/2022/07/dihedral/" rel="alternate" type="text/html" title="Ways to compute dihedrals" /><published>2022-07-16T06:20:00+00:00</published><updated>2022-07-16T06:20:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/07/dihedral</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/07/dihedral/"><![CDATA[<h2 id="dihedral-angle-defined-by-four-points-ie-three-vectors">Dihedral angle defined by four points (i.e. three vectors)</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">def</span> <span class="nf">dihedral</span><span class="p">(</span><span class="n">coord0</span><span class="p">,</span> <span class="n">coord1</span><span class="p">,</span> <span class="n">coord2</span><span class="p">,</span> <span class="n">coord3</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">coord2</span> <span class="o">-</span> <span class="n">coord1</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">coord1</span> <span class="o">-</span> <span class="n">coord0</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">coord2</span> <span class="o">-</span> <span class="n">coord3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">).</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="n">u</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+\[\begin{aligned}
+  \textbf{coord}_{i} &amp;\in \mathbb{R}^{3} \\
+  \mathbf{b}_{ij} &amp;= \textbf{coord}_{j} - \textbf{coord}_{i} \\
+  \mathbf{u} &amp;= \mathbf{b}_{12} \times \mathbf{b}_{01} = - \mathbf{b}_{01} \times \mathbf{b}_{12} \\
+  \mathbf{w} &amp;= \mathbf{b}_{12} \times \mathbf{b}_{32} = -\mathbf{b}_{12} \times \mathbf{b}_{23} \\
+  \cos\theta &amp;= \frac{\mathbf{u} \cdot \mathbf{w}}{\lvert \mathbf{u} \rvert \lvert \mathbf{w} \rvert} \\
+  \sin\theta &amp;= \frac{(\mathbf{u}\times\mathbf{w}) \cdot \mathbf{b}_{12}}{\lvert \mathbf{u} \rvert \lvert \mathbf{w} \rvert \lvert \mathbf{b}_{12} \rvert} \\
+  \tan\theta &amp;= \frac{\sin\theta}{\cos\theta} = \frac{(\mathbf{u}\times\mathbf{w}) \cdot \mathbf{b}_{12}}{\mathbf{u} \cdot \mathbf{w}} \lvert \mathbf{b}_{12} \rvert
+\end{aligned}\]]]></content><author><name>Zefeng Zhu</name></author><category term="coding" /><summary type="html"><![CDATA[A brief record.]]></summary></entry><entry><title type="html">Instant Notes - ISMB 2022 3DSIG COSI</title><link href="https://naturegeorge.github.io/blog/2022/07/instant-notes/" rel="alternate" type="text/html" title="Instant Notes - ISMB 2022 3DSIG COSI" /><published>2022-07-11T04:18:00+00:00</published><updated>2022-07-11T04:18:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/07/instant-notes</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/07/instant-notes/"><![CDATA[<h2 id="protein-comparison-and-search">Protein Comparison and Search</h2>
+
+<h3 id="protein-structure-comparison">Protein Structure Comparison</h3>
+
+<p>Peter Røgen presented a novel method applying the Knot theory to find topological obstructions to a superposition of one protein backbone onto another<d-cite key="PR2021"></d-cite>. Such a protein structure comparison method considers self-intersections and self-avoiding morphs. He previously utilized generalized Gauss integrals and proposed scaled Gauss metric as geometric measures of protein structures<d-cite key="PR2003"></d-cite>.</p>
+
+<h3 id="protein-structure-search">Protein Structure Search</h3>
+
+<p>Kempen et al. developed a new approach to perform a fast protein structure search by discretizing the tertiary interactions into structural alphabets learned by VQ-VAE<d-cite key="vanKempen2022"></d-cite> and emphasized advantages over those discretizing the local backbone<d-cite key="Brevern2000"></d-cite> (related to Alexandre G. de Brevern group’s works),</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://www.biorxiv.org/content/biorxiv/early/2022/06/24/2022.02.07.479398/F1.large.jpg" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig 1 of Kempen et al.
+</div>
+
+<p>however not mention the related works utilizing the 3D Zernike polynomials that supporting both monomeric and oligomeric query<d-cite key="Guzenko2020"></d-cite>.</p>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://journals.plos.org/ploscompbiol/article/figure/image?size=medium&amp;id=10.1371/journal.pcbi.1007970.g003-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://journals.plos.org/ploscompbiol/article/figure/image?size=medium&amp;id=10.1371/journal.pcbi.1007970.g003-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://journals.plos.org/ploscompbiol/article/figure/image?size=medium&amp;id=10.1371/journal.pcbi.1007970.g003-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://journals.plos.org/ploscompbiol/article/figure/image?size=medium&amp;id=10.1371/journal.pcbi.1007970.g003" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig 3 of Guzenko et al.
+</div>
+
+<p>For discretizing tertiary interactions, there are also some related works<d-cite key="Shi2014"></d-cite><d-cite key="Jure2022"></d-cite><d-cite key="Nepomnyachiy2017"></d-cite>,</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g001-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g001-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g001-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g001" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g003-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g003-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g003-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0083788.g003" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0263566.g001-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0263566.g001-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0263566.g001-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://journals.plos.org/plosone/article/figure/image?size=medium&amp;id=10.1371/journal.pone.0263566.g001" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Fig 1 and Fig 3 of Shi et al. &amp; Fig 1 of Pražnikar et al.
+</div>
+
+<p>particularly Gevorg Grigoryan group’s works<d-cite key="Zheng2015"></d-cite><d-cite key="Mackenzie2016"></d-cite><d-cite key="Zhou2020"></d-cite>.</p>
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://els-jbs-prod-cdn.jbs.elsevierhealth.com/cms/attachment/943141aa-8fb6-44e2-a51a-fa35e51afd24/fx1-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://els-jbs-prod-cdn.jbs.elsevierhealth.com/cms/attachment/943141aa-8fb6-44e2-a51a-fa35e51afd24/fx1-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://els-jbs-prod-cdn.jbs.elsevierhealth.com/cms/attachment/943141aa-8fb6-44e2-a51a-fa35e51afd24/fx1-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://els-jbs-prod-cdn.jbs.elsevierhealth.com/cms/attachment/943141aa-8fb6-44e2-a51a-fa35e51afd24/fx1.jpg" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1607178113/asset/e0d64f5b-0d4b-4882-9d9b-dc39866a0048/assets/graphic/pnas.1607178113fig01-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1607178113/asset/e0d64f5b-0d4b-4882-9d9b-dc39866a0048/assets/graphic/pnas.1607178113fig01-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1607178113/asset/e0d64f5b-0d4b-4882-9d9b-dc39866a0048/assets/graphic/pnas.1607178113fig01-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://www.pnas.org/cms/10.1073/pnas.1607178113/asset/e0d64f5b-0d4b-4882-9d9b-dc39866a0048/assets/graphic/pnas.1607178113fig01.jpeg" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        <figure>
+
+  <picture>
+    <source media="(max-width: 480px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1908723117/asset/84ce450d-1d76-4fcc-9717-03aac5f502d0/assets/graphic/pnas.1908723117fig01-480.webp" />
+    <source media="(max-width: 800px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1908723117/asset/84ce450d-1d76-4fcc-9717-03aac5f502d0/assets/graphic/pnas.1908723117fig01-800.webp" />
+    <source media="(max-width: 1400px)" srcset="https://www.pnas.org/cms/10.1073/pnas.1908723117/asset/84ce450d-1d76-4fcc-9717-03aac5f502d0/assets/graphic/pnas.1908723117fig01-1400.webp" />
+    <!-- Fallback to the original file -->
+    <img class="img-fluid rounded z-depth-1" src="https://www.pnas.org/cms/10.1073/pnas.1908723117/asset/84ce450d-1d76-4fcc-9717-03aac5f502d0/assets/graphic/pnas.1908723117fig01.jpeg" data-zoomable="" />
+
+  </picture>
+
+</figure>
+
+    </div>
+</div>
+<div class="caption">
+    Summary Fig of Zheng et al. &amp; Fig 1 of Mackenzie et al. &amp; Fig 1 of Zhou et al.
+</div>
+
+<h3 id="new-sequence-alignment">New Sequence Alignment</h3>
+
+<p>Inspired by the field of protein structure contact prediction, particularly the Direct Coupling Analysis (DCA) methodology, Talibart et al. applied the Potts model considering direct couplings (i.e. coevolution) between positions in addition to positional composition (i.e. positional conservation) to align two sequences through aligning two Potts models inferred from corresponding multiple sequence alignments (MSA) via Integer Linear Programming (ILP)<d-cite key="Talibart2021"></d-cite>. Their model can be used to improve the alignment of remotely related protein sequences in tractable time. Following this idea, it is straightforward to utilize the Restricted Boltzmann Machines (RBM)<d-cite key="Monasson2019"></d-cite> and even deep neural networks to build theoretically more powerful models.</p>
+
+<p>Interestingly, Petti et al. recently proposed another (similar in idea but quite different in implementation) approach to perform multiple sequence alignment<d-cite key="Petti2021"></d-cite>. They implemented a smooth and differentiable version of the Smith-Waterman pairwise alignment algorithm via differentiable dynamic programming and designed a method called Smooth Markov Unaligned Random Field (SMURF) that takes as input unaligned sequences and jointly learns the MSA. And they proved that such a differentiable alignment module helps improve the structure prediction results over those initial MSAs.</p>
+
+<h2 id="alphafold2-and-rosettafold-downstream-analysis">AlphaFold2 and RoseTTAFold Downstream Analysis</h2>
+
+<h3 id="new-fold">New Fold?</h3>
+
+<p>Bordin et al. reported a new CATH-Assign protocol (ultizing Foldseek<d-cite key="vanKempen2022"></d-cite> for fast structure comparison) which is used to analyze the AlphaFoldDB and detect new superfamilies<d-cite key="Bordin2022"></d-cite>. It seems that AlphaFold2 yields a certain amount of “novel” structures. But people should be cautious about this since the predicted structures are not always “true” and the structure comparison methods may not be robust enough<d-cite key="PR2021"></d-cite>.</p>
+
+<h3 id="predicting-the-impact-of-mutations">Predicting the Impact of Mutations</h3>
+
+<p>Sen et al. used both AlphaFold and RoseTTAFold to predict the structures of protein domains without known experimental structures, and perform subsequent functional predictions based on those predicted structures to help estimate the effect of disease-associated missense mutations<d-cite key="Sen2022"></d-cite>. Such incorporating two models to try to yield better results is a kind of ensemble approach.</p>
+
+<h2 id="toolbox">Toolbox</h2>
+
+<ul>
+  <li>The structural bioinformatics library (SBL)<d-cite key="Cazals2016"></d-cite></li>
+  <li>iBIS2Analyzer: a web server for a phylogeny-driven coevolution analysis of protein families<d-cite key="Oteri2022"></d-cite></li>
+</ul>
+
+<p>Require further investigation for usability.</p>
+
+<hr />
+
+<p>Cited as:</p>
+
+<div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@online</span><span class="p">{</span><span class="nl">zhu2022instant-notes-on-ISMB-2022-3DSIG-COSI</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">=</span><span class="s">{Instant Notes - ISMB 2022 3DSIG COSI}</span><span class="p">,</span>
+        <span class="na">author</span><span class="p">=</span><span class="s">{Zefeng Zhu}</span><span class="p">,</span>
+        <span class="na">year</span><span class="p">=</span><span class="s">{2022}</span><span class="p">,</span>
+        <span class="na">month</span><span class="p">=</span><span class="s">{July}</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">=</span><span class="s">{https://naturegeorge.github.io/blog/2022/07/instant-notes/}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zefeng Zhu</name></author><category term="review" /><category term="instant-notes" /><summary type="html"><![CDATA[Here are the notes on some interesting articles appeared in the ISMB 2022's 3DSIG COSI, as well as related works on the same topic.]]></summary></entry><entry><title type="html">Fundamental formulas in ML</title><link href="https://naturegeorge.github.io/blog/2022/06/ml-formula/" rel="alternate" type="text/html" title="Fundamental formulas in ML" /><published>2022-06-17T06:02:00+00:00</published><updated>2022-06-17T06:02:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/06/ml-formula</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/06/ml-formula/"><![CDATA[<h2 id="the-basic-building-blocks">The Basic Building Blocks</h2>
+
+<h3 id="taylor-series-approximation">Taylor Series Approximation</h3>
+
+<p>Around a given point \(x_{0}\), we have:</p>
+
+\[\begin{aligned}
+  f(x) &amp;= \sum_{n=0}^{\infty}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\\
+       &amp;\simeq \underbrace{\left(\sum_{n=0}^{k}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\right)}_{k\text{th order Taylor polynomial}} + \underbrace{\frac{f^{(k+1)}(c)}{(k+1)!}(x-x_{0})^{k+1}}_{\text{remainder (mean-value (Lagrange) form)}}
+\end{aligned}\]
+
+<p>which requires \(f\) to be a k+1 times differentiable function.</p>
+
+<h3 id="stirlings-approximation">Stirling’s Approximation</h3>
+
+\[\begin{aligned}
+    n! &amp; \simeq n^{n} e^{-n}{\color{gray} \sqrt{2 \pi n}} \\
+    \Leftrightarrow \ln n! &amp; \simeq n\ln n-n {\color{gray} + \frac{1}{2}\ln 2\pi n}
+\end{aligned}\]
+
+<p>And its application on \(\begin{pmatrix} N \\ r \end{pmatrix}\):</p>
+
+\[\begin{aligned}
+    \ln \begin{pmatrix}N \\ r\end{pmatrix} \equiv \ln \frac{N!}{(N-r)!r!}
+&amp;\simeq (N-r)\ln \frac{N}{N-r} + r\ln \frac{N}{r} {\color{gray} - \frac{1}{2}\ln \frac{2\pi r(N-r)}{N}} \\
+&amp;= N\left[\frac{(N-r)}{N}\ln \frac{N}{N-r} + \frac{r}{N}\ln \frac{N}{r}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N \frac{(N-r)}{N}\frac{r}{N}} \\
+&amp;= N\left[\left(1-\frac{r}{N}\right)\ln \frac{1}{1-\frac{r}{N}} + \frac{r}{N}\ln \frac{N}{r}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N \left(1-\frac{r}{N}\right)\frac{r}{N}} \\
+&amp;= \underbrace{N\left[\left(1-x\right)\ln \frac{1}{1-x} + x\ln \frac{1}{x}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N (1-x) x}}_{x=r/N}
+\end{aligned}\]
+
+<p>Thus:</p>
+
+\[\begin{pmatrix} N \\ r \end{pmatrix} \simeq e^{N[(1-x)\ln \frac{1}{1-x}+x\ln\frac{1}{x}]{\color{gray} - \frac{1}{2}\ln 2\pi N (1-x) x}}\]
+
+<p>Noted that all the terms are logarithm and according to the Logarithm change of base rule, the above logarithm can be changed to any base. For instance:</p>
+
+\[\begin{aligned}
+    \begin{pmatrix} N \\ r \end{pmatrix} \simeq 2^{N H_{b}(r/N){\color{gray} - \frac{1}{2}\log_{2} 2\pi N (1-r/N) r/N}} \\
+\text{where} \quad \underbrace{H_{b}(x) \equiv x\log_{2}\frac{1}{x} + (1-x) \log_{2}\frac{1}{1-x}}_{\text{binary entropy function}}
+\end{aligned}\]
+
+<h3 id="soft-maximum">Soft Maximum</h3>
+
+<p>One of the approaches is:</p>
+
+\[\begin{aligned}
+  \max(x,y) &amp;\simeq \ln(\exp(x)+\exp(y))\\
+  \mathrm{abs}(x) = \max(x,-x) &amp;\simeq \ln(\exp(x)+\exp(-x))\\
+  \max(\mathbf{x}) &amp;\simeq \ln\left(\sum_{i=1}^{n} \exp(x_{i}) \right) \triangleq \mathrm{logsumexp}(\mathbf{x})\\
+\end{aligned}\]
+
+<p>For values with a larger gap, this approximation would be more precise, as the gap between those exponential values would be larger making the logarithm of the sum closer to the maximum value. So we can add a coefficient to adjust the scale of input values depending on the precision we would like to achieve:</p>
+
+\[\max(\mathbf{x}) \simeq \frac{1}{k}\ln\left(\sum_{i=1}^{n} \exp(k x_{i}) \right)\]
+
+<p>But it should be noted that this approximation is easy to overflow or underflow for computers. We can shift the input values by a constant:</p>
+
+\[\ln( \exp(x) + \exp(y)) = \ln( \exp(x – c) + \exp(y–c) ) + c\]
+
+<p>And we get:</p>
+
+\[\begin{aligned}
+  \max(\mathbf{x}) &amp;\simeq \frac{1}{k} \left[\ln\left(\sum_{i=1}^{n} \exp(k x_{i} - c) \right) + c \right] \\
+  \text{where } &amp; c=\max(k\mathbf{x})
+\end{aligned}\]
+
+<h3 id="matrix-exponential">Matrix Exponential</h3>
+
+\[\exp (\mathbf{A}) = \sum^{\infty}_{n=0} \frac{\mathbf{A}^{n}}{n!}\]
+
+\[\begin{aligned}
+  \det(\exp (\mathbf{A})) &amp;= \exp(\mathrm{Tr}(\mathbf{A})) \\
+  \ln(\det(\underbrace{\mathbf{B}}_{\exp(\mathbf{A})})) &amp;= \mathrm{Tr}(\ln(\mathbf{B}))
+\end{aligned}\]
+
+<h3 id="properties-of-gaussian-distribution">Properties of Gaussian Distribution</h3>
+
+\[p(\mathbf{x};\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)\]
+
+<h2 id="applications">Applications</h2>
+
+<h3 id="numerical-integration-and-differentiation">Numerical Integration and Differentiation</h3>
+
+<p>…</p>
+
+<h3 id="boltzmann-factor">Boltzmann Factor</h3>
+
+<p>…</p>
+
+<h3 id="kernel-method">Kernel Method</h3>
+
+<h4 id="kernel-function">Kernel Function</h4>
+
+<p>…</p>
+
+<h4 id="kernel-trick">Kernel Trick</h4>
+
+<p>…</p>
+
+<h3 id="representation-of-transformations">Representation of Transformations</h3>
+
+\[\begin{bmatrix}
+  \cos n\theta &amp; -\sin n \theta \\
+  \sin n\theta &amp; \cos n\theta
+\end{bmatrix} = \exp \left( n\theta \begin{bmatrix}
+  0 &amp; -1 \\ 1 &amp; 0
+\end{bmatrix} \right)\]]]></content><author><name>Zefeng Zhu</name></author><category term="computation" /><summary type="html"><![CDATA[Naive but useful keynotes on ML.]]></summary></entry><entry><title type="html">Fundamental computations in ML</title><link href="https://naturegeorge.github.io/blog/2022/06/ml-computation/" rel="alternate" type="text/html" title="Fundamental computations in ML" /><published>2022-06-16T03:12:00+00:00</published><updated>2022-06-16T03:12:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/06/ml-computation</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/06/ml-computation/"><![CDATA[<blockquote>
+  <p>Notation: bold, lower-case letters refer to column vectors</p>
+</blockquote>
+
+<h2 id="the-basic-building-blocks">The Basic Building Blocks</h2>
+
+<h3 id="norm">Norm</h3>
+
+<p>…</p>
+
+<h3 id="dot-product">Dot Product</h3>
+
+<p>The dot product intrinsically defines a kind of similarity:</p>
+
+\[\mathbf{a}\cdot\mathbf{b} = \sum_{i} a_{i} b_{i} = \mathbf{a}^{\mathsf{T}}\mathbf{b} = \underbrace{\lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \cos\theta}_{\text{for orthonormal basis}}\]
+
+<p>And it is the way to perform vector projection:</p>
+
+\[\mathrm{proj}_{\mathbf{a}}\mathbf{b} = \frac{(\mathbf{a}^{\mathsf{T}}\mathbf{b}) \mathbf{a}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}=\frac{\mathbf{a}\mathbf{a}^{\mathsf{T}}\mathbf{b}}{\mathbf{a}^{\mathsf{T}}\mathbf{a}}\]
+
+<p>and make it simple to derive the trigonometric formulas:</p>
+
+\[\begin{array}{c}
+  \mathbf{a} = \begin{bmatrix} \cos\alpha \\ \sin\alpha \end{bmatrix}, \mathbf{b} = \begin{bmatrix} \cos\beta \\ \sin\beta \end{bmatrix} \quad\text{(unit circle)} \\
+  \mathbf{a}\cdot\mathbf{b} = \cos\alpha\cos\beta + \sin\alpha\sin\beta = \cos(\alpha - \beta) = \cos(\beta-\alpha)
+\end{array}\]
+
+<p>Noted that we have the Cauchy-Buniakowsky-Schwarz Inequality:</p>
+
+\[\left(\sum_{i} a_{i} b_{i}\right)^{2} \le \left(\sum_{i} a_{i}^{2}\right) \left(\sum_{i} b_{i}^{2}\right)\]
+
+<h4 id="properties">Properties</h4>
+
+\[\mathbf{a}\cdot(\mathbf{b}+\mathbf{c})=a\cdot\mathbf{b}+a\cdot\mathbf{c}\]
+
+<h3 id="matrix-multiplication">Matrix Multiplication</h3>
+
+<p>And the matrix multiplication can be seen as a generalization of the dot product operation, i.e. apply dot product in batch:</p>
+
+\[\begin{bmatrix}
+         a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n}\\
+         a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn}
+     \end{bmatrix}
+     \begin{bmatrix}
+         b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1p}\\
+         b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2p}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         b_{n1} &amp; b_{n2} &amp; \cdots &amp; b_{np}
+     \end{bmatrix}
+      =
+     \begin{bmatrix}
+         c_{11} &amp; c_{12} &amp; \cdots &amp; c_{1p}\\
+         c_{21} &amp; c_{22} &amp; \cdots &amp; c_{2p}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         c_{m1} &amp; c_{m2} &amp; \cdots &amp; c_{mp}
+     \end{bmatrix}\]
+
+\[c_{ij}= \sum_{k=1}^n a_{ik}b_{kj}\]
+
+<p>Then we can derive the outer product operation of two column vectors:</p>
+
+\[\mathbf{u} \otimes \mathbf{v} = \mathbf{uv}^{\mathsf{T}}= \begin{bmatrix}
+         u_{1}v_{1} &amp; u_{1}v_{2} &amp; \cdots &amp; u_{1}v_{n}\\
+         u_{2}v_{1} &amp; u_{2}v_{2} &amp; \cdots &amp; u_{2}v_{n}\\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+         u_{m}v_{1} &amp; u_{m}v_{2} &amp; \cdots &amp; u_{m}v_{n}
+     \end{bmatrix}\]
+
+<p>The matrix multiplication can also be formulated as:</p>
+
+\[\mathbf{A}_{m\times n}\mathbf{B}_{n\times p}=\sum_{k=1}^{n} \mathbf{A}_{(:,k)}\mathbf{B}_{(k,:)}\]
+
+<p>We can find out that there exist ways to perform block matrix multiplication:</p>
+
+\[\mathbf{A} = \begin{bmatrix}
+    \mathbf{M}_{ra} &amp; \mathbf{M}_{rb} \\
+    \mathbf{M}_{sa} &amp; \mathbf{M}_{sb}
+  \end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+    \mathbf{M}_{at} &amp; \mathbf{M}_{au} \\
+    \mathbf{M}_{bt} &amp; \mathbf{M}_{bu}
+  \end{bmatrix}\]
+
+\[\mathbf{AB} = \begin{bmatrix}
+    \mathbf{M}_{ra}\mathbf{M}_{at} + \mathbf{M}_{rb}\mathbf{M}_{bt}
+&amp; \mathbf{M}_{ra}\mathbf{M}_{au} + \mathbf{M}_{rb}\mathbf{M}_{bu} \\
+    \mathbf{M}_{sa}\mathbf{M}_{at} + \mathbf{M}_{sb}\mathbf{M}_{bt}
+&amp; \mathbf{M}_{sa}\mathbf{M}_{au} + \mathbf{M}_{sb}\mathbf{M}_{bu}
+  \end{bmatrix}
+= \begin{bmatrix}
+    \mathbf{M}_{rt} &amp; \mathbf{M}_{ru} \\
+    \mathbf{M}_{st} &amp; \mathbf{M}_{su}
+  \end{bmatrix}\]
+
+<h3 id="cross-product">Cross Product</h3>
+
+\[\begin{aligned}
+  \mathbf{a}\times\mathbf{b} &amp;= \underbrace{[\mathbf{a}]_{\times}}_{\text{skew-symmetric matrix}} \mathbf{b} = \lVert \mathbf{a} \rVert_{2} \lVert \mathbf{b} \rVert_{2} \sin\theta \mathbf{n}\\
+  &amp;= {[\mathbf{b}]_{\times}}^{\mathsf{T}}\mathbf{a} = -(\mathbf{b}\times\mathbf{a}) \\
+\lVert \mathbf{a}\times\mathbf{b} \rVert_{2}^{2} &amp;=  \lVert \mathbf{a} \rVert_{2}^{2} \lVert \mathbf{b} \rVert_{2}^{2}-(\mathbf{a}\cdot\mathbf{b})^{2} \\
+&amp;=\sum_{1\le i &lt; j \le n} (a_{i}b_{j}-a_{j}b_{i})^{2} &amp; \text{Lagrange's identity}\\
+(\mathbf{a}\times\mathbf{b}) \cdot (\mathbf{c}\times\mathbf{d})&amp;= (\mathbf{a}\cdot\mathbf{c})(\mathbf{b}\cdot\mathbf{d})-(\mathbf{a}\cdot\mathbf{d})(\mathbf{b}\cdot\mathbf{c}) &amp; \text{the Binet–Cauchy identity}\\
+\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})&amp;=\mathbf{b}\cdot(\mathbf{c}\times\mathbf{a})=\mathbf{c}\cdot(\mathbf{a}\times\mathbf{b}) &amp; \text{the scalar triple product}\\
+\mathbf{a}\times(\mathbf{b}+\mathbf{c})&amp;=(\mathbf{a}\times\mathbf{b})+(\mathbf{a}\times\mathbf{c}) &amp; \text{distributive over addition}\\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c})&amp;=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{c}(\mathbf{a}\cdot \mathbf{b}) &amp; \text{the vector triple product} \\
+(\mathbf{a}\times\mathbf{b})\times\mathbf{c}&amp;=\mathbf{b}(\mathbf{c}\cdot \mathbf{a})-\mathbf{a}(\mathbf{b}\cdot \mathbf{c}) \\
+\mathbf{a}\times(\mathbf{b}\times\mathbf{c}) &amp;+ \mathbf{b}\times(\mathbf{c}\times\mathbf{a}) + \mathbf{c}\times(\mathbf{a}\times\mathbf{b}) = \mathbf{0} &amp; \text{the Jacobi identity}
+\end{aligned}\]
+
+<h3 id="matrix-determinant">Matrix Determinant</h3>
+
+<p>…</p>
+
+<h3 id="matrix-decomposition">Matrix Decomposition</h3>
+
+<h4 id="lu-decomposition">LU Decomposition</h4>
+
+<p>…</p>
+
+<h4 id="qr-decomposition">QR Decomposition</h4>
+
+<p>For \(\mathbf{A} \in \mathbb{R}^{m\times n}\quad(m\ge n)\), through the Gram-Schmidt process (MGS) or Givens rotation or Householder transformation, we have:</p>
+
+\[\begin{aligned}
+  \mathbf{A}_{m\times n} &amp;=\underbrace{\mathbf{Q}_{m\times n}}_{\text{n orthonormal column vectors}}\underbrace{\mathbf{R}_{n\times n}}_{\text{triu}} \\
+  \text{where } &amp; \mathbf{Q}^{\mathsf{T}}\mathbf{Q} \in \mathbf{I}_{n}
+\end{aligned}\]
+
+<p>Noted that:</p>
+
+\[\begin{aligned}
+   \mathbf{A}^{\mathsf{T}}\mathbf{A} &amp;= (\mathbf{QR})^{\mathsf{T}}(\mathbf{QR}) \\
+   &amp;= \mathbf{R}^{\mathsf{T}}\mathbf{Q}^{\mathsf{T}}\mathbf{QR} \\
+   &amp;= \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   \Rightarrow \det \mathbf{A}^{\mathsf{T}}\mathbf{A} &amp;= \det \mathbf{R}^{\mathsf{T}} \mathbf{R} \\
+   &amp;=\det \mathbf{R}^{\mathsf{T}} \det \mathbf{R} \\
+   &amp;= (\det \mathbf{R})^2
+\end{aligned}\]
+
+<h4 id="eigenvalue-decomposition">Eigenvalue Decomposition</h4>
+
+\[\det(\mathbf{A}-\lambda \mathbf{I})\]
+
+<p>For \(\mathbf{A}_{1} \sim \mathbf{A}_{2}\) (i.e. \(\mathbf{A}_{1}=\mathbf{SA}_{2}\mathbf{S}^{-1}\)):</p>
+
+\[\begin{aligned}
+  \mathbf{A}_{1}-\lambda \mathbf{I} &amp;= \mathbf{SA}_{2}\mathbf{S}^{-1}-\lambda \mathbf{I} = \mathbf{S}(\mathbf{A}_{2}-\lambda \mathbf{I})\mathbf{S}^{-1} \\
+  \det(\mathbf{A}_{1}-\lambda \mathbf{I}) &amp;= \det(\mathbf{S})\det(\mathbf{A}_{2}-\lambda \mathbf{I})\det(\mathbf{S}^{-1}) =\det(\mathbf{A}_{2}-\lambda \mathbf{I})
+\end{aligned}\]
+
+<h4 id="singular-value-decomposition">Singular Value Decomposition</h4>
+
+<p>…</p>
+
+<p>(Moore–Penrose inverse)</p>
+
+<h3 id="matrix-derivatives">Matrix Derivatives</h3>
+
+\[\begin{aligned}
+  \frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}}{\partial \mathbf{a}} &amp;= \frac{\mathbf{a}-\mathbf{b}}{\lVert \mathbf{a} - \mathbf{b} \rVert_{2}}
+\\
+\frac{\partial \lVert \mathbf{a} - \mathbf{b} \rVert_{2}^{2}}{\partial \mathbf{a}} &amp;= 2(\mathbf{a}-\mathbf{b})
+\end{aligned}\]
+
+<h3 id="matrix-lie-groups">Matrix Lie Groups</h3>
+
+<h4 id="rotations">Rotations</h4>
+
+<p>For basis vectors</p>
+
+\[\mathbf{e}_{1}=\begin{bmatrix} 1\\0 \end{bmatrix},\mathbf{e}_{2}=\begin{bmatrix} 0\\1 \end{bmatrix}\]
+
+<p>, a rotation of the plane \(\mathbb{R}^{2}\) about the origin \(O\) through angle \(\theta\) is a linear
+transformation \(R_{\theta}: \mathbb{R}^{2} \rightarrow \mathbb{R}^{2}\) that making</p>
+
+\[\begin{aligned}
+  R_{\theta}(\mathbf{e}_{1}) &amp;= \begin{bmatrix}\cos\theta \\ \sin\theta \end{bmatrix} \\
+R_{\theta}(\mathbf{e}_{2}) &amp;= \begin{bmatrix}\cos(\theta+\frac{\pi}{2}) \\ \sin(\theta+\frac{\pi}{2}) \end{bmatrix} = \begin{bmatrix} -\sin\theta \\ \cos\theta \end{bmatrix}
+\end{aligned}\]
+
+<p>Thus:</p>
+
+\[\begin{aligned}
+  \mathbf{R}_{\theta} &amp;= \begin{bmatrix}
+  \cos\theta &amp; -\sin\theta\\
+  \sin\theta &amp; \cos\theta
+\end{bmatrix} \\ &amp;= \cos\theta \underbrace{\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}}_{\mathbf{1}} + \sin\theta \underbrace{\begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}}_{\mathbf
+i} \\
+  \mathbf{R}_{\theta}\begin{bmatrix} x\\ y\end{bmatrix} &amp;=
+  \begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix} \\
+  \mathbf{R}_{\theta}\mathbf{R}_{\beta} &amp;= \mathbf{R}_{\theta+\beta} = \mathbf{R}_{\beta}\mathbf{R}_{\theta}
+\end{aligned}\]
+
+<p>If we take the complex view, each rotation \(R_{\theta}\) of \(\mathbb{R}^{2}\) can be represented by the complex number:</p>
+
+\[\begin{aligned}
+  z_{\theta} &amp;=\underbrace{\cos\theta+i\sin\theta}_{e^{i\theta}} \\
+  z_{\theta}(x+iy) &amp;= (\cos\theta+i\sin\theta)(x+iy) \\
+  &amp;= (x\cos\theta - y\sin\theta) + i (x\sin\theta + y\cos\theta)\\
+  z_{\theta}z_{\beta} &amp;= e^{i(\theta+\beta)} = z_{\theta+\beta} = z_{\beta}z_{\theta}
+\end{aligned}\]
+
+<p>These two representations of rotations have intrinsic relationships. Noted that all complex numbers have corresponding 2×2 real matrices:</p>
+
+\[a+bi \Leftrightarrow \begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix} = a \mathbf{1} + b\mathbf{i},\quad \text{where }a,b\in \mathbb{R}\]
+
+<p>We can view it as this: we model the real unit \(1\) by \((\mathbf{e}_{1})^{\star}=\mathbf{1}\) and model the imaginary unit \(i\) by \((\mathbf{e}_{2})^{\star}=\mathbf{i}\), where</p>
+
+\[\begin{aligned}
+  \begin{bmatrix}a\\b\end{bmatrix}^{\star} &amp;= \begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix}\\
+  c\left(\begin{bmatrix}a\\b\end{bmatrix}^{\star}\right)&amp;=\left(c\begin{bmatrix}a\\b\end{bmatrix}\right)^{\star}
+\end{aligned}\]
+
+<p>So, for \(a+bi\) the real part is modeled by \(a(\mathbf{e}_{1})^{\star}=(a\mathbf{e}_{1})^{\star}\) and the imaginary part is modeled by \(b(\mathbf{e}_{2})^{\star}=(b\mathbf{e}_{2})^{\star}\). Thus the complex number is modeled by:</p>
+
+\[\begin{aligned}
+  a(\mathbf{e}_{1})^{\star}+b(\mathbf{e}_{2})^{\star} &amp;= (a\mathbf{e}_{1})^{\star}+(b\mathbf{e}_{2})^{\star} \\
+  &amp;= (a\mathbf{e}_{1}+b\mathbf{e}_{2})^{\star}
+\end{aligned}\]
+
+<p>The matrix representation behave exactly the same as the complex numbers under addition and multiplication (matrices as \(\mathbb{C}\)):</p>
+
+\[\begin{aligned}
+  (a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})&amp;=\begin{bmatrix} a &amp; -b \\ b &amp; a \end{bmatrix} \begin{bmatrix} c &amp; -d \\ d &amp; c \end{bmatrix} \\&amp;
+  = \begin{bmatrix} ac-bd &amp; -(ad+bc) \\ ad+bc &amp; ac-bd \end{bmatrix} \\
+  &amp;=(ac-bd) \mathbf{1} + (ad+bc)\mathbf{i}
+\end{aligned}\]
+
+\[\begin{aligned}
+  \mathbf{1}^{2}=\mathbf{1},\mathbf{1i}&amp;=\mathbf{i1}=\mathbf{i},\mathbf{i}^{2}=\mathbf{-1} \\
+  (a \mathbf{1} + b\mathbf{i})^{-1} &amp;= \frac{a \mathbf{1} - b\mathbf{i}}{a^{2}+b^{2}}\\
+\det(a\mathbf{1}+b\mathbf{i}) &amp;= a^{2}+b^{2} = \lvert a+bi \rvert^{2} \\
+\det((a \mathbf{1} + b\mathbf{i})(c \mathbf{1} + d\mathbf{i})) &amp;=\det(a \mathbf{1} + b\mathbf{i})\det(c \mathbf{1} + d\mathbf{i}) \\
+=(ac-bd)^{2}+(ad+bc)^{2} &amp;= (a^{2}+b^{2})(c^{2}+d^{2}) \quad \} \text{ the two-square identity}\\
+= \lvert (a+bi)(c+di) \rvert^{2} &amp;= \lvert a+bi \rvert^{2} \lvert c+di \rvert^{2}
+\end{aligned}\]
+
+<p>So, for rotations, we have:</p>
+
+\[\begin{aligned}
+  z_{\theta}(x+iy) \Leftrightarrow &amp;\quad (\underbrace{\cos\theta\mathbf{1} +\sin\theta \mathbf{i}}_{\mathbf{R}_{\theta}})(x\mathbf{1}+y\mathbf{i}) \\
+  &amp;= (x\cos\theta - y\sin\theta)\mathbf{1} + (x\sin\theta + y\cos\theta)\mathbf{i}\\
+  &amp;=\begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix}^{\star}
+\end{aligned}\]
+
+<p>If we consider the set of all rotations of the plane \(\mathbb{R}^{2}\) about the origin \(O\), the set is the special orthogonal group for n=2:</p>
+
+\[\mathrm{SO}(2) = \lbrace \mathbf{R} \in \mathbb{R}^{2 \times 2} | \mathbf{R}\mathbf{R}^{\mathsf{T}}=\mathbf{I},\det(\mathbf{R})=1 \rbrace\]
+
+<p>If we consider the set of all rotations of the plane \(\mathbb{C}\) about the origin \(O\), the set is the unit circle or 1-dimensional sphere (also a (Lie) group under the operation of complex number multiplication):</p>
+
+\[\mathbb{S}^{1} = \lbrace z: \lvert z \rvert = 1 \rbrace\]
+
+<p>The complex numbers are ordered pairs with the <em>sum,</em> <em>product,</em> and <em>absolute value</em> operations that can express through matrix computations. We can extend this idea to the ordered quadruples of real values (i.e. quaternions)</p>
+
+\[\begin{aligned}
+  q &amp;=a+bi+cj+dk \\
+  i^{2}&amp;=j^{2}=k^{2}=ijk=-1 \\
+  ij&amp;=k,ji=-k,\ldots \\
+  \bar{q} &amp;= a-bi-cj-dk
+\end{aligned}\]
+
+<p>with the matrix:</p>
+
+\[\begin{array}{c}
+  \mathbf{q} = \begin{bmatrix}
+  a+id &amp; -b-ic \\
+  b-ic &amp; a-id
+\end{bmatrix} = \begin{bmatrix}
+  \alpha &amp; -\beta \\
+  \bar{\beta} &amp; \bar{\alpha}
+\end{bmatrix}
+= a\mathbf{1}+b\mathbf{i}+c\mathbf{j}+d\mathbf{k}\\
+\text{where } \mathbf{j}=\begin{bmatrix}0 &amp; -i \\ -i &amp; 0\end{bmatrix}, \mathbf{k}=\begin{bmatrix} i &amp; 0 \\ 0 &amp; -i\end{bmatrix}
+\end{array}\]
+
+<p>We can verify that, the sum, product, and determinant of matrices like \(\mathbf{q}\) are just equivalent to the sum, product, and squared absolute value of quaternions.</p>
+
+\[\begin{aligned}
+  \mathbf{i}^{2}&amp;=\mathbf{j}^{2}=\mathbf{k}^{2}=\mathbf{ijk}=-\mathbf{1} \\
+\mathbf{ij}&amp;=\mathbf{k}, \mathbf{ji}=-\mathbf{k},\ldots \\
+\bar{\mathbf{q}} &amp;= a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k} = \begin{bmatrix} \bar{\alpha} &amp; -\bar{\beta} \\ \beta &amp; \alpha \end{bmatrix}^{\mathsf{T}}\\
+\bar{(\mathbf{q}_{1}\mathbf{q}_{2})}&amp;=\bar{\mathbf{q}_{2}}\bar{\mathbf{q}_{1}}\\
+\mathbf{q}^{-1}&amp;=\frac{a\mathbf{1}-b\mathbf{i}-c\mathbf{j}-d\mathbf{k}}{a^{2}+b^{2}+c^{2}+d^{2}}\\
+\det\mathbf{q} &amp;= a^{2}+b^{2}+c^{2}+d^{2} = \lvert q \rvert^{2}= q\bar{q}\\
+\det(\mathbf{q}_{1}\mathbf{q}_{2})&amp;=\det\mathbf{q}_{1}\det\mathbf{q}_{2} =\lvert q_{1}q_{2} \rvert^{2} = \lvert q_{1} \rvert^{2}\lvert q_{2} \rvert^{2}
+\end{aligned}\]
+
+<p>For unit quaternions, they form the 3-sphere in the space \(\mathbb{R}^{4}\):</p>
+
+\[\mathbb{S}^{3}=\lbrace q: \lvert q \rvert = 1 \rbrace\]
+
+<p>It is a group under quaternion multiplication.</p>
+
+<p>From the multiplicative absolute value,</p>
+
+\[\lvert uv - uw \rvert = \lvert u(v - w) \rvert = \lvert u \rvert \lvert v-w \rvert\]
+
+<p>we can see that, for both complex numbers and quaternions, multiplication by a number \(u\) where \(\lvert u \rvert=1\) is a rigid motion, leaving the distance between \(v\) and \(w\) unchanged. \(u\) is the unit complex number or unit quaternion respectively. And such rigid motion of \(\mathbb{C}=\mathbb{R}^{2}\) or \(\mathbb{R}^{4}\) is known as an isometry. Noted that the origin is also fixed. This is exactly the nature of rotation.</p>
+
+<h3 id="optimization">Optimization</h3>
+
+<p>…</p>
+
+<h3 id="softmax">Softmax</h3>
+
+<p>The Softmax serves as a smooth approximation to \(\text{onehot}(\arg\max(\mathbf{x}))\):</p>
+
+\[\text{Softmax}(\mathbf{x})=\left[\frac{\exp(x_1)}{\sum_{i}^{n}\exp(x_i)}, \ldots, \frac{\exp(x_n)}{\sum_{i}^{n}\exp(x_n)} \right]^{\mathsf{T}}\]
+
+<h2 id="applications">Applications</h2>
+
+<h3 id="standardizing-and-whitening-data">Standardizing and Whitening Data</h3>
+
+<p>For a data matrix \(\mathbf{X}\in\mathbb{R}^{N\times D}\) (row: sample, column: feature), we would like to:</p>
+
+<ul>
+  <li>standardize the data: <em>to ensure the features are comparable in magnitude, which can help with model fitting and inference</em></li>
+  <li>whiten the data: to remove correlation between the features</li>
+</ul>
+
+<p>The most common way to standardize the data is:</p>
+
+\[\begin{aligned}
+  \text{standardize}(x_{nd}) &amp;= \frac{x_{nd}-\hat{\mu}_{d}}{\hat{\sigma}_{d}} \\
+  &amp;\simeq \frac{x_{nd}-\hat{\mu}_{d}}{\sqrt{\hat{\sigma}_{d}^{2}+\epsilon}}
+\end{aligned}\]
+
+<p>For each of the features, this Z-score standardization centers the mean to zero and scales the data to unit variance (i.e. remove bias and scale).</p>
+
+<p>However, standardization does not consider the covariation between features. Thus we have to whiten the data matrix via linear transformation (on feature dimension) so as to make the covariance matrix become an identity matrix (as long as the covariance matrix is nonsingular). Suppose the data matrix is already centered, we have:</p>
+
+\[\begin{aligned}
+  \mathbf{\Sigma} &amp;= \frac{1}{N}\mathbf{X}^{\mathsf{T}}\mathbf{X} \\
+  \mathbf{I} &amp;= \frac{1}{N} \mathbf{W}^{\mathsf{T}}\mathbf{X}^{\mathsf{T}}\mathbf{XW} = \mathbf{W}^{\mathsf{T}}\mathbf{\Sigma}\mathbf{W}
+\end{aligned}\]
+
+<p>For preserving the original characteristics of the data matrix, we can define \(\mathbf{W} \in \mathbb{R}^{D\times D}, \det\mathbf{W}&gt;0\) and get:</p>
+
+\[\mathbf{\Sigma} = (\mathbf{W}^{\mathsf{T}})^{-1}\mathbf{W}^{-1} =  (\mathbf{W}^{-1})^{\mathsf{T}}\mathbf{W}^{-1}\]
+
+<p>Since the covariance matrix is a real symmetric matrix, it is always orthogonally diagonalizable:</p>
+
+\[\mathbf{\Sigma} = \mathbf{V\Lambda V}^{\mathsf{T}}\]
+
+<p>Thus we can let:</p>
+
+\[\mathbf{W}^{-1} = \underbrace{\mathbf{R}}_{\text{arbitrary orthogonal matrix}}\sqrt{\mathbf{\Lambda}}\mathbf{V}^{\mathsf{T}}\]
+
+<p>and get:</p>
+
+\[\begin{aligned}
+  \mathbf{W} &amp;= \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{R}^{\mathsf{T}} \\
+  &amp;= \left\{ \begin{array}{lll} \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}},&amp;\mathbf{R} = \mathbf{I} &amp;\text{(PCA whitening)} \\ \mathbf{V}\sqrt{\mathbf{\Lambda}^{-1}}\mathbf{V}^{\mathsf{T}},&amp;\mathbf{R} = \mathbf{V} &amp;\text{(ZCA whitening)} \end{array} \right.
+\end{aligned}\]
+
+<p>Noted that it would require a regularization term \(\epsilon\) added to the eigenvalues so as to avoid dividing by zero.</p>
+
+<h3 id="linear-layer">Linear Layer</h3>
+
+<p>Typically, a matrix could be a representation of a linear transformation with respect to certain bases. And a linear layer (e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Linear</code>) is exactly a weight matrix together with a bias vector, storing learnable parameters and representing a learnable linear transformation. Feeding an input data matrix into a linear layer, we would get a transformed data matrix.</p>
+
+\[\begin{array}{llll}
+  \mathbf{y} = \mathbf{Wx} + \mathbf{b}, &amp;\mathbf{x} \in \mathbb{R}^{d \times 1},&amp;\mathbf{W} \in \mathbb{R}^{\hat{d} \times d}, &amp;\mathbf{b},\mathbf{y} \in \mathbb{R}^{\hat{d}\times 1} \\
+  \mathbf{Y} = \mathbf{XW} + \mathbf{B}, &amp;\mathbf{X} \in \mathbb{R}^{n \times d}, &amp;\mathbf{W}\in \mathbb{R}^{d\times\hat{d}}, &amp;\mathbf{B},\mathbf{Y}\in \mathbb{R}^{n\times \hat{d}}
+\end{array}\]
+
+<h3 id="embedding-layer">Embedding Layer</h3>
+
+<p>An embedding layer (e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Embedding</code>) is just a linear layer without bias but queried with onehot vectors (sparse input matrix). Thus it serves as a lookup table with learnable parameters. In deep learning frameworks, the embedding layer is optimized for retrieving with indices rather than doing matrix multiplication with sparse matrix.</p>
+
+<h3 id="attention-function">Attention (Function)</h3>
+
+<p>With the Query \(\mathbf{Q}\in\mathbb{R}^{n\times d_{k}}\) and the paired Key \(\mathbf{K}\in\mathbb{R}^{m\times d_{k}}\) and Value \(\mathbf{V}\in\mathbb{R}^{m\times d_{v}}\), we would like to find the queries’ corresponding values based on the similarity between the queries and keys. Then we can apply the Scaled Dot-Product Attention:</p>
+
+\[\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left( \frac{\mathbf{Q}\mathbf{K}^{\mathsf{T}}}{\sqrt{d_{k}}} \right)\mathbf{V}\]
+
+<p>where \(\sqrt{d_{k}}\) is used for scaling down large dot product values.
+And self-Attention i.e. \(\text{Attention}(\mathbf{X}, \mathbf{X}, \mathbf{X})\).</p>
+
+<h3 id="multi-head-attention-layer">Multi-Head Attention (Layer)</h3>
+
+<p><em>… linearly project the queries, keys and values \(h\) times with different, learned linear projections to \(d_{k}\), \(d_{k}\) and \(d_v\) dimensions, respectively.</em></p>
+
+\[\begin{aligned}
+  \text{head}_{i} &amp;= \text{Attention}(\mathbf{QW}_{i}^{Q}, \mathbf{KW}_{i}^{K}, \mathbf{VW}_{i}^{V}) \\
+  \text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) &amp;= \text{Concat}(\text{head}_{1}, \ldots, \text{head}_{h})\mathbf{W}^{O}
+\end{aligned}\]
+
+<p>Noted that \(\mathbf{W}_{i}^{Q}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{K}\in \mathbb{R}^{d_{k}\times \tilde{d_{k}}},\mathbf{W}_{i}^{V}\in \mathbb{R}^{d_{v}\times \tilde{d_{v}}},\mathbf{W}^{O}\in \mathbb{R}^{h\cdot \tilde{d_{v}} \times d_{o}}\).</p>
+
+<p><em>On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding \(d_{v}\)-dimensional output values. These are concatenated and once again projected, resulting in the final values … <strong>Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions.</strong></em> —— Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A., Kaiser, u., &amp; Polosukhin, I. (2017). Attention is All you Need. In Advances in Neural Information Processing Systems. Curran Associates, Inc.</p>
+
+<p>And self Multi-Head Attention i.e. \(\text{MultiHead}(\mathbf{X}, \mathbf{X}, \mathbf{X})\) with \(d_{v}=d_{k}, \tilde{d_{v}}=\tilde{d_{k}}\) and embedding dimension be \(h\cdot \tilde{d_{v}}\).</p>
+
+<p>Pseudocode:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">embed_dim</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">num_heads</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">head_dim</span> <span class="o">=</span> <span class="n">embed_dim</span> <span class="o">//</span> <span class="n">num_heads</span>
+
+<span class="n">qkv_proj</span> <span class="o">=</span> <span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">embed_dim</span><span class="p">)</span>
+<span class="n">o_proj</span> <span class="o">=</span> <span class="n">Linear</span><span class="p">(</span><span class="n">embed_dim</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span>
+
+<span class="n">qkv</span> <span class="o">=</span> <span class="n">qkv_proj</span><span class="p">(</span><span class="n">x</span>                       <span class="c1"># from x: batch_size, seq_length, input_dim
+</span>                                       <span class="c1"># to qkv: batch_size, seq_length, 3 * embed_dim
+</span>    <span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span>  <span class="c1"># 3 * embed_dim = 3 * head_dim * num_heads
+</span>              <span class="n">num_heads</span><span class="p">,</span>               <span class="c1">#               = num_heads * 3 * head_dim
+</span>              <span class="mi">3</span> <span class="o">*</span> <span class="n">head_dim</span>             <span class="c1"># batch_size, seq_length, num_heads, 3 * head_dim
+</span>    <span class="p">).</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>              <span class="c1"># batch_size, num_heads, seq_length, 3 * head_dim
+</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">qkv</span><span class="p">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">values</span><span class="p">,</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">scaled_dot_product</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>     <span class="c1"># batch_size, seq_length, num_heads, head_dim
+</span>                                  <span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span> 
+                                       <span class="c1"># batch_size, seq_length, num_heads * head_dim
+</span><span class="n">out</span> <span class="o">=</span> <span class="n">o_proj</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="least-square">Least Square</h3>
+
+\[\mathbf{Ax}=\mathbf{b}\]
+
+\[\lVert \mathbf{Ax}-\mathbf{b} \rVert_{2}\]
+
+<h3 id="nonlinear-least-square">Nonlinear Least Square</h3>
+
+<p>…</p>
+
+<h3 id="group-equivariance">Group Equivariance</h3>
+
+<ul>
+  <li>Let discriminator function denoted as \(f:\mathbb{R}^{d} \rightarrow \mathbb{R}\), group operator denoted as \(g \in G\)
+    <ul>
+      <li>then group invariance can be expressed as: \(f(\mathbf{x})=f(g(\mathbf{x}))\)</li>
+      <li>we say that such function is invariant to \(g\) since with and without the group action results in the same output</li>
+    </ul>
+  </li>
+  <li>Let discriminator function denoted as \(f:\mathbb{R}^{d} \rightarrow \mathbb{R}^{d'}\), group operator in input space denoted as \(g \in G\), group operator in output space denoted as \(g' \in G'\)
+    <ul>
+      <li>then group equivariance can be expressed as: \(f(g(\mathbf{x}))=g'(f(\mathbf{x}))\)</li>
+      <li>we say that such function is equivariant to \(g\) since there exists an equivalent transformation \(g'\)
+on its output space</li>
+    </ul>
+  </li>
+</ul>
+
+\[\begin{array}{lll}
+  &amp;\mathbf{x} &amp;\xrightarrow[f]{} &amp; f(\mathbf{x}) \\
+  &amp;\big\downarrow^{g\in G} &amp; &amp;\big\downarrow^{g'\in G'} \\
+  &amp;g(\mathbf{x}) &amp;\xrightarrow[f]{} &amp; \left\{ \begin{array}{r} g'(f(\mathbf{x})) \\ f(g(\mathbf{x})) \end{array} \right.
+\end{array}\]
+
+<h3 id="lie-algebra-convolutional-layer">Lie Algebra Convolutional Layer</h3>
+
+<p><em>…</em> —— Dehmamy, N., Walters, R., Liu, Y., Wang, D., &amp; Yu, R. (2021). Automatic Symmetry Discovery with Lie Algebra Convolutional Network. In Advances in Neural Information Processing Systems (pp. 2503–2515). Curran Associates, Inc.</p>
+
+<h3 id="en-equivariant-graph-convolutional-layer">E(n)-Equivariant Graph Convolutional Layer</h3>
+
+<p><em>…</em> —— Satorras, V., Hoogeboom, E., &amp; Welling, M. (2021). E(n) Equivariant Graph Neural Networks. In Proceedings of the 38th International Conference on Machine Learning (pp. 9323–9332). PMLR.</p>
+
+<h3 id="reparameterization">Reparameterization</h3>
+
+\[\begin{aligned}
+\mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &amp;= \left\{ \begin{array}{rcl} \int  p_{\theta}(z) f(z) dz &amp; \text{continuous} \\ \\ \sum_{z} p_{\theta}(z) f(z) &amp; \text{discrete} \end{array} \right. \\
+&amp;\approx \frac{1}{n} \sum_{z} f(z)
+\end{aligned}\]
+
+<p>Since the sampling process is not differentiable, we can not optimize the \(p_{\theta}\) via methods like backpropagation. We would need to convert from the expectation related to \(z\) to the expectation related to another variable of which distribution  with no parameter to optimize.</p>
+
+\[\begin{aligned}
+  \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)]&amp; = \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  \text{where}&amp; \quad z = g_{\theta}(\epsilon)
+\end{aligned}\]
+
+<p>And we have:</p>
+
+\[\begin{aligned}
+  \frac{\partial}{\partial \theta} \mathbb{E}_{z\sim p_{\theta}(z)}[f(z)] &amp;= \frac{\partial}{\partial \theta} \mathbb{E}_{\epsilon \sim q(\epsilon)}[f(g_{\theta}(\epsilon))] \\
+  &amp;= \mathbb{E}_{\epsilon \sim q(\epsilon)}\left[ \frac{\partial f}{\partial g} \cdot \frac{\partial g_{\theta}(\epsilon)}{ \partial \theta} \right]
+\end{aligned}\]
+
+<h4 id="reparameterizing-distributions-on-lie-groups">Reparameterizing Distributions on Lie Groups</h4>
+
+<p><em>…</em> —— Falorsi, L., de Haan, P., Davidson, T., &amp; Forré, P. (2019). Reparameterizing Distributions on Lie Groups. In Proceedings of the Twenty-Second International Conference on Artificial Intelligence and Statistics (pp. 3244–3253). PMLR.</p>
+
+<h4 id="riemannian-score-based-generative-modeling">Riemannian Score-Based Generative Modeling</h4>
+
+<p><em>…</em> – Valentin De Bortoli, Emile Mathieu, Michael Hutchinson, James Thornton, Yee Whye Teh, &amp; Arnaud Doucet (2022). Riemannian Score-Based Generative Modeling. CoRR, abs/2202.02763.</p>]]></content><author><name>Zefeng Zhu</name></author><category term="computation" /><summary type="html"><![CDATA[Naive but useful keynotes on ML.]]></summary></entry><entry><title type="html">Conformation 101 - Probabilistic Models For Protein Structure</title><link href="https://naturegeorge.github.io/blog/2022/06/probabilistic-model/" rel="alternate" type="text/html" title="Conformation 101 - Probabilistic Models For Protein Structure" /><published>2022-06-12T06:05:00+00:00</published><updated>2022-06-12T06:05:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/06/probabilistic-model</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/06/probabilistic-model/"><![CDATA[<p><strong>NOTE:</strong>
+Still on writing.<d-cite key="ch4-book-2012"></d-cite><d-cite key="probabilistic-model-2014"></d-cite><d-cite key="probabilistic-model-book-2015"></d-cite><d-cite key="torus-2017"></d-cite><d-cite key="torus-2019"></d-cite><d-cite key="torus-2021"></d-cite><d-cite key="POSTIC20202228"></d-cite></p>
+
+<hr />
+
+<p>Cited as:</p>
+
+<div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@online</span><span class="p">{</span><span class="nl">zhu2022probabilistic</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">=</span><span class="s">{Conformation 101 - Probabilistic Models For Protein Structure}</span><span class="p">,</span>
+        <span class="na">author</span><span class="p">=</span><span class="s">{Zefeng Zhu}</span><span class="p">,</span>
+        <span class="na">year</span><span class="p">=</span><span class="s">{2022}</span><span class="p">,</span>
+        <span class="na">month</span><span class="p">=</span><span class="s">{June}</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">=</span><span class="s">{https://naturegeorge.github.io/blog/2022/06/probabilistic-model/}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zefeng Zhu</name></author><category term="review" /><category term="conformation-101" /><category term="probabilistic" /><summary type="html"><![CDATA[Thoughts on the probabilistic formulation of protein conformation.]]></summary></entry><entry><title type="html">Conformation 101 - Protein Structure Superposition</title><link href="https://naturegeorge.github.io/blog/2022/06/struct-superposition/" rel="alternate" type="text/html" title="Conformation 101 - Protein Structure Superposition" /><published>2022-06-08T05:15:00+00:00</published><updated>2022-06-08T05:15:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/06/struct-superposition</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/06/struct-superposition/"><![CDATA[<p>For measuring how much a particular atom of a molecule fluctuates over a set of conformations (e.g. simulation trajectory for a period of time or NMR ensemble), it is straightforward to calculate the Root Mean Square Fluctuation (RMSF) of this atom $\lbrace \mathbf{r}(t) \in \mathbb{R}^{3} \rbrace_{t}^{T}$ after optimal translation and rotation of the molecule:</p>
+
+\[\sqrt{\frac{1}{T}\sum_{t}^{T} \lVert \mathbf{r}(t) -\langle \mathbf{r} \rangle \rVert^{2}_{2}},\quad \langle \mathbf{r} \rangle = \frac{1}{T}\sum_{t}^{T} \mathbf{r}(t)\]
+
+<p>In other words, for a molecule with a set of superpositioned conformations, we can calculate the RMSF of each atom to evaluate their variations.</p>
+
+<p>If we would like to measure the covariation among $K$ atoms of a molecule,
+the above formula can be extended to:</p>
+
+\[\sigma_{i,j} = \frac{1}{T} \sum_{t}^{T} \lVert \mathbf{r}_{i}(t) - \langle \mathbf{r}_{i} \rangle \rVert_{2} \, \lVert \mathbf{r}_{j}(t) - \langle \mathbf{r}_{j} \rangle \rVert_{2}\]
+
+<p>Thus we can derive a covariance matrix $\mathbf{\Sigma}\in \mathbb{R}^{K\times K}$ describing the covariation of each of the $K$ atoms with each of the others:</p>
+
+\[\mathbf{\Sigma} = \frac{1}{T} \mathbf{A}^{\mathsf{T}}\mathbf{A}\]
+
+\[\mathbf{A} = \begin{bmatrix}
+    \lVert \mathbf{r}_{1}(1) - \langle \mathbf{r}_{1} \rangle \rVert_{2} &amp; \dots  &amp; \lVert \mathbf{r}_{K}(1) - \langle \mathbf{r}_{K} \rangle \rVert_{2} \\
+    \lVert \mathbf{r}_{1}(2) - \langle \mathbf{r}_{1} \rangle \rVert_{2} &amp; \dots  &amp; \lVert \mathbf{r}_{K}(2) - \langle \mathbf{r}_{K} \rangle \rVert_{2} \\
+    \vdots &amp; \ddots &amp; \vdots \\
+    \lVert \mathbf{r}_{1}(T) - \langle \mathbf{r}_{1} \rangle \rVert_{2} &amp; \dots  &amp; \lVert \mathbf{r}_{K}(T) - \langle \mathbf{r}_{K} \rangle \rVert_{2}
+\end{bmatrix}_{T\times K}\]
+
+<p>Through normalizing the covariances by the variances, we can get the correlation matrix $\mathbf{C}$<d-footnote>Hadamard product and Hadamard power notations are used here. See [here](https://en.wikipedia.org/wiki/Hadamard_product_(matrices)) for details.</d-footnote>:</p>
+
+\[\mathbf{C} = \mathbf{\Sigma} \circ (\mathbf{b}\mathbf{b}^{\mathsf{T}})^{\circ-\frac{1}{2}},\, \mathbf{b} = \mathrm{diag}(\mathbf{\Sigma})\]
+
+<p>and each element $c_{i,j}$ of the correlation matrix is given by:</p>
+
+\[c_{i,j} = \frac{\sigma_{i,j}}{\sqrt{\sigma_{i,i}\sigma_{j,j}}}\]
+
+<p>Above mentioned calculations can be transferred from ordinary molecules to coarse-grained protein structures (e.g. define a representative atom for each kind of residue). And the conformation set of the same entity can be extended to the aligned conformation set composed of conformations from different entities (e.g. a properly superpositioned family of protein structures), in which the determination of the optimal alignment region, translation, and rotation are required in advance. Thus there are there three scenarios for the analysis of protein structures:</p>
+
+<ul>
+  <li>quantify the internal dynamics of the same protein</li>
+  <li>quantify the structural similarity among a protein sequence family</li>
+  <li>quantify the structural similarity among a protein structure family</li>
+</ul>
+
+<p>Each of the scenarios has a variant case that there may be instances with different numbers of residues or with different residue identities (<a href="https://link.springer.com/chapter/10.1007/978-3-642-27225-7_8">Structure Alignment Versus Structure Superposition</a>)<d-cite key="TheobaldBook2012"></d-cite> thus requiring appointment of alignment region. Sometimes the alignment region is (almost) deterministic, e.g. during the analysis of structure fragments of the same protein with sequence overlap or sequence family with many highly conserved residue sites. But if sequence alignment is not allowed or not feasible, we would need a structure-based alignment method, which will not be covered in this blog post but will be discussed in the near future.</p>
+
+<p>Here I will give a brief summary of some infrastructure works of superpositioning of protein structures conducted by <a href="https://theobald.brandeis.edu/people.php">Prof. Douglas L. Theobald</a> et al.<d-cite key="TheobaldSuperpose2006"></d-cite><d-cite key="TheobaldSuperposeSoftware2006"></d-cite><d-cite key="TheobaldSuperpose2008"></d-cite><d-cite key="TheobaldSuperpose2012"></d-cite><d-cite key="TheobaldSuperpose2019"></d-cite></p>
+
+<p><strong>NOTE:</strong>
+Still on writing.</p>
+
+<hr />
+
+<p>Cited as:</p>
+
+<div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@online</span><span class="p">{</span><span class="nl">zhu2022superposition</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">=</span><span class="s">{Conformation 101 - Protein Structure Superposition}</span><span class="p">,</span>
+        <span class="na">author</span><span class="p">=</span><span class="s">{Zefeng Zhu}</span><span class="p">,</span>
+        <span class="na">year</span><span class="p">=</span><span class="s">{2022}</span><span class="p">,</span>
+        <span class="na">month</span><span class="p">=</span><span class="s">{June}</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">=</span><span class="s">{https://naturegeorge.github.io/blog/2022/06/struct-superposition/}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zefeng Zhu</name></author><category term="review" /><category term="conformation-101" /><category term="superposition" /><summary type="html"><![CDATA[Thoughts on protein conformation difference.]]></summary></entry><entry><title type="html">Conformation 101 - Funneled energy landscape</title><link href="https://naturegeorge.github.io/blog/2022/05/funneled-energy-landscape/" rel="alternate" type="text/html" title="Conformation 101 - Funneled energy landscape" /><published>2022-05-31T07:22:00+00:00</published><updated>2022-05-31T07:22:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/05/funneled-energy-landscape</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/05/funneled-energy-landscape/"><![CDATA[<p>Systematic descriptions of the energy landscapes help us to intrinsically quantify conformations and their changes. Here I will give a brief summary of pioneered works of <a href="https://www.stonybrook.edu/commcms/chemistry/faculty/_faculty-profiles/wang-jin">Prof. Jin Wang</a> et al.<d-cite key="WangReview2022"></d-cite> introducing the funneled energy landscape of protein structures.</p>
+
+<p>For analytical derivation<d-cite key="WangFoldingEvo2019"></d-cite><d-cite key="WangBindingEvo2020"></d-cite>, we can assume the energy $E$ of a conformation (of a protein sequence) to be the sum of independent interactions, thus the density of states (i.e. a statistical energy distribution in microcanonical ensemble) approximates a Gaussian distribution<d-footnote>Noted that the density of states can be obtained from the simulated canonical ensemble after transformation and is not necessarily follows Gaussian distribution in a real system.</d-footnote>:</p>
+
+\[n(E) = \frac{1}{\sqrt{2\pi\Delta E^2}}\exp\left[-\frac{(E-\bar{E})^2}{2\Delta E^2}\right],\quad\Delta E = \sqrt{\langle E^2 \rangle - \langle E \rangle^2}\]
+
+<p>For a protein sequence, its total number of conformations is assumed to be $\Omega_0$. Then the conformational entropy with energy $E$ is:</p>
+
+\[\begin{aligned}
+S(E) &amp;= K_B\ln(\underbrace{\Omega_{0} n(E)}_{\text{the number of conformations with energy} E}) \\
+&amp;= K_B \ln \Omega_0 + K_B \ln n(E)\\
+&amp;= \underbrace{K_B \ln \Omega_0}_{S_0} - K_B \frac{(E-\bar{E})^2}{2\Delta E^2} \color{gray}{\underbrace{- K_B \frac{\ln(2\pi\Delta E^2)}{2}}_{\text{dropped}}}
+\end{aligned}\]
+
+<p>Since we have the thermodynamic relation:</p>
+
+\[\frac{\partial S}{\partial E} = \frac{1}{T}\]
+
+<p>we can derive the most probable energy as a function of $T$ as:</p>
+
+\[\begin{aligned}
+\frac{-2K_{B}(E-\bar{E})}{2 \Delta E^{2}}&amp;= \frac{1}{T}\\
+&amp;\Downarrow \\
+E(T) &amp;= \bar{E} - \frac{\Delta E^{2}}{K_{B}T} \\
+\end{aligned}\]
+
+<p>So the entropy at the most probable energy as a function of $T$ is:</p>
+
+\[S(T) = S(E(T)) = S_{0} - \frac{\Delta E^{2}}{2K_{B}T^{2}}\]
+
+<ul>
+  <li>(noted that) for an infinite high temperature, $S(T)$ is approximately $S_{0}$.</li>
+  <li>(noted that) when at or below a lower enough critical temperature $T_g$ ($S(T_g)=0$), the protein is trapped in one of the frozen states.</li>
+</ul>
+
+\[T_g = \sqrt{\frac{\Delta E^{2}}{2 K_B S_0}}\]
+
+<p>From the thermodynamic expressions of the energy $E(T)$ and entropy $S(T)$, the Helmholtz free energy of the system as a function of $T$ can be expressed as:</p>
+
+\[\begin{aligned}
+F(T) &amp;= E(T) - TS(T)\\
+     &amp;=\bar{E} - \frac{\Delta E^{2}}{K_{B}T} - TS_{0} + \frac{\Delta E^{2}}{2K_{B}T}\\
+     &amp;= \bar{E} - TS_{0} - \frac{\Delta E^{2}}{2K_{B}T}\\
+\end{aligned}\]
+
+<p>With the observations of naturally occurring proteins, we can assume that a natural protein normally has a unique ground state (with energy $E_N$) at which both the energy and entropy variance (roughness) are zero. Then the free energy of the native state equals $E_N$.</p>
+
+<p>A first-order transition between native state and non-native state is expected at the temperature $T_{f}$ (folding transition temperature) where they have equal free energy. Thus we have:</p>
+
+\[\begin{aligned}
+  E_{N} &amp;= \bar{E} - T_{f}S_{0} - \frac{\Delta E^{2}}{2K_{B}T_{f}} \\
+  \underbrace{\bar{E}-E_{N}}_{\delta E} &amp;= T_{f}S_{0} + \frac{\Delta E^{2}}{2K_{B}T_{f}} \\
+  &amp;\Downarrow \\
+  T_{f} &amp;= \frac{\delta E}{2S_{0}}(1+\sqrt{1 - \frac{2S_{0}\Delta E^{2}}{K_{B} \delta E^{2}}})
+\end{aligned}\]
+
+<p>$T_{f}$ should be larger than $T_{g}$ so as not to be trapped in the frozen state and make the system able to reach the native state. So we are focusing on $\frac{T_{f}}{T_{g}}$ and find out that:</p>
+
+\[\begin{aligned}
+  \frac{T_{f}}{T_{g}} &amp;= \underbrace{\sqrt{\frac{K_{B}}{2S_{0}}}\frac{\delta E}{\Delta E}}_{\Lambda} + \sqrt{\frac{K_{B}\delta E^{2}}{2S_{0}\Delta E^{2}}-1} \\
+  &amp;= \Lambda + \sqrt{\Lambda^2 - 1} \\
+\end{aligned}\]
+
+<ul>
+  <li>The larger the ratio $\frac{T_{f}}{T_{g}}$ is, the less chance the protein has to be trapped on the way to its native state.</li>
+  <li>$\Lambda$ itself is a quantitative measure of the landscape topogarphy. The larger the $\Lambda$ is, the more funneled protein folding energy landscape shape is against the vast number of states and roughness (i.e. minimal frustration principle).</li>
+  <li>Maximizing $\frac{T_{f}}{T_{g}}$ is equivalent of maximizing the value of $\Lambda$.
+    <ul>
+      <li>This relationship connects the folding criterion to the underlying landscape topography.</li>
+      <li>It provides a practical implementation of the principle of minimal frustration for protein folding.</li>
+      <li>Optimization of $\Lambda$ guarantees the kinetic accessibility of the native state.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>So we have the Optimal Foldability Criterion<d-cite key="pnas-89-11-4918"></d-cite><d-cite key="PhysRevLett-7-4070"></d-cite><d-cite key="WangFolding1997"></d-cite>:</p>
+
+\[\max \frac{T_f}{T_g} \sim \max \Lambda\]
+
+<p>The probability $P(E)$ of sampling any conformation at a finite temperature $T$ with energy $E$ is:</p>
+
+\[P(E) = \frac{n(E)\exp[-\frac{E-\bar{E}}{K_{B}T}]}{Z}\]
+
+<ul>
+  <li>Transforming from the microcanonical ensemble to the canonical ensemble, the probability is weighted by the Boltzmann factor $\exp[-\frac{E-\bar{E}}{K_{B}T}]$.</li>
+  <li>$Z$ is the partition function of the canonical ensemble.</li>
+</ul>
+
+<p>Thus, at a particular $T$ larger than $T_{g}$, the probability of the system in its unique native state and the non-native state are $P_N$ and $P_{D}$ respectively:</p>
+
+\[\begin{aligned}
+  P_{N}&amp;=\frac{\exp[-\frac{E_{N}-\bar{E}}{K_{B}T}]}{Z}\\
+  P_{D}&amp;=\sum_{E&gt;E_{N}}\frac{n(E)\exp[-\frac{E-\bar{E}}{K_{B}T}]}{Z}\\
+\end{aligned}\]
+
+<p>So the thermodynamic stability of the native ground state is quantified as:</p>
+
+\[\begin{aligned}
+  \Delta G &amp;= -K_{B}T\ln(\frac{P_N}{P_D})\\
+  &amp;= E_N + K_{B}T\ln\left[\sum_{E&gt;E_N} n(E) \exp(\frac{-E}{K_B T}) \right]
+\end{aligned}\]
+
+<p><strong>NOTE:</strong>
+Still on writing.</p>
+
+<hr />
+
+<p>Cited as:</p>
+
+<div class="language-bibtex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">@online</span><span class="p">{</span><span class="nl">zhu2022funneled</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">=</span><span class="s">{Conformation 101 - Funneled energy landscape}</span><span class="p">,</span>
+        <span class="na">author</span><span class="p">=</span><span class="s">{Zefeng Zhu}</span><span class="p">,</span>
+        <span class="na">year</span><span class="p">=</span><span class="s">{2022}</span><span class="p">,</span>
+        <span class="na">month</span><span class="p">=</span><span class="s">{May}</span><span class="p">,</span>
+        <span class="na">url</span><span class="p">=</span><span class="s">{https://naturegeorge.github.io/blog/2022/05/funneled-energy-landscape/}</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zefeng Zhu</name></author><category term="review" /><category term="conformation-101" /><category term="energy-landscape" /><summary type="html"><![CDATA[Thoughts on protein conformation change.]]></summary></entry><entry><title type="html">Ways to compute distance map</title><link href="https://naturegeorge.github.io/blog/2022/05/coords2dist/" rel="alternate" type="text/html" title="Ways to compute distance map" /><published>2022-05-27T07:50:00+00:00</published><updated>2022-05-27T07:50:00+00:00</updated><id>https://naturegeorge.github.io/blog/2022/05/coords2dist</id><content type="html" xml:base="https://naturegeorge.github.io/blog/2022/05/coords2dist/"><![CDATA[<p>Just take advantage of the symmetric property:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">...</span>  <span class="c1"># (N, 3)
+</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">D</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">coords</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]]).</span><span class="n">norm</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Or do it more algebraically:</p>
+
+\[\begin{aligned}
+\mathbf{B} &amp;= \mathbf{X}\mathbf{X}^{\mathsf{T}} \\
+\mathbf{c} &amp;= \mathrm{diag}(\mathbf{B}) \\
+\mathbf{D} &amp;= (\mathbf{c}\mathbf{1}^{\mathsf{T}} + \mathbf{1}\mathbf{c}^{\mathsf{T}} - 2\mathbf{B})^{\circ \frac{1}{2}}
+\end{aligned}\]
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="n">B</span> <span class="o">=</span> <span class="n">coords</span> <span class="o">@</span> <span class="n">coords</span><span class="p">.</span><span class="n">T</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">diag</span><span class="p">(</span><span class="n">B</span><span class="p">).</span><span class="n">expand</span><span class="p">(</span><span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">B</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">c</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>If radius cutoff (e.g. 8) is known in prior:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="kn">from</span> <span class="nn">torch_geometric.nn</span> <span class="kn">import</span> <span class="n">radius_graph</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">radius_graph</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">8.0</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>]]></content><author><name>Zefeng Zhu</name></author><category term="coding" /><summary type="html"><![CDATA[A brief record.]]></summary></entry></feed>

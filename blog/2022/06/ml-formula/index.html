@@ -2,7 +2,7 @@
 <html lang="en">
 
   <!-- Head -->
-  <head><meta http-equiv="refresh" content="3; url=https://naturegeorge.github.io/" />        
+  <head>        
     <!-- Metadata, OpenGraph and Schema.org -->
     
 
@@ -10,9 +10,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Zefeng Zhu | Page not found</title>
+    <title>Zefeng Zhu | Fundamental formulas in ML</title>
     <meta name="author" content="Zefeng  Zhu" />
-    <meta name="description" content="Looks like there has been a mistake. Nothing exists here." />
+    <meta name="description" content="Naive but useful keynotes on ML." />
 
 
     <!-- Bootstrap & MDB -->
@@ -30,7 +30,7 @@
     <!-- Styles -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://naturegeorge.github.io/404.html">
+    <link rel="canonical" href="https://naturegeorge.github.io/blog/2022/06/ml-formula/">
 
     <!-- Dark Mode -->
     <script src="/assets/js/theme.js"></script>
@@ -64,7 +64,7 @@
               </li>
               
               <!-- Blog -->
-              <li class="nav-item ">
+              <li class="nav-item active">
                 <a class="nav-link" href="/blog/">blog</a>
               </li>
 
@@ -97,20 +97,135 @@
 
     <!-- Content -->
     <div class="container mt-5">
-      <!-- page.html -->
-        <div class="post">
+      <!-- _layouts/post.html -->
 
-          <header class="post-header">
-            <h1 class="post-title">Page not found</h1>
-            <p class="post-description">Looks like there has been a mistake. Nothing exists here.</p>
-          </header>
+<div class="post">
 
-          <article>
-            <p>You will be redirected to the main page within 3 seconds. If not redirected, please click <a href="https://naturegeorge.github.io/">here</a>.</p>
+  <header class="post-header">
+    <h1 class="post-title">Fundamental formulas in ML</h1>
+    <p class="post-meta">June 17, 2022</p>
+    <p class="post-tags">
+      <a href="/blog/2022"> <i class="fas fa-calendar fa-sm"></i> 2022 </a>
+        ·  
+        <a href="/blog/category/computation">
+          <i class="fas fa-tag fa-sm"></i> computation</a>  
+          
 
-          </article>
+    </p>
+  </header>
 
-        </div>
+  <article class="post-content">
+    <h2 id="the-basic-building-blocks">The Basic Building Blocks</h2>
+
+<h3 id="taylor-series-approximation">Taylor Series Approximation</h3>
+
+<p>Around a given point \(x_{0}\), we have:</p>
+
+\[\begin{aligned}
+  f(x) &amp;= \sum_{n=0}^{\infty}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\\
+       &amp;\simeq \underbrace{\left(\sum_{n=0}^{k}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}\right)}_{k\text{th order Taylor polynomial}} + \underbrace{\frac{f^{(k+1)}(c)}{(k+1)!}(x-x_{0})^{k+1}}_{\text{remainder (mean-value (Lagrange) form)}}
+\end{aligned}\]
+
+<p>which requires \(f\) to be a k+1 times differentiable function.</p>
+
+<h3 id="stirlings-approximation">Stirling’s Approximation</h3>
+
+\[\begin{aligned}
+    n! &amp; \simeq n^{n} e^{-n}{\color{gray} \sqrt{2 \pi n}} \\
+    \Leftrightarrow \ln n! &amp; \simeq n\ln n-n {\color{gray} + \frac{1}{2}\ln 2\pi n}
+\end{aligned}\]
+
+<p>And its application on \(\begin{pmatrix} N \\ r \end{pmatrix}\):</p>
+
+\[\begin{aligned}
+    \ln \begin{pmatrix}N \\ r\end{pmatrix} \equiv \ln \frac{N!}{(N-r)!r!}
+&amp;\simeq (N-r)\ln \frac{N}{N-r} + r\ln \frac{N}{r} {\color{gray} - \frac{1}{2}\ln \frac{2\pi r(N-r)}{N}} \\
+&amp;= N\left[\frac{(N-r)}{N}\ln \frac{N}{N-r} + \frac{r}{N}\ln \frac{N}{r}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N \frac{(N-r)}{N}\frac{r}{N}} \\
+&amp;= N\left[\left(1-\frac{r}{N}\right)\ln \frac{1}{1-\frac{r}{N}} + \frac{r}{N}\ln \frac{N}{r}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N \left(1-\frac{r}{N}\right)\frac{r}{N}} \\
+&amp;= \underbrace{N\left[\left(1-x\right)\ln \frac{1}{1-x} + x\ln \frac{1}{x}\right] {\color{gray} - \frac{1}{2}\ln 2\pi N (1-x) x}}_{x=r/N}
+\end{aligned}\]
+
+<p>Thus:</p>
+
+\[\begin{pmatrix} N \\ r \end{pmatrix} \simeq e^{N[(1-x)\ln \frac{1}{1-x}+x\ln\frac{1}{x}]{\color{gray} - \frac{1}{2}\ln 2\pi N (1-x) x}}\]
+
+<p>Noted that all the terms are logarithm and according to the Logarithm change of base rule, the above logarithm can be changed to any base. For instance:</p>
+
+\[\begin{aligned}
+    \begin{pmatrix} N \\ r \end{pmatrix} \simeq 2^{N H_{b}(r/N){\color{gray} - \frac{1}{2}\log_{2} 2\pi N (1-r/N) r/N}} \\
+\text{where} \quad \underbrace{H_{b}(x) \equiv x\log_{2}\frac{1}{x} + (1-x) \log_{2}\frac{1}{1-x}}_{\text{binary entropy function}}
+\end{aligned}\]
+
+<h3 id="soft-maximum">Soft Maximum</h3>
+
+<p>One of the approaches is:</p>
+
+\[\begin{aligned}
+  \max(x,y) &amp;\simeq \ln(\exp(x)+\exp(y))\\
+  \mathrm{abs}(x) = \max(x,-x) &amp;\simeq \ln(\exp(x)+\exp(-x))\\
+  \max(\mathbf{x}) &amp;\simeq \ln\left(\sum_{i=1}^{n} \exp(x_{i}) \right) \triangleq \mathrm{logsumexp}(\mathbf{x})\\
+\end{aligned}\]
+
+<p>For values with a larger gap, this approximation would be more precise, as the gap between those exponential values would be larger making the logarithm of the sum closer to the maximum value. So we can add a coefficient to adjust the scale of input values depending on the precision we would like to achieve:</p>
+
+\[\max(\mathbf{x}) \simeq \frac{1}{k}\ln\left(\sum_{i=1}^{n} \exp(k x_{i}) \right)\]
+
+<p>But it should be noted that this approximation is easy to overflow or underflow for computers. We can shift the input values by a constant:</p>
+
+\[\ln( \exp(x) + \exp(y)) = \ln( \exp(x – c) + \exp(y–c) ) + c\]
+
+<p>And we get:</p>
+
+\[\begin{aligned}
+  \max(\mathbf{x}) &amp;\simeq \frac{1}{k} \left[\ln\left(\sum_{i=1}^{n} \exp(k x_{i} - c) \right) + c \right] \\
+  \text{where } &amp; c=\max(k\mathbf{x})
+\end{aligned}\]
+
+<h3 id="matrix-exponential">Matrix Exponential</h3>
+
+\[\exp (\mathbf{A}) = \sum^{\infty}_{n=0} \frac{\mathbf{A}^{n}}{n!}\]
+
+\[\begin{aligned}
+  \det(\exp (\mathbf{A})) &amp;= \exp(\mathrm{Tr}(\mathbf{A})) \\
+  \ln(\det(\underbrace{\mathbf{B}}_{\exp(\mathbf{A})})) &amp;= \mathrm{Tr}(\ln(\mathbf{B}))
+\end{aligned}\]
+
+<h3 id="properties-of-gaussian-distribution">Properties of Gaussian Distribution</h3>
+
+\[p(\mathbf{x};\boldsymbol{\mu,\Sigma}) = \frac{1}{\sqrt{|2\pi\boldsymbol{\Sigma}|}}\exp \Big(-\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x}-\boldsymbol{\mu}) \Big)\]
+
+<h2 id="applications">Applications</h2>
+
+<h3 id="numerical-integration-and-differentiation">Numerical Integration and Differentiation</h3>
+
+<p>…</p>
+
+<h3 id="boltzmann-factor">Boltzmann Factor</h3>
+
+<p>…</p>
+
+<h3 id="kernel-method">Kernel Method</h3>
+
+<h4 id="kernel-function">Kernel Function</h4>
+
+<p>…</p>
+
+<h4 id="kernel-trick">Kernel Trick</h4>
+
+<p>…</p>
+
+<h3 id="representation-of-transformations">Representation of Transformations</h3>
+
+\[\begin{bmatrix}
+  \cos n\theta &amp; -\sin n \theta \\
+  \sin n\theta &amp; \cos n\theta
+\end{bmatrix} = \exp \left( n\theta \begin{bmatrix}
+  0 &amp; -1 \\ 1 &amp; 0
+\end{bmatrix} \right)\]
+
+  </article>
+
+</div>
 
     </div>
 
